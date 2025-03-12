@@ -86,10 +86,10 @@ integrate:
 
 	# Add information about where to find the tags/docs to the doc sets
 
-	cat .sphinx/_integration/add_config.py >> integration/matter-docs/custom_conf.py
-	cat .sphinx/_integration/add_config.py >> integration/industrial_documentation/custom_conf.py
-	cat .sphinx/_integration/add_config.py >> integration/edge_ai_docs/custom_conf.py
-	cat .sphinx/_integration/add_config.py >> integration/smart_cities/custom_conf.py
+	# cat .sphinx/_integration/add_config.py >> integration/matter-docs/custom_conf.py
+	# cat .sphinx/_integration/add_config.py >> integration/industrial_documentation/custom_conf.py
+	# cat .sphinx/_integration/add_config.py >> integration/edge_ai_docs/custom_conf.py
+	# cat .sphinx/_integration/add_config.py >> integration/smart_cities/custom_conf.py
 
 	
 
@@ -117,14 +117,13 @@ html: integrate
 # `html-rtd` builds the integrated docs, with the correct paths for Read the Docs.
 # This target is used by the Read the Docs build.
 html-rtd:
-	PATH_PREFIX=$(PATH_PREFIX) $(MAKE) -f Makefile.sp sp-html BUILDDIR=$(READTHEDOCS_OUTPUT)/html/microcloud
 
 	PATH_PREFIX=$(PATH_PREFIX) $(MAKE) -C integration/matter-docs/ html BUILDDIR=$(READTHEDOCS_OUTPUT)/html/matter-docs
 	PATH_PREFIX=$(PATH_PREFIX) $(MAKE) -C integration/industrial_documentation/ html BUILDDIR=$(READTHEDOCS_OUTPUT)/html/industrial_documentation
 	PATH_PREFIX=$(PATH_PREFIX) $(MAKE) -C integration/edge_ai_docs/ html BUILDDIR=$(READTHEDOCS_OUTPUT)/html/edge_ai_docs
 	PATH_PREFIX=$(PATH_PREFIX) $(MAKE) -C integration/smart_cities/ html BUILDDIR=$(READTHEDOCS_OUTPUT)/html/smart_cities
 
-
+	PATH_PREFIX=$(PATH_PREFIX) $(MAKE) -f Makefile.sp sp-html BUILDDIR=$(READTHEDOCS_OUTPUT)/html/microcloud
 # `spelling` checks only the MicroCloud docs.
 spelling: clean-doc microcloud
 	$(MAKE) -f Makefile.sp sp-spellcheck

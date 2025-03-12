@@ -19,7 +19,9 @@ build:
     # and https://github.com/canonical/microceph/pull/400 is restored)
     # - ln -s /bin/true doc/integration/microovn/docs/woke
     # - ln -s /bin/true doc/integration/microceph/docs/woke
-    - cd doc && make html
+    # - cd doc && make html
+    - cd doc && make html-rtd
+
     # - make doc-html-rtd PATH=$PATH:.
 
 # Build documentation in the docs/ directory with Sphinx

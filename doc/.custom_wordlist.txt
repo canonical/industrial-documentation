@@ -48,8 +48,9 @@ PNG
 pre
 preseed
 QSFP
-rollout
 roadmap
+rollout
+scalability
 scalable
 SDN
 snapd
