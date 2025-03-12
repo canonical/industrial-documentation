@@ -37,7 +37,7 @@ jobs:
       - run: pip install -r doc/.sphinx/requirements.txt
       - run: pip install pyspelling
       - run: cd doc && make spellcheck
-      # - run: cat doc/_build/spelling/output.txt
+      
   vale:
     runs-on: ubuntu-latest
     steps:
