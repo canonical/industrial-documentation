@@ -25,19 +25,9 @@ jobs:
       - run: python3 -m venv doc/.sphinx/venv
       - run: source doc/.sphinx/venv/bin/activate
       - run: pip install -r doc/.sphinx/requirements.txt
-      spelling:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
-        with:
-          python-version: '3.x'
-      - run: python3 -m venv doc/.sphinx/venv
-      - run: source doc/.sphinx/venv/bin/activate
-      - run: pip install -r doc/.sphinx/requirements.txt
       - run: pip install pyspelling
       - run: cd doc && make spellcheck
-      
+
   vale:
     runs-on: ubuntu-latest
     steps:
