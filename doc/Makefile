@@ -86,10 +86,10 @@ integrate:
 
 	# Add information about where to find the tags/docs to the doc sets
 
-	cat .sphinx/_integration/add_config.py >> integration/matter-docs/custom_conf.py
-	cat .sphinx/_integration/add_config.py >> integration/industrial_documentation/custom_conf.py
-	cat .sphinx/_integration/add_config.py >> integration/edge_ai_docs/custom_conf.py
-	cat .sphinx/_integration/add_config.py >> integration/smart_cities/custom_conf.py
+	# cat .sphinx/_integration/add_config.py >> integration/matter-docs/custom_conf.py
+	# cat .sphinx/_integration/add_config.py >> integration/industrial_documentation/custom_conf.py
+	# cat .sphinx/_integration/add_config.py >> integration/edge_ai_docs/custom_conf.py
+	# cat .sphinx/_integration/add_config.py >> integration/smart_cities/custom_conf.py
 
 	
 
