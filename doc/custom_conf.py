@@ -231,7 +231,7 @@ elif ("READTHEDOCS" in os.environ) and (os.environ["READTHEDOCS"] == "True"):
 else:
     intersphinx_mapping = {
         "ceph": ("https://docs.ceph.com/en/latest/", None),
-        "matter-docs": ("/matter-docs/", "_build/matter-docs/objects.inv"),
+        # "matter-docs": ("/matter-docs/", "_build/matter-docs/objects.inv"),
     }
 
 # Define a :center: role that can be used to center the content of table cells.
