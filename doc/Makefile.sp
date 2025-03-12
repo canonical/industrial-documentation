@@ -88,7 +88,7 @@ sp-clean-doc:
 	git clean -fx "$(BUILDDIR)"
 	rm -rf $(SPHINXDIR)/.doctrees
 
-sp-spellcheck:
+sp-spellcheck: sp-install
 	. $(VENV) ; python3 -m pyspelling -c $(SPHINXDIR)/spellingcheck.yaml -j $(shell nproc)
 
 sp-spelling: sp-html sp-spellcheck
