@@ -9,11 +9,9 @@ version: 2
 build:
   os: ubuntu-22.04
   tools:
-    golang: "1.22"
     python: "3.11"
   commands:
     - git fetch --unshallow || true
-    - cd doc && make integrate
     - cd doc && make integrate
     # - cd doc/integration/lxd/ && go build -ldflags "-s -w" -o trimpath -o lxc.bin ./lxc
     # Pretend that woke is installed - we don't need it for building

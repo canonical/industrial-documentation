@@ -49,42 +49,6 @@ Welcome to the Industrial documentation! This site provides comprehensive guides
   </tr>
 </table>
 
---------------------
-
-|      |             |      |             |
-|------|-------------|------|-------------|
-| <img src="/edge_ai_docs/_static/tag.png" width="100px" alt="Home Automation Logo"> | <h4><a href="/home_automation/index">Home Automation</a></h4> **Start here**: a hands-on [introduction to Home Automation](/home_automation/get_started) for new users | <img src="/edge_ai_docs/_static/tag.png" width="100" alt="Smart Cities Logo"> | <h4><a href="/smart_cities/index">Smart Cities</a></h4> **Step-by-step guides** covering key operations and common tasks such as [installing Smart Cities](/smart_cities/install/) and [managing infrastructure](/smart_cities/manage_infrastructure) |
-| <img src="/edge_ai_docs/_static/tag.png" width="50" alt="Manufacturing Logo"> | <h4><a href="/manufacturing/index">Manufacturing</a></h4> **Technical information** - Detailed [requirements](/manufacturing/requirements) | <img src="/edge_ai_docs/_static/tag.png" width="100" alt="Edge AI Logo"> | <h4><a href="/edge_ai/index">Edge AI</a></h4> **Discussion and clarification** of key topics such as {ref}`AI models <edge_ai-models>` and the [deployment process](/edge_ai/deployment/) |
-
--------------------
-
-## About the documentation sets
-
-The Industrial documentation is organized to provide a comprehensive guide for users, covering various aspects of the system. The main sections include:
-
-- **Home Automation**: A hands-on introduction for new users, with step-by-step guides and key operations.
-- **Smart Cities**: Detailed guides on installing and managing infrastructure.
-- **Manufacturing**: Technical information and detailed requirements.
-- **Edge AI**: Discussions and clarifications on key topics such as AI models and deployment processes.
-
-The four main categories of the Industrial documentation ({doc}`home_automation:index`, {doc}`smart_cities:index`, {doc}`manufacturing:index`, and {doc}`edge_ai:index`) each offer their own documentation sets, available at their respective standalone documentation sites. For convenience, this site provides not only the Industrial documentation but also an integrated view of all four documentation sets. You can easily switch between sets using the links in the site header, allowing you to explore all the related documentation without leaving this site.
-
-```{note}
-The categories' documentation sets are written for a general audience that might not be using the Industrial system. Thus, not all the information in these sets is relevant to Industrial system users. For example, ....
-```
-
-Additionally, the documentation includes a section on the project and community, providing links to the Industrial system snap, contribution guidelines, support options, and contact information for further inquiries.
-
----
-
-## Project and community
-
-MicroCloud is a member of the Ubuntu family. It’s an open source project that warmly welcomes community projects, contributions, suggestions, fixes and constructive feedback.
-
-- [Contribute](https://github.com/canonical/microcloud)
-- [Get support](https://discourse.ubuntu.com/c/lxd/microcloud/)
-- [Thinking about using MicroCloud for your next project? Get in touch!](https://canonical.com/microcloud)
-
 ```{toctree}
 :hidden:
 :maxdepth: 2

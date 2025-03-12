@@ -64,8 +64,8 @@ integrate:
 	cp .sphinx/_integration/matter.html integration/matter-docs/.sphinx/_templates/header.html
 	cp .sphinx/_integration/header.css integration/matter-docs/.sphinx/_static/
 
-	cp .sphinx/_integration/industrial.html integration/industrial_documentation/docs/.sphinx/_templates/header.html
-	cp .sphinx/_integration/header.css integration/industrial_documentation/docs/.sphinx/_static/
+	cp .sphinx/_integration/industrial.html integration/industrial_documentation/.sphinx/_templates/header.html
+	cp .sphinx/_integration/header.css integration/industrial_documentation/.sphinx/_static/
 
 	cp .sphinx/_integration/edge-ai.html integration/edge_ai_docs/.sphinx/_templates/header.html
 	cp .sphinx/_integration/header.css integration/edge_ai_docs/.sphinx/_static/
@@ -79,7 +79,7 @@ integrate:
 	cp .sphinx/_integration/rtd-search.js integration/microcloud/_static/
 
 	cp .sphinx/_integration/rtd-search.js integration/matter-docs/.sphinx/_static/
-	cp .sphinx/_integration/rtd-search.js integration/industrial_documentation/docs/.sphinx/_static/
+	cp .sphinx/_integration/rtd-search.js integration/industrial_documentation/.sphinx/_static/
 	cp .sphinx/_integration/rtd-search.js integration/edge_ai_docs/.sphinx/_static/
 	cp .sphinx/_integration/rtd-search.js integration/smart_cities/.sphinx/_static/
 
@@ -87,7 +87,7 @@ integrate:
 	# Add information about where to find the tags/docs to the doc sets
 
 	cat .sphinx/_integration/add_config.py >> integration/matter-docs/custom_conf.py
-	cat .sphinx/_integration/add_config.py >> integration/industrial_documentation/docs/custom_conf.py
+	cat .sphinx/_integration/add_config.py >> integration/industrial_documentation/custom_conf.py
 	cat .sphinx/_integration/add_config.py >> integration/edge_ai_docs/custom_conf.py
 	cat .sphinx/_integration/add_config.py >> integration/smart_cities/custom_conf.py
 
@@ -110,7 +110,7 @@ html: integrate
 	cd integration/matter-docs/ && $(MAKE) html BUILDDIR=$(current_dir)/_build/matter-docs
 	cd integration/edge_ai_docs/ && $(MAKE) html BUILDDIR=$(current_dir)/_build/edge_ai_docs
 	cd integration/smart_cities/ && $(MAKE) html BUILDDIR=$(current_dir)/_build/smart_cities
-	cd integration/industrial_documentation/docs/ && $(MAKE) html BUILDDIR=$(current_dir)/_build/industrial_documentation
+	cd integration/industrial_documentation/ && $(MAKE) html BUILDDIR=$(current_dir)/_build/industrial_documentation
 	
 	$(MAKE) -f Makefile.sp sp-html BUILDDIR=$(current_dir)/_build/microcloud
 
@@ -120,7 +120,7 @@ html-rtd:
 	PATH_PREFIX=$(PATH_PREFIX) $(MAKE) -f Makefile.sp sp-html BUILDDIR=$(READTHEDOCS_OUTPUT)/html/microcloud
 
 	PATH_PREFIX=$(PATH_PREFIX) $(MAKE) -C integration/matter-docs/ html BUILDDIR=$(READTHEDOCS_OUTPUT)/html/matter-docs
-	PATH_PREFIX=$(PATH_PREFIX) $(MAKE) -C integration/industrial_documentation/docs/ html BUILDDIR=$(READTHEDOCS_OUTPUT)/html/industrial_documentation
+	PATH_PREFIX=$(PATH_PREFIX) $(MAKE) -C integration/industrial_documentation/ html BUILDDIR=$(READTHEDOCS_OUTPUT)/html/industrial_documentation
 	PATH_PREFIX=$(PATH_PREFIX) $(MAKE) -C integration/edge_ai_docs/ html BUILDDIR=$(READTHEDOCS_OUTPUT)/html/edge_ai_docs
 	PATH_PREFIX=$(PATH_PREFIX) $(MAKE) -C integration/smart_cities/ html BUILDDIR=$(READTHEDOCS_OUTPUT)/html/smart_cities
 
