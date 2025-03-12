@@ -14,3 +14,23 @@ jobs:
     uses: canonical/documentation-workflows/.github/workflows/documentation-checks.yaml@main
     with:
       working-directory: 'doc/'
+  spelling:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+      - run: pip install -r doc/.sphinx/requirements.txt
+      # - run: pip install sphinxcontrib-spelling
+      - run: cd doc && make spellcheck
+      # - run: cat doc/_build/spelling/output.txt
+  vale:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+      - run: pip install -r doc/.sphinx/requirements.txt
+      - run: cd doc && make vale
