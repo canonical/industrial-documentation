@@ -43,8 +43,8 @@ integrate:
 	@echo "\033[0;34mStarting integration and cloning repositories...\033[0m"
 
 
-	cd integration/ && ( git -C matter-docs fetch || git clone https://github.com/canonical/matter-docs.git)
-	git -C integration/matter-docs reset --hard $(MATTERVERSION)
+	# cd integration/ && ( git -C matter-docs fetch || git clone https://github.com/canonical/matter-docs.git)
+	# git -C integration/matter-docs reset --hard $(MATTERVERSION)
 
 
 	# cd integration/ && ( git -C industrial_documentation fetch || git clone https://github.com/canonical/industrial_documentation.git )
@@ -98,8 +98,7 @@ integrate:
 
 clean-integrate:
 
-	rm -rf integration/matter-docs
-	# rm -rf integration/edge_ai_docs
+	# rm -rf integration/matter-docs
 
 clean: clean-integrate
 	$(MAKE) -f Makefile.sp sp-clean
