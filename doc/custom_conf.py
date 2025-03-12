@@ -217,7 +217,6 @@ custom_tags = []
 
 if "SINGLE_BUILD" in os.environ and os.environ["SINGLE_BUILD"] == "True":
     intersphinx_mapping = {
-        "lxd": ("https://documentation.ubuntu.com/lxd/en/latest/", None),
         "microceph": (
             "https://canonical-microceph.readthedocs-hosted.com/en/latest/",
             None,
@@ -226,10 +225,7 @@ if "SINGLE_BUILD" in os.environ and os.environ["SINGLE_BUILD"] == "True":
     }
 elif ("READTHEDOCS" in os.environ) and (os.environ["READTHEDOCS"] == "True"):
     intersphinx_mapping = {
-        "lxd": (
-            os.environ["PATH_PREFIX"] + "lxd/",
-            os.environ["READTHEDOCS_OUTPUT"] + "html/lxd/objects.inv",
-        ),
+       
         "ceph": ("https://docs.ceph.com/en/latest/", None),
     }
 else:
