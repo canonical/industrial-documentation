@@ -1,5 +1,5 @@
-Matter on Ubuntu
-================
+Smart Cities
+============
 
 
 Matter is an open source connectivity standard for smart home.
@@ -26,21 +26,8 @@ hardware to explore and understand its basics.
 .. toctree::
    :maxdepth: 1
 
-   Build a Matter device with Raspberry Pi <tutorial/pi-gpio-commander>
+   Build a Matter device with Raspberry Pi <docs/tutorial/pi-gpio-commander>
 
-How-to guides
-~~~~~~~~~~~~~
-
-Guides for specific real-world problems and tasks.
-
-.. toctree::
-   :maxdepth: 1
-
-   Manage devices with Chip Tool <how-to/chip-tool-commission-and-control>
-   Set up OpenThread Border Router <how-to/otbr-on-ubuntu>
-   Run Matter apps with Thread networking <how-to/matter-and-thread-on-ubuntu>
-   Create an OS image with OTBR <how-to/otbr-ubuntu-core-image>
-   Install Home Assistant on Ubuntu Core <how-to/home-assistant-ubuntu-core>
 
 
 Project and community
