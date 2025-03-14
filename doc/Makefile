@@ -112,7 +112,13 @@ html: integrate
 	cd integration/smart_cities/ && $(MAKE) html BUILDDIR=$(current_dir)/_build/smart_cities
 	cd integration/manufacturing/ && $(MAKE) html BUILDDIR=$(current_dir)/_build/manufacturing
 	
+	@echo "\033[0;32m-----------Final Step----------------------------------\033[0m\n"
+
+	@echo "\033[0;32mNext step: Building the integrated documentation...\033[0m\n"
+
+	# $(MAKE) -f Makefile.sp sp-html BUILDDIR=$(current_dir)/_build/industrial
 	$(MAKE) -f Makefile.sp sp-html BUILDDIR=$(current_dir)/_build/industrial
+
 
 # `html-rtd` builds the integrated docs, with the correct paths for Read the Docs.
 # This target is used by the Read the Docs build.
