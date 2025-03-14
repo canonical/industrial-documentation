@@ -19,7 +19,7 @@ import datetime
 ############################################################
 
 # Product name
-project = "Robotics"
+project = "Industrial Manufacturing"
 author = "Canonical Ltd."
 
 # The title you want to display for the documentation in the sidebar.

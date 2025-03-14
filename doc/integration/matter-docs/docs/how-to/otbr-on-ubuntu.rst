@@ -17,7 +17,7 @@ In this how to, we will go through the steps to quickly setup OTBR on Ubuntu.
 
     .. TODO: add link to a document explaining how to get the Radio URL.
 
-We use the (unofficial) `OTBR Snap`_ because it makes the setup, configuration,
+We use the (unofficial) `OTBR Snap` because it makes the setup, configuration,
 and maintenance significantly simpler.
 Let's get started:
 
@@ -102,7 +102,7 @@ Grant access to resources
 Configure the OTBR snap
 -----------------------
 
-The configurations are set via `Snap Configuration Options`_ and passed on the
+The configurations are set via `Snap Configuration Options` and passed on the
 services.
 
 First, check the default configurations:
