@@ -17,30 +17,30 @@ Welcome to the Industrial documentation! This site provides comprehensive guides
 <table style="border-collapse: collapse; width: 100%; border: none;">
   <tr>
     <td style="padding: 8px; vertical-align: top; width: 60px;">
-      <img src="/edge_ai_docs/_static/tag.png" width="75" alt="Home Automation Logo">
+      <img src="https://canonical-microcloud.readthedocs-hosted.com/en/latest/microceph/_static/tag.png" width="75" alt="Home Automation Logo">
     </td>
     <td style="padding: 8px; vertical-align: top; border-right: 1px solid #eee;">
       <h4><a href="/matter-docs/" style="color: #0066cc; text-decoration: none;">Home Automation</a></h4>
       <p>A hands-on introduction to Home Automation for new users</p>
     </td>
     <td style="padding: 8px; vertical-align: middle; width: 80px;">
-      <img src="/edge_ai_docs/_static/tag.png" width="75" alt="Smart Cities Logo">
+      <img src="https://canonical-microcloud.readthedocs-hosted.com/en/latest/microceph/_static/tag.png" width="75" alt="Smart Cities Logo">
     </td>
     <td style="padding: 8px; vertical-align: top; ">
-      <h4><a href="/smart_cities/index" style="color: #0066cc; text-decoration: none;">Smart Cities</a></h4>
+      <h4><a href="/smart_cities/" style="color: #0066cc; text-decoration: none;">Smart Cities</a></h4>
       <p><strong>Step-by-step guides</strong> covering key operations and common tasks such as <a href="/smart_cities/install/">installing Smart Cities</a> and <a href="/smart_cities/manage_infrastructure">managing infrastructure</a></p>
     </td>
   </tr>
-  <tr style="background-color: #f9f9f9;">
+  <tr >
     <td style="padding: 8px; vertical-align: middle; width: 80px;">
-      <img src="/edge_ai_docs/_static/tag.png" width="75" alt="Manufacturing Logo">
+      <img src="https://canonical-microcloud.readthedocs-hosted.com/en/latest/microceph/_static/tag.png" width="75" alt="Manufacturing Logo">
     </td>
     <td style="padding: 8px; vertical-align: top; border-right: 1px solid #eee;">
-      <h4><a href="/manufacturing/index" style="color: #0066cc; text-decoration: none;">Manufacturing</a></h4>
+      <h4><a href="/industrial_documentation/" style="color: #0066cc; text-decoration: none;">Manufacturing</a></h4>
       <p><strong>Technical information</strong> - Detailed <a href="/manufacturing/requirements">requirements</a></p>
     </td>
     <td style="padding: 8px; vertical-align: middle; width: 80px;">
-      <img src="/edge_ai_docs/_static/tag.png" width="75" alt="Edge AI Logo">
+      <img src="https://canonical-microcloud.readthedocs-hosted.com/en/latest/microceph/_static/tag.png" width="75" alt="Edge AI Logo">
     </td>
     <td style="padding: 8px; vertical-align: top;">
       <h4><a href="/edge_ai_docs/" style="color: #0066cc; text-decoration: none;">Edge AI</a></h4>

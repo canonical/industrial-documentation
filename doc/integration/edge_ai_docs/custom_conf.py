@@ -19,15 +19,22 @@ import datetime
 ############################################################
 
 # Product name
-project = "Edge-AI"
-author = "Canonical Group Ltd"
+project = "Edge AI"
+author = "Canonical Ltd."
 
 # The title you want to display for the documentation in the sidebar.
 # You might want to include a version number here.
 # To not display any title, set this option to an empty string.
 html_title = project + " documentation"
 
-# The default value uses the current year as the copyright year.
+# The default value uses CC-BY-SA as the license and the current year
+# as the copyright year.
+#
+# If your documentation needs a different copyright license, use that
+# instead of 'CC-BY-SA'. Also, if your documentation is included as
+# part of the code repository of your project, it'll inherit the license
+# of the code. So you'll need to specify that license here (instead of
+# 'CC-BY-SA').
 #
 # For static works, it is common to provide the year of first publication.
 # Another option is to give the first year and the current year
@@ -41,13 +48,15 @@ html_title = project + " documentation"
 #   -H 'Accept: application/vnd.github.v3.raw' \
 #   https://api.github.com/repos/canonical/<REPO> | jq '.created_at'
 
-copyright = "%s, %s" % (datetime.date.today().year, author)
+copyright = "%s CC-BY-SA, %s" % (datetime.date.today().year, author)
 
 ## Open Graph configuration - defines what is displayed as a link preview
 ## when linking to the documentation from another website (see https://ogp.me/)
 # The URL where the documentation will be hosted (leave empty if you
 # don't know yet)
-ogp_site_url = "https://canonical-matter.readthedocs-hosted.com/"
+# NOTE: If no ogp_* variable is defined (e.g. if you remove this section) the
+# sphinxext.opengraph extension will be disabled.
+ogp_site_url = "https://canonical-starter-pack.readthedocs-hosted.com/"
 # The documentation website name (usually the same as the product name)
 ogp_site_name = project
 # The URL of an image or logo that is used in the preview
@@ -64,7 +73,7 @@ html_context = {
     # For example: "ubuntu.com/lxd" or "microcloud.is"
     # If there is no product website, edit the header template to remove the
     # link (see the readme for instructions).
-    "product_page": "",
+    "product_page": "documentation.ubuntu.com",
     # Add your product tag (the orange part of your logo, will be used in the
     # header) to ".sphinx/_static" and change the path here (start with "_static")
     # (default is the circle of friends)
@@ -72,12 +81,16 @@ html_context = {
     # Change to the discourse instance you want to be able to link to
     # using the :discourse: metadata at the top of a file
     # (use an empty value if you don't want to link)
-    "discourse": "",
+    "discourse": "https://discourse.ubuntu.com",
     # Change to the Mattermost channel you want to link to
     # (use an empty value if you don't want to link)
-    "mattermost": "",
+    "mattermost": "https://chat.canonical.com/canonical/channels/documentation",
+    # Change to the Matrix channel you want to link to
+    # (use an empty value if you don't want to link)
+    "matrix": "https://matrix.to/#/#documentation:ubuntu.com",
     # Change to the GitHub URL for your project
-    "github_url": "https://github.com/canonical/matter-docs",
+    # This is used, for example, to link to the source files and allow creating GitHub issues directly from the documentation.
+    "github_url": "https://github.com/canonical/sphinx-docs-starter-pack",
     # Change to the branch for this version of the documentation
     "github_version": "main",
     # Change to the folder that contains the documentation
@@ -89,6 +102,10 @@ html_context = {
     # Controls the existence of Previous / Next buttons at the bottom of pages
     # Valid options: none, prev, next, both
     "sequential_nav": "none",
+    # Controls if to display the contributors of a file or not
+    "display_contributors": True,
+    # Controls time frame for showing the contributors
+    "display_contributors_since": "",
 }
 
 # If your project is on documentation.ubuntu.com, specify the project
@@ -112,11 +129,28 @@ redirects = {}
 ############################################################
 
 # Links to ignore when checking links
-linkcheck_ignore = ["http://127.0.0.1:8000", "http://localhost:80", "http://pi4.local"]
+linkcheck_ignore = [
+    "http://127.0.0.1:8000",
+    "https://linux.die.net/man/1/curl",
+    "https://ubuntu.com/robotics#get-in-touch",
+    "https://www.vesiluoma.com/exploiting-with-badusb-meterpreter-digispark/",
+    "https://ubuntu.com/robotics/ros-esm#get-in-touch",
+    "https://ubuntu.com/core/docs/build-write-image#heading--write",
+]
 
 # Pages on which to ignore anchors
 # (This list will be appended to linkcheck_anchors_ignore_for_url)
-custom_linkcheck_anchors_ignore_for_url = []
+
+custom_linkcheck_anchors_ignore_for_url = [
+    r"https://snapcraft.io/docs/.*",
+    r"https://ubuntu.com/tutorials/.*",
+    r"https://ubuntu.com/core/features/.*",
+    r"https://ubuntu.com/core/docs/getting-started/*",
+    r"https://ubuntu.com/robotics#get-in-touch",
+    r"https://ubuntu.com/core/docs/build-write-image#heading--write",
+    r"https://ubuntu.com/robotics/ros-esm#get-in-touch",
+    r"https://ubuntu.com/core/features/secure-boot/.*",
+]
 
 ############################################################
 ### Additions to default configuration
@@ -124,7 +158,8 @@ custom_linkcheck_anchors_ignore_for_url = []
 
 ## The following settings are appended to the default configuration.
 ## Use them to extend the default functionality.
-# NOTE: Remove this variable to disable the MyST parser extensions.
+
+# Remove this variable to disable the MyST parser extensions.
 custom_myst_extensions = []
 
 # Add custom Sphinx extensions as needed.
@@ -138,6 +173,7 @@ custom_extensions = [
     "canonical.related-links",
     "canonical.custom-rst-roles",
     "canonical.terminal-output",
+    "notfound.extension",
 ]
 
 # Add custom required Python modules that must be added to the
@@ -145,11 +181,12 @@ custom_extensions = [
 # NOTE: The following modules are handled automatically and do not need to be
 # added here: canonical-sphinx-extensions, furo, linkify-it-py, myst-parser,
 # pyspelling, sphinx, sphinx-autobuild, sphinx-copybutton, sphinx-design,
-# sphinx-reredirects, sphinx-tabs, sphinxcontrib-jquery, sphinxext-opengraph
+# sphinx-notfound-page, sphinx-reredirects, sphinx-tabs, sphinxcontrib-jquery,
+# sphinxext-opengraph
 custom_required_modules = []
 
 # Add files or directories that should be excluded from processing.
-custom_excludes = ["doc-cheat-sheet*", "readme.rst", "author-guidelines.rst"]
+custom_excludes = ["doc-cheat-sheet*", "*readme*"]
 
 # Add CSS files (located in .sphinx/_static/)
 custom_html_css_files = []
@@ -172,6 +209,10 @@ disable_feedback_button = False
 # (https://www.sphinx-doc.org/en/master/usage/restructuredtext/directives.html#tags)
 custom_tags = []
 
+# If you are using the :manpage: role, set this variable to the URL for the version
+# that you want to link to:
+# manpages_url = "https://manpages.ubuntu.com/manpages/noble/en/man{section}/{page}.{section}.html"
+
 ############################################################
 ### Additional configuration
 ############################################################
@@ -182,13 +223,14 @@ custom_tags = []
 rst_prolog = """
 .. role:: center
    :class: align-center
+.. role:: h2
+    :class: hclass2
 """
+
+
+myst_heading_anchors = 2
 # Links to other doc sets (used in the header)
 # All paths are relative to the URL of one doc set
-
-
-
-
 html_context["microcloud_path"] = "../microcloud"
 html_context["microcloud_tag"] = "../microcloud/_static/tag.png"
 
@@ -196,8 +238,8 @@ html_context["microcloud_tag"] = "../microcloud/_static/tag.png"
 html_context["matter_path"] = "../matter-docs"
 html_context["matter_tag"] = "../matter-docs/_static/tag.png"
 
-html_context["industrial_path"] = "../industrial_documentation"
-html_context["industrial_tag"] = "../industrial_documentation/_static/tag.png"
+html_context["manufacturing_path"] = "../manufacturing"
+html_context["manufacturing_tag"] = "../manufacturing/_static/tag.png"
 
 html_context["edge_ai_path"] = "../edge_ai_docs"
 html_context["edge_ai_tag"] = "../edge_ai_docs/_static/tag.png"

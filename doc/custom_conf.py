@@ -67,7 +67,7 @@ html_context = {
     # For example: "ubuntu.com/lxd" or "microcloud.is"
     # If there is no product website, edit the header template to remove the
     # link (see the readme for instructions).
-    "product_page": "canonical.com/microcloud",
+    "product_page": "canonical.com/industrial",
     # Add your product tag (the orange part of your logo, will be used in the
     # header) to ".sphinx/_static" and change the path here (start with "_static")
     # (default is the circle of friends)
@@ -89,7 +89,7 @@ html_context = {
     "matrix": "",
     # Change to the GitHub URL for your project
     # This is used, for example, to link to the source files and allow creating GitHub issues directly from the documentation.
-    "github_url": "https://github.com/canonical/microcloud",
+    "github_url": "https://github.com/canonical/industrial_documentation",
     # Change to the branch for this version of the documentation
     "github_version": "main",
     # Change to the folder that contains the documentation
@@ -248,7 +248,7 @@ if not ("SINGLE_BUILD" in os.environ and os.environ["SINGLE_BUILD"] == "True"):
             mode="exec",
         )
     )
-    custom_html_static_path = ["integration/microcloud/_static"]
-    custom_templates_path = ["integration/microcloud/_templates"]
-    redirects["../index"] = "microcloud/"
+    custom_html_static_path = ["integration/industrial/_static"]
+    custom_templates_path = ["integration/industrial/_templates"]
+    redirects["../index"] = "industrial/"
     custom_tags.append("integrated")

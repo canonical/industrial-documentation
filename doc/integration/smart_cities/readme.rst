@@ -1,5 +1,7 @@
-Documentation starter pack
+Documentation starter pack  
 ==========================
+
+
 
 *A pre-configured repository to build and publish documentation with Sphinx.*
 
@@ -87,6 +89,8 @@ pack* and *Work with your documentation* post-enablement.
     + `Activate/deactivate feedback button`_
     + `Configure included extensions`_
     + `Add custom configuration`_
+    + `Add Python packages`_
+    + `Add page-specific configuration`_
 
   * `Change log`_
 
@@ -150,6 +154,7 @@ Here is one way to do this for newly-created fictional docs repository
    git clone git@github.com:canonical/sphinx-docs-starter-pack alpha-docs
    cd alpha-docs
    rm -rf .git
+   rm -f .github/workflows/sphinx-python-dependency-build-checks.yml
    git init
    git branch -m main
    UPDATE THE CONFIGURATION AND BUILD THE DOCS
@@ -163,21 +168,23 @@ Documentation in a code repository
 
 To add documentation to an existing code repository:
 
-#. create a directory called ``docs`` at the root of the code repository
-#. populate the above directory with the contents of the starter pack
-   repository (with the exception of the ``.git`` directory)
-#. copy the file(s) located in the ``docs/.github/workflows`` directory into
-   the code repository's ``.github/workflows`` directory
-#. in the above workflow file(s), change the value of the ``working-directory`` field from ``.`` to ``docs``
-#. create a symbolic link to the ``docs/.wokeignore`` file from the root directory of the code repository
-#. in file ``docs/.readthedocs.yaml`` set the following:
+#. Create a directory called :file:`docs` at the root of the code repository.
+#. Populate the above directory with the contents of the starter pack
+   repository (with the exception of the :file:`.git` directory).
+#. Copy the :file:`docs/.github/workflows/automatic-doc-checks.yml` file into
+   the :file:`.github/workflows` directory in the root of the code repository.
+#. In the above workflow file(s), change the value of the
+   :file:`working-directory` field from ``.`` to ``docs``.
+#. Create a symbolic link to the :file:`docs/.wokeignore` file from the root
+   directory of the code repository.
+#. In the :file:`docs/.readthedocs.yaml` file, set the following:
 
-   * ``post_checkout: cd docs && python3 build_requirements.py``
+   * ``post_checkout: cd docs && python3 .sphinx/build_requirements.py``
    * ``configuration: docs/conf.py``
    * ``requirements: docs/.sphinx/requirements.txt``
 
-**Note:** When configuring RTD itself for your project, the setting "Path for
-``.readthedocs.yaml``" (under **Advanced Settings**) will need to be given the
+**Note:** When configuring RTD itself for your project, the setting \"Path for
+``.readthedocs.yaml``\" (under **Advanced Settings**) will need to be given the
 value of ``docs/.readthedocs.yaml``.
 
 Automation
@@ -185,29 +192,36 @@ Automation
 
 To automate the initialisation for either scenario ensure you have the following:
 
-- A GitHub repository where you want to host your documentation, cloned to your local machine. The recommended approach is to host the documentation alongside your code in a ``docs`` folder. But a standalone documentation repository is also an option; in this case, start with an empty repository.
+- A GitHub repository where you want to host your documentation, cloned to your
+  local machine. The recommended approach is to host the documentation alongside
+  your code in a :file:`docs` folder. But a standalone documentation repository
+  is also an option; in this case, start with an empty repository.
 - Git and Bash installed on your system.
 
-There is a provided ``init.sh`` Bash script that does the following:
+There is a provided :file:`init.sh` Bash script that does the following:
 
-- clones the starter pack GitHub repository
-- creates the specified installation directory if necessary
-- updates working directory paths in workflow files, and updates configuration paths in the ``.readthedocs.yaml`` file
-- copies and moves contents and ``.github`` files from the starter pack to the installation directory
-- deletes the cloned repository when it's done
+- Clones the starter pack GitHub repository.
+- Creates the specified installation directory (if necessary).
+- Updates working directory paths in workflow files, and updates configuration
+  paths in the :file:`.readthedocs.yaml` file.
+- Copies and moves contents and :file:`.github` files from the starter pack to
+  the installation directory.
+- Deletes the cloned repository when it\'s done.
 
 To use the script:
 
-#. copy ``init.sh`` to your repository's root directory
-#. run the script: ``./init.sh``
-#. enter the installation directory when prompted. For standalone repositories, enter ".". For documentation alongside code, enter the folder where your documentation is (e.g. ``docs``)
+#. Copy ``init.sh`` to your repository\'s root directory.
+#. Run the script: ``./init.sh``.
+#. Enter the installation directory when prompted. For standalone repositories,
+   enter ``.``. For documentation alongside code, enter the folder where your
+   documentation is (e.g. ``docs``).
 
 When the script completes, review all changes before committing them.
 
 Build the documentation
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-The documentation needs to be built in order to be published. This is explained
+The documentation needs to be built before publication. This is explained
 in more detail in section `Local checks`_ (for contributors), but at this time
 you should verify a successful build. Run the following commands from where
 your doc files were placed (repository root or the ``docs`` directory):
@@ -216,6 +230,35 @@ your doc files were placed (repository root or the ``docs`` directory):
 
    make install
    make html
+
+Build a PDF
+^^^^^^^^^^^
+
+Build a PDF locally with the following command:
+
+.. code-block:: none
+
+    make pdf
+
+PDF generation requires some system files. If these files are not found, a prompt will be presented and the generation will stop.
+
+On Linux, required packages can be installed with:
+
+.. code-block:: none
+
+    make pdf-prep-force
+
+.. note::
+    
+    When generating a PDF, the index page is considered a 'foreword' and will not be labelled with a chapter.
+
+.. important::
+    
+    When generating a PDF, it is important to not use additional headings before a ``toctree``. Documents referenced by the
+    ``toctree`` will be nested under any provided headings.
+
+    A ``rubric`` directive can be combined with the ``h2`` class to provide a heading styled rubric in the HTML output. See the default ``index.rst`` for an example.
+    Rubric based headings will not be included as an entry in the table of contents or side navigation.
 
 Configure the documentation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -269,8 +312,10 @@ The following extensions will automatically be included based on the configurati
 - |sphinxext.opengraph|_
 - |lxd-sphinx-extensions|_ (``youtube-links``, ``related-links``, ``custom-rst-roles``, and ``terminal-output``)
 - |myst_parser|_
+- |notfound.extension|_
 
 You can add further extensions in the ``custom_extensions`` variable in ``custom_conf.py``.
+If the extensions need specific Python packages, add those to the ``custom_required_modules`` variable.
 
 Add custom configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^
@@ -284,13 +329,36 @@ The following links can help you with additional configuration:
 - `Sphinx extensions`_
 - `Furo documentation`_ (Furo is the Sphinx theme we use as our base.)
 
+Add Python packages
+^^^^^^^^^^^^^^^^^^^
+
+If you need additional Python packages for any custom processing you do in your documentation, add them to the ``custom_required_modules`` variable in ``custom_conf.py``.
+
+If you use these packages inside of ``custom_conf.py``, you will encounter a circular dependency (see issue `#197`_).
+To work around this problem, add a step that installs the packages to the ``.readthedocs.yaml`` file:
+
+.. code-block:: yaml
+
+  ...
+  jobs:
+    pre_install:
+      - pip install <packages>
+      - python3 .sphinx/build_requirements.py
+      ...
+
+In addition, override the ``ADDPREREQS`` variable in the Makefile with the names of the packages.
+For example::
+
+  make html ADDPREREQS='<packages>'
+
+
 Add page-specific configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 You can override some global configuration for specific pages.
 
 For example, you can configure whether to display Previous/Next buttons at the bottom of pages in the ``custom_conf.py`` file.
-You can then override this default setting for a specific page (a common use case for this is to turn off the Previous/Next buttons by default, but display them in a multi-page tutorial).
+You can then override this default setting for a specific page (for example, to turn off the Previous/Next buttons by default, but display them in a multi-page tutorial).
 
 To do so, add `file-wide metadata`_ at the top of a page.
 See the following examples for how to enable Previous/Next buttons for one page:
@@ -326,10 +394,10 @@ Work with your documentation
 ----------------------------
 
 This section is for documentation contributors. It assumes that the current
-repository has been initialised with the starter pack as described in
-section `Enable the starter pack`_.
+repository has been initialised with the starter pack as described in section
+`Enable the starter pack`_.
 
-There are make targets defined in the ``Makefile`` that do various things. To
+There are make targets defined in the :file:`Makefile` that provide different functionality. To
 get started, we will:
 
 * install prerequisite software
@@ -338,15 +406,16 @@ get started, we will:
 Install prerequisite software
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Before you start, make sure you have ``make`` and ``python3`` on your system:
+Before you start, make sure you have ``make``, ``python3``, ``python3-venv``,
+and ``python3-pip`` on your system:
 
 .. code-block:: none
 
    sudo apt update
-   sudo apt install make python3
+   sudo apt install make python3 python3-venv python3-pip
 
-Some `validation tools <#local-checks>`_ won't be available by default;
-to install them, you need ``snap`` and ``npm``:
+Some `validation tools <#local-checks>`_ won't be available by default. To
+install them, you need ``snap`` and ``npm``:
 
 .. code-block:: none
 
@@ -387,7 +456,7 @@ To view the documentation:
 
    make run
 
-This will do several things:
+This will perform several actions:
 
 * activate the virtual environment
 * build the documentation
@@ -452,6 +521,59 @@ Validate links within the documentation:
 .. code-block:: shell
 
    make linkcheck
+
+Style guide linting
+^^^^^^^^^^^^^^^^^^^
+
+Check documentation against the `Vale documentation linter configured with the current style guide <https://github.com/canonical/praecepta>`_.
+
+.. code-block:: shell
+
+   make vale
+
+Vale can run against individual files, directories, or globs. To set a specific target:
+
+.. code-block:: shell
+
+    make vale TARGET=example.file
+    make vale TARGET=example-directory
+
+.. note::
+
+    Running Vale against a directory will also run against subfolders.
+
+To run against all files with a specific extension within a folder:
+
+.. code-block:: shell
+
+    make vale TARGET=*.md
+
+.. note::
+
+    Wildcards can be used to run against all files matching a string, or an extension. The example above will match against all :code:`.md`
+    files, and :code:`TARGET=doc*` will match both :code:`doc_1.md` and :code:`doc_2.md`.
+
+To disable Vale linting within individual files, specific markup can be used.
+
+For Markdown:
+
+.. code-block::
+
+    <!-- vale off -->
+
+    This text will be ignored by Vale.
+
+    <!-- vale on -->
+
+For reStructuredText:
+
+.. code-block::
+
+    .. vale off
+
+    This text will be ignored by Vale.
+
+    .. vale on
 
 Configure the spelling check
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -585,5 +707,8 @@ Other resources
 .. _myst_parser: https://myst-parser.readthedocs.io/en/latest/
 .. |sphinxcontrib.jquery| replace:: ``sphinxcontrib.jquery``
 .. _sphinxcontrib.jquery: https://github.com/sphinx-contrib/jquery/
+.. |notfound.extension| replace:: ``notfound.extension``
+.. _notfound.extension: https://sphinx-notfound-page.readthedocs.io/en/latest/
 
 .. _woke documentation: https://docs.getwoke.tech/ignore
+.. _#197: https://github.com/canonical/sphinx-docs-starter-pack/issues/197

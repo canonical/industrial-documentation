@@ -7,8 +7,8 @@ html_context["microcloud_tag"] = "../microcloud/_static/tag.png"
 html_context["matter_path"] = "../matter-docs"
 html_context["matter_tag"] = "../matter-docs/_static/tag.png"
 
-html_context["industrial_path"] = "../industrial_documentation"
-html_context["industrial_tag"] = "../industrial_documentation/_static/tag.png"
+html_context["manufacturing_path"] = "../manufacturing"
+html_context["manufacturing_tag"] = "../manufacturing/_static/tag.png"
 
 html_context["edge_ai_path"] = "../edge_ai_docs"
 html_context["edge_ai_tag"] = "../edge_ai_docs/_static/tag.png"
