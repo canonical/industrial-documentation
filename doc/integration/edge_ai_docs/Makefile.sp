@@ -6,7 +6,7 @@
 
 # You can set these variables from the command line, and also
 # from the environment for the first two.
-SPHINXDIR     = ./.sphinx
+SPHINXDIR     = .sphinx
 SPHINXOPTS    ?= -c . -d $(SPHINXDIR)/.doctrees -j auto
 SPHINXBUILD   ?= sphinx-build
 SOURCEDIR     = .
