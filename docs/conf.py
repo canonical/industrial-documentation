@@ -23,7 +23,7 @@ import datetime
 #
 # TODO: Update with the official name of your project or product
 
-project = "Industrial Documentation"
+project = "Industrial"
 author = "Canonical Ltd."
 
 
@@ -33,8 +33,7 @@ author = "Canonical Ltd."
 #
 # TODO: To disable the title, set to an empty string.
 
-# html_title = project + " documentation"
-html_title = project
+html_title = project + " documentation"
 
 
 # Copyright string; shown at the bottom of the page
@@ -136,11 +135,11 @@ html_context = {
     # Docs branch in the repo; used in links for viewing the source files
     #
     # TODO: To customise the branch, uncomment and update as needed.
-    "github_version": "main",
+    "repo_default_branch": "main",
     # Docs location in the repo; used in links for viewing the source files
     #
     # TODO: To customise the directory, uncomment and update as needed.
-    "github_folder": "/docs/",
+    "repo_folder": "/docs/",
     # TODO: To enable or disable the Previous / Next buttons at the bottom of pages
     # Valid options: none, prev, next, both
     # "sequential_nav": "both",
@@ -149,6 +148,17 @@ html_context = {
     # Required for feedback button
     "github_issues": "enabled",
 }
+
+# TODO: To enable the edit button on pages, uncomment and change the link to a
+# public repository on GitHub or Launchpad. Any of the following link domains
+# are accepted:
+# - https://github.com/example-org/example"
+# - https://launchpad.net/example
+# - https://git.launchpad.net/example
+#
+# html_theme_options = {
+# 'source_edit_link': 'https://github.com/canonical/sphinx-docs-starter-pack',
+# }
 
 # Project slug; see https://meta.discourse.org/t/what-is-category-slug/87897
 #
@@ -238,15 +248,11 @@ extensions = [
 
 # Excludes files or directories from processing
 
-exclude_patterns = [
-    "doc-cheat-sheet*",
-]
+exclude_patterns = ["doc-cheat-sheet*", "content/*"]
 
 # Adds custom CSS files, located under 'html_static_path'
 
-html_css_files = [
-    "css/pdf.css",
-]
+# html_css_files = []
 
 
 # Adds custom JavaScript files, located under 'html_static_path'
@@ -269,13 +275,15 @@ rst_epilog = """
 
 # Your manpage URL
 #
-# TODO: To enable manpage links, uncomment and update as needed.
+# TODO: To enable manpage links, uncomment and replace {codename} with required
+#       release, preferably an LTS release (e.g. noble). Do *not* substitute
+#       {section} or {page}; these will be replaced by sphinx at build time
 #
 # NOTE: If set, adding ':manpage:' to an .rst file
 #       adds a link to the corresponding man section at the bottom of the page.
 
-# manpages_url = f'https://manpages.ubuntu.com/manpages/{codename}/en/' + \
-#     f'man{section}/{page}.{section}.html'
+# manpages_url = 'https://manpages.ubuntu.com/manpages/{codename}/en/' + \
+#     'man{section}/{page}.{section}.html'
 
 
 # Specifies a reST snippet to be prepended to each .rst file
