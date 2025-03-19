@@ -113,7 +113,7 @@ exclude_patterns = [
 exclude_patterns.extend(custom_excludes)
 
 rst_epilog = """
-.. include:: /reuse/links.txt
+
 """
 if "custom_rst_epilog" in locals():
     rst_epilog = custom_rst_epilog
@@ -189,7 +189,7 @@ if html_title == "":
 ### Additional files
 ############################################################
 
-html_static_path = [".sphinx/_static"]
+html_static_path = ["../../.sphinx/_static"]
 
 html_css_files = [
     "custom.css",
@@ -269,22 +269,22 @@ html_context["get_contribs"] = get_contributors_for_file
 ############################################################
 
 latex_additional_files = [
-    "./.sphinx/fonts/Ubuntu-B.ttf",
-    "./.sphinx/fonts/Ubuntu-R.ttf",
-    "./.sphinx/fonts/Ubuntu-RI.ttf",
-    "./.sphinx/fonts/UbuntuMono-R.ttf",
-    "./.sphinx/fonts/UbuntuMono-RI.ttf",
-    "./.sphinx/fonts/UbuntuMono-B.ttf",
-    "./.sphinx/images/Canonical-logo-4x.png",
-    "./.sphinx/images/front-page-light.pdf",
-    "./.sphinx/images/normal-page-footer.pdf",
+    "../../.sphinx/fonts/Ubuntu-B.ttf",
+    "../../.sphinx/fonts/Ubuntu-R.ttf",
+    "../../.sphinx/fonts/Ubuntu-RI.ttf",
+    "../../.sphinx/fonts/UbuntuMono-R.ttf",
+    "../../.sphinx/fonts/UbuntuMono-RI.ttf",
+    "../../.sphinx/fonts/UbuntuMono-B.ttf",
+    "../../.sphinx/images/Canonical-logo-4x.png",
+    "../../.sphinx/images/front-page-light.pdf",
+    "../../.sphinx/images/normal-page-footer.pdf",
 ]
 
 latex_engine = "xelatex"
 latex_show_pagerefs = True
 latex_show_urls = "footnote"
 
-with open(".sphinx/latex_elements_template.txt", "rt") as file:
+with open("../../.sphinx/latex_elements_template.txt", "rt") as file:
     latex_config = file.read()
 
 latex_elements = ast.literal_eval(latex_config.replace("$PROJECT", project))

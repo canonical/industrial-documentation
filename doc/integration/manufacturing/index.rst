@@ -10,4 +10,4 @@ The documentation starter pack helps you to quickly set up, build, and publish d
 
    docs/how-to/index
 
-   /content/contributing
+   docs/contributing.rst

@@ -182,7 +182,14 @@ custom_extensions = [
 custom_required_modules = []
 
 # Add files or directories that should be excluded from processing.
-custom_excludes = ["integration", "README.md"]
+
+custom_excludes = [
+    "integrate",
+    "readme*",
+    "license*",
+    "**venv**",
+    "*.sphinx*",
+]
 
 # Add CSS files (located in .sphinx/_static/)
 custom_html_css_files = []
@@ -225,7 +232,6 @@ if "SINGLE_BUILD" in os.environ and os.environ["SINGLE_BUILD"] == "True":
     }
 elif ("READTHEDOCS" in os.environ) and (os.environ["READTHEDOCS"] == "True"):
     intersphinx_mapping = {
-       
         "ceph": ("https://docs.ceph.com/en/latest/", None),
     }
 else:

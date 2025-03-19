@@ -48,6 +48,11 @@ Project and community
 Matter on Ubuntu references existing open source implementations.
 The Matter standard and SDK are supported by the Connectivity Standards Alliance (CSA).
 
+.. toctree::
+   :maxdepth: 1
+
+      Contributing <docs/contributing.rst>
+
 Canonical is responsible for Snap packages presented in this documentation:
 
 - `Chip Tool <https://snapcraft.io/chip-tool>`_

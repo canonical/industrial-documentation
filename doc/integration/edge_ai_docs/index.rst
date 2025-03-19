@@ -11,4 +11,4 @@ The documentation starter pack helps you to quickly set up, build, and publish d
    TensorFlow Lite sample applications <docs/tflite-sample-apps.md>
    docs/how-to/index
 
-   /content/contributing
+   docs/contributing
