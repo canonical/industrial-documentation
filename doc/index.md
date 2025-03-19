@@ -22,7 +22,7 @@ In the Industrial documentation
     </tr>
     <tr>
         <td style="padding: 8px; vertical-align: top; border: 1px solid #eee;">
-            <h4><a href="/industrial_documentation/" style="color: #0066cc; text-decoration: none;">Manufacturing</a></h4>
+            <h4><a href="/manufacturing/" style="color: #0066cc; text-decoration: none;">Manufacturing</a></h4>
             <p><strong>Technical information</strong> - Detailed <a href="/manufacturing/requirements">requirements</a></p>
         </td>
         <td style="padding: 8px; vertical-align: top; border: 1px solid #eee;">

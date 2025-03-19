@@ -107,10 +107,10 @@ html: integrate
 	@echo $(current_dir)
 	mkdir -p $(current_dir)/_build
 
-	cd integration/edge_ai_docs/ && $(MAKE) html BUILDDIR=$(current_dir)/_build/edge_ai_docs
 	cd integration/matter-docs/ && $(MAKE) html BUILDDIR=$(current_dir)/_build/matter-docs
 	cd integration/smart_cities/ && $(MAKE) html BUILDDIR=$(current_dir)/_build/smart_cities
 	cd integration/manufacturing/ && $(MAKE) html BUILDDIR=$(current_dir)/_build/manufacturing
+	cd integration/edge_ai_docs/ && $(MAKE) html BUILDDIR=$(current_dir)/_build/edge_ai_docs
 	
 	@echo "\033[0;32m-----------Final Step----------------------------------\033[0m\n"
 
