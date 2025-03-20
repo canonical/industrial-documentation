@@ -1,11 +1,8 @@
 How-to guides
 =============
 
-The documentation starter pack helps you to quickly set up, build, and publish documentation with Sphinx.
-
 
 .. toctree::
-   :hidden:
    :maxdepth: 2
 
     Package Docker images in a snap <package-docker-images-in-a-snap>
