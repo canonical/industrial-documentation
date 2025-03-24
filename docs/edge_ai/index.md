@@ -3,6 +3,7 @@
 ```{toctree}
 :maxdepth: 2
 
-how-to/index
 tflite-sample-apps
+how-to/index
+
 ```

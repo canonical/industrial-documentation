@@ -1,4 +1,4 @@
-# Build your first Matter device with a Raspberry Pi
+# Tutorial: Build your first Matter device with a Raspberry Pi
 
 This tutorial walks you through setting up a Matter Lighting device on a Raspberry Pi.
 We will use the [matter-pi-gpio-commander] snap which contains a lighting app built on top of the Matter SDK.
