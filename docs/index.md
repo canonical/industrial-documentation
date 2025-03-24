@@ -56,7 +56,7 @@ Harness the power of AI at the edge for real-time analytics and decision-making.
 
 This documentation is part of Canonical's industrial initiatives, supporting open-source solutions across various sectors. We welcome contributions, discussions, and feedback.
 
-- [Contribute to the project](/contributing.rst)
+- [Contribute to the project](/contributing.md)
 - [Join the community forum](https://discourse.ubuntu.com)
 
 ```{toctree}
