@@ -45,7 +45,7 @@ sudo snap install chip-tool
 Pre-release versions of Chip Tool are available in different [channels]
 ```
 
-Once installed, the application should be available as ``chip-tool`` on your machine.
+Once installed, the application should be available as `chip-tool` on your machine.
 
 The snap restricts the app's access to only the necessary resources on the host.
 This access is managed via [snap interface] connections.
