@@ -1,5 +1,7 @@
 # Industrial Applications
+
 Documentation on industrial Ubuntu-based applications. This documentation covers several application areas including:
+
 - Home Automation
 - Manufacturing
 - Edge AI
@@ -9,9 +11,10 @@ Documentation on industrial Ubuntu-based applications. This documentation covers
 
 This section outlines the structure of this repository, and some key files.
 
-**/docs**: This directory contains the documentation for the starter pack itself. To view it in your browser, change to this directory and type `make run`.
+**/docs**: This directory contains the documentation content. To view it in your browser, change to this directory and type `make run`.
 
 ## Project and community
+
 The Industrial project welcomes community contributions, suggestions,
 fixes and constructive feedback. If you wish to contribute to Real-time Ubuntu,
 please follow [the guide][contribute].
@@ -25,11 +28,13 @@ us permission to use your contributions.
 - Our [Code of Conduct][code-of-conduct]
 
 <!--
+
 - [Get support][get-support]
 - Join our [online chat][online-chat]
 - Browse the [product roadmap][roadmap]
 - Thinking about using Real-time Ubuntu for your next project? [Get in
   touch!][get-in-touch]
+
 -->
 
 [comment]: # (LINKS)
