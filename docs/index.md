@@ -64,8 +64,11 @@ This documentation is part of Canonical's industrial initiatives, supporting ope
 :titlesonly:
 self
 Home Automation <matter/index>
+Real Time Applications <real_time/index>
 smart_cities/index
 Edge AI <edge_ai/index>
 manufacturing/index
+Fleet Management <fleet_management/index>
+Communication Protocols <communication_protocols/index>
 
 contributing
