@@ -1,4 +1,5 @@
 # Leave a blank line at the end of this file to support concatenation
+BMCA
 Chrony
 Chrony's
 cjk
@@ -20,7 +21,11 @@ NTP
 OpenThread
 otf
 plantuml
+PHC
+PHCs
 PTP
+stdout
+syslog
 tex
 texlive
 Timemaster
