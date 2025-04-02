@@ -67,5 +67,6 @@ Home Automation <matter/index>
 smart_cities/index
 Edge AI <edge_ai/index>
 manufacturing/index
+communication_protocols/index
 
 contributing
