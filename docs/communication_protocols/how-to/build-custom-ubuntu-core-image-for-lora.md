@@ -73,4 +73,4 @@ It is not possible to log in here as there is no user configured.
 
 At this point the Pi should have registered with Landscape.
 
-Follow the the guide [here](../landscape/README.md) to control your gateway via Landscape.
+Follow the the guide [here](https://github.com/canonical/lora-basicstation-snap/blob/main/landscape/README.md) to control your gateway via Landscape.
