@@ -1,5 +1,5 @@
-# How to set up LoRa Basic Station on Ubuntu Core
-The LoRa Basic Station snap is a companion snap for LoRa Basics™ Station for Docker. It allows you to run and configure a LoRa gateway on Ubuntu Core devices. This guide will take you through the steps of setting up, running, and debugging the snap.
+# How to set up LoRa Basics™ Station on Ubuntu Core
+The LoRa Basics Station snap is a companion snap for LoRa Basics™ Station for Docker. It allows you to run and configure a LoRa gateway on Ubuntu Core devices. This guide will take you through the steps of setting up, running, and debugging the snap.
 
 ## Install the snap
 To install the snap from the Snap Store, run:
