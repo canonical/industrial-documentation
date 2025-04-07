@@ -4,7 +4,7 @@ The Raspberry Pi 5 supports hardware timestamping of network packets transmitted
 
 PTP stands for precision time protocol, which is a standardized protocol to synchronize PHCs over Ethernet. LinuxPTP provides the `ptp4l` application to do this synchronization.
 
-As an additional step one can synchronize your system clock to the PHC, or synchronize your system clock from the PHC, using the `phc2sys` utility.
+In addition to synchronizing PHCs, one can synchronize the system clock to the PHC or vice versa using the `phc2sys` utility.
 
 ```{figure} images/RPi5-ptp.svg
    :width: 100%
@@ -15,16 +15,12 @@ As an additional step one can synchronize your system clock to the PHC, or synch
 
 ## Install LinuxPTP
 
-LinuxPTP is available in Ubuntu as either a snap or a deb package. The snap gets more frequent updates, but the deb is more stable. Either of these will work for the rest of this guide.
+LinuxPTP is available on Ubuntu as either a snap or a deb package. Either of these will work for the rest of this guide.
 
 You can install the snap using:
 
 ```bash
 sudo snap install linuxptp
-```
-
-```{note}
-The `linuxptp` snap is not yet available under the stable channel. You can install it from the beta channel by appending `--beta` to the command above. The current version of the snap installs `linuxptp` version 4.4.
 ```
 
 Alternatively you can install the Debian package:
@@ -41,7 +37,7 @@ This will give you an older, but stable version of LinuxPTP - currently version 
 
 LinuxPTP can use either layer 2 or layer 3 networking. We will use layer 3, IP networking, for the two Raspberry Pis to communicate. If you use a switch between the two Raspberry Pis, the switch will also need to support the PTP protocol. As a starting point, do not use a switch, but connect the two Pis directly to each other.
 
-From now on we will refer to *Pi A* and *Pi B* to distinguish between the two devices.
+From now on we will refer to the two devices as *Pi A* and *Pi B*.
 
 Assign static IP addresses to the two Pis, so that they can communicate on this direct link. We will assign 10.0.0.1 to Pi A, and 10.0.0.2 to Pi B.
 
@@ -51,7 +47,7 @@ On Ubuntu Desktop, Ethernet is managed by Network Manager. In this case remove t
 sudo nmcli dev set eth0 managed no
 ```
 
-Assign a static IP to the interface, and up the link.
+Assign static IPs and bring up the interfaces.
 
 On Pi A:
 ```bash
@@ -103,9 +99,13 @@ rtt min/avg/max/mdev = 0.216/0.225/0.235/0.007 ms
 
 ## Start PTP synchronization
 
-PTP in a server-client architecture. One time domain has one server with multiple clients synchronizing against it. One Ethernet can have multiple of these time domains.
+PTP operates in a server-client architecture.
+A server with one or more clients synchronizing against it, is called a time domain.
+One Ethernet can have multiple time domains.
+If the time domain is not specified, LinuxPTP will default to domain number 0.
 
-PTP has a best master clock algorithm (BMCA) to choose which device should be the server. For our experiment we manually configure Pi A to be the server and Pi B to be the client, by respectively specifying the `--serverOnly 1` and `--clientOnly 1` command line arguments.
+By default PTP will use the best master clock algorithm (BMCA) to choose which device should be the server for the time domain.
+For this how-to we manually configure Pi A to be the server and Pi B to be the client, by respectively specifying the `--serverOnly 1` and `--clientOnly 1` command line arguments.
 
 Start the PTP server on Pi A:
 
@@ -120,12 +120,12 @@ We mostly use the default configuration of `ptp4l`, except for these overrides:
 * `--verbose 1` prints logs to stdout  
 * `--use_syslog 0` prevents logs from being written to the syslog  
 * `--hwts_filter full` is an override that is required for the Raspberry Pi 5, to tell the network driver to always timestamp network packets. Without this, timestamping does not occur on all network packet types, and synchronization fails.  
-* `--neighborPropDelayThresh 17000` is also an override required for the Raspberry Pi 5\. From experimentation we can see that there is a constant path delay of around 16.9 microseconds between two Raspberry Pi 5s. The Pi 5’s Ethernet is connected to the RP1 chip, which is a coprocessor that handles IO. The latency between the two Pis is likely increased because this RP1 chip sits inline. This constant delay is above LinuxPTP's default threshold of 800 nanoseconds. We increase the threshold to just above the constant delay of around 16.9 microseconds.  
-* `--serverOnly 1` tells `ptp4l` to run in server only mode, and not use BMCA to become a client.
+* `--neighborPropDelayThresh 17000` is also an override required for the Raspberry Pi 5. From experimentation we can see that there is a constant path delay of around 16.9 microseconds between two Raspberry Pi 5s. The Pi 5's Ethernet is connected to the RP1 chip, which is a coprocessor that handles IO. The latency between the two Pis is likely increased because this RP1 chip sits inline. This constant delay is above LinuxPTP's default threshold of 800 nanoseconds. We increase the threshold to just above the constant delay of around 16.9 microseconds.  
+* `--serverOnly 1` tells `ptp4l` to run in server mode, and not use BMCA to become a client.
 
 Refer to the [`ptp4l` man page](https://manpages.ubuntu.com/manpages/latest/en/man8/ptp4l.8.html) for a detailed description of all options.
 
-On Raspberry Pi B, start the client:
+On Pi B, start the client:
 
 ```bash
 sudo ptp4l -i eth0 --verbose 1 --use_syslog 0 --hwts_filter full --neighborPropDelayThresh 17000 --clientOnly 1
@@ -133,7 +133,7 @@ sudo ptp4l -i eth0 --verbose 1 --use_syslog 0 --hwts_filter full --neighborPropD
 
 The command for the client is almost identical to the server, except that we change the last argument to `--clientOnly 1` to force `ptp4l` to always run in client mode, and not try and become the server using BMCA.
 
-On the client device you will see many logs being printed. Let’s look at some of the important ones.
+On the client device you will see many logs being printed. Let's look at some of the important ones.
 
 If the client found the server on the network, it will print these messages:
 
@@ -180,29 +180,29 @@ For this step we assume that Pi A, the server, has an accurate system clock. You
 2025-03-31 15:09:07.128437 (+0000) +0.000957 +/- 0.009660 pool.ntp.org 196.10.52.57 s2 no-leap
 ```
 
-On Pi A, start `phc2sys`, synchronizing from the system clock to eth0’s PHC:
+On Pi A, start `phc2sys`, synchronizing from the system clock to eth0's PHC:
 
 ```bash
 sudo phc2sys -s CLOCK_REALTIME -c eth0 -O 0 -m -q
 ```
 
 * `-s` specifies that the source is the system clock, a.k.a `CLOCK_REALTIME`   
-* `-c` specifies the clock that needs to be synchronized. In this case it is either `eth0`, or its alias `/dev/ptp0`  
-* `-O 0` tells the synchronizer that it should target a 0 nanosecond offset between the two clocks. You can add an offset here, for example to account for leap seconds  
+* `-c` specifies the clock that needs to be synchronized. In this case it is either `eth0`, or its device node `/dev/ptp0`  
+* `-O 0` tells the synchronizer that it should target a zero second offset between the two clocks. You can add an offset here, for example to account for leap seconds  
 * `-m` enables printing log messages to stdout  
 * `-q` disables printing to the syslog
 
 Refer to the [`phc2sys` man page](https://manpages.ubuntu.com/manpages/latest/en/man8/phc2sys.8.html) for a detailed description of all available options.
 
 ```{note}
-`phc2sys` has many more features to automatically synchronize between clocks, like selecting the best source to synchronize from, and automatically handling leap seconds and daylight savings time. The arguments we use here disable all these features, and use constant offsets. This is to show a minimal setup of what this utility does. In a real world scenario you will highly likely never synchronize from your system clock, as it is usually inaccurate. You would rather use a source clock that is synchronized by a GPS receiver.
+`phc2sys` has many more features to automatically synchronize between clocks, like selecting the best source to synchronize from, and automatically handling leap seconds and daylight savings time. The arguments we use here disable all these features, and use constant offsets. This is to show a minimal setup of what this utility does.
 ```
 
-After running the `phc2sys` command, the output should show the difference between eth0’s clock and the system clock, and over time it should decrease to the range 0±100. 
+After running the `phc2sys` command, the output should show the difference between eth0's clock and the system clock, and over time it should decrease to the range 0±100. 
 
-On Pi B, the client, you will see some jumps in the time offset too, as we are now synchronizing from A’s system clock, to A’s PHC, to B’s PHC.
+On Pi B, the client, you will see some jumps in the time offset too, as we are now synchronizing from A's system clock, to A's PHC, to B's PHC.
 
-To synchronize B’s system clock from its PHC, run this command:
+To synchronize Pi B's system clock from its PHC, run this command:
 
 ```bash
 sudo phc2sys -s eth0 -c CLOCK_REALTIME -O 0 -m -q
