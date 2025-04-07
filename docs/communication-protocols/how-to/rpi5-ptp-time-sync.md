@@ -130,23 +130,27 @@ rtt min/avg/max/mdev = 0.216/0.225/0.235/0.007 ms
 PTP operates in a server-client architecture.
 A server with one or more clients synchronizing against it, is called a time domain.
 One Ethernet can have multiple time domains.
-If the time domain is not specified, LinuxPTP will default to domain number 0.
+If the time domain is not specified, LinuxPTP will default to time domain number 0.
 
 By default PTP will use the best master clock algorithm (BMCA) to choose which device should be the server for the time domain.
 For this how-to we manually configure Pi A to be the server and Pi B to be the client, by respectively specifying the `--serverOnly 1` and `--clientOnly 1` command line arguments.
 
+### Start server
+
 Start the PTP server on Pi A:
 
 ```bash
-sudo ptp4l -i eth0 --verbose 1 --use_syslog 0 --hwts_filter full --neighborPropDelayThresh 17000 --serverOnly 1
+sudo ptp4l -i eth0 --verbose 1 --use_syslog 0 --step_threshold 1 --hwts_filter full --neighborPropDelayThresh 17000 --serverOnly 1
 ```
 
 Wait for the server to print out `assuming the grand master role` before starting the client.
 
 We mostly use the default configuration of `ptp4l`, except for these overrides:  
-* `-i eth0` specifies the Ethernet interface to use  
-* `--verbose 1` prints logs to stdout  
-* `--use_syslog 0` prevents logs from being written to the syslog  
+* `-i eth0` specifies the Ethernet interface to use.
+* `--verbose 1` prints logs to stdout.
+* `--use_syslog 0` prevents logs from being written to the syslog.
+* `--step_threshold 1` tells `ptp4l` to step the clock when large time jumps occur.
+  This is optional, but useful during testing to see if two devices keep pace.
 * `--hwts_filter full` is an override that is required for the Raspberry Pi 5, to tell the network driver to always timestamp network packets.
   Without this, timestamping does not occur on all network packet types, and synchronization fails.
 * `--neighborPropDelayThresh 17000` is also an override required for the Raspberry Pi 5.
@@ -159,10 +163,12 @@ We mostly use the default configuration of `ptp4l`, except for these overrides:
 
 Refer to the [`ptp4l` man page](https://manpages.ubuntu.com/manpages/latest/en/man8/ptp4l.8.html) for a detailed description of all options.
 
+### Start client
+
 On Pi B, start the client:
 
 ```bash
-sudo ptp4l -i eth0 --verbose 1 --use_syslog 0 --hwts_filter full --neighborPropDelayThresh 17000 --clientOnly 1
+sudo ptp4l -i eth0 --verbose 1 --use_syslog 0 --step_threshold 1 --hwts_filter full --neighborPropDelayThresh 17000 --clientOnly 1
 ```
 
 The command for the client is almost identical to the server, except that we change the last argument to `--clientOnly 1` to force `ptp4l` to always run in client mode, and not try and become the server using BMCA.
@@ -205,33 +211,22 @@ Generally two systems are considered synchronized with PTP when their clocks dif
 A software Proportional-Integral control system is used by `ptp4l` to tune the frequency of the PHC.
 Depending on how well the systems are synchronized, it might take tens of seconds to stabilize around 0±100.
 
-## Synchronize the system clock
-
-For this step we assume that Pi A, the server, has an accurate system clock.
-You can manually synchronize it from the internet using the `ntpdate` tool from the `ntpsec-ntpdate` package:
-
-```{terminal}
-   :input: sudo ntpdate pool.ntp.org
-   :user: ubuntu
-   :host: pi-a
-   :dir: ~
-
-2025-03-31 15:09:07.128437 (+0000) +0.000957 +/- 0.009660 pool.ntp.org 196.10.52.57 s2 no-leap
-```
+## Synchronize system clock
 
 On Pi A, start `phc2sys`, synchronizing from the system clock to eth0's PHC:
 
 ```bash
-sudo phc2sys -s CLOCK_REALTIME -c eth0 -O 0 -m -q
+sudo phc2sys -s CLOCK_REALTIME -c eth0 -O 0 --step_threshold 1 -m -q
 ```
 
-* `-s` specifies that the source is the system clock, a.k.a `CLOCK_REALTIME`   
+* `-s` specifies that the source is the system clock, a.k.a `CLOCK_REALTIME`.
 * `-c` specifies the clock that needs to be synchronized.
-  In this case it is either `eth0`, or its device node `/dev/ptp0`  
+  In this case it is either `eth0`, or its device node `/dev/ptp0`.
 * `-O 0` tells the synchronizer that it should target a zero second offset between the two clocks.
-  You can add an offset here, for example to account for leap seconds  
-* `-m` enables printing log messages to stdout  
-* `-q` disables printing to the syslog
+  You can add an offset here, for example to account for leap seconds.
+* `--step_threshold 1` (optional) tells `phc2sys` to step the clock when large time jumps occur.
+* `-m` enables printing log messages to stdout.
+* `-q` disables printing to the syslog.
 
 Refer to the [`phc2sys` man page](https://manpages.ubuntu.com/manpages/latest/en/man8/phc2sys.8.html) for a detailed description of all available options.
 
@@ -248,56 +243,79 @@ On Pi B, the client, you will see some jumps in the time offset too, as we are n
 To synchronize Pi B's system clock from its PHC, run this command:
 
 ```bash
-sudo phc2sys -s eth0 -c CLOCK_REALTIME -O 0 -m -q
+sudo phc2sys -s eth0 -c CLOCK_REALTIME -O 0 --step_threshold 1 -m -q
 ```
 
-The terminal will print the offset statistics.
+The only difference between this command, and the `phc2sys` command on Pi A, is that the source clock and destination clocks are swapped around.
 
-## Verifying that it works
+After running the command, the terminal will print the offset statistics.
 
-We will now verify that time is propagating from Pi A to Pi B.
-Stop `phc2sys` on Pi B.
+## Verify time synchronization
 
-Change the system clock for Pi B to some date in the past, and verify that it has changed:
+With this setup, Pi A's system clock is synchronized to its PHC.
+Pi A's PHC then gets synchronized over the network to Pi B's PHC.
+Finally Pi B's PHC is synchronized to its system clock.
 
-On Pi B:
-```{terminal}   
+We should therefore see that Pi A's system clock and Pi B's system clocks are synchronized.
+You can verify this by running the `date` command on both devices, and checking that their clocks report the same time.
+
+```{terminal}
    :user: ubuntu
-   :host: pi-b
+   :host: pi-a
    :dir: ~
 
-:input: sudo date --set="2015-01-01 14:15:16.178"
-Thu Jan  1 14:15:16 SAST 2015
 :input: date
-Thu Jan  1 14:15:17 SAST 2015
+Mon Apr  7 14:42:36 UTC 2025
 ```
 
-Start `phc2sys` on Pi B and let it run until the offset is within 0±100:
+Verify that Pi B reports the same time.
+Note that the device could be set up in a different time zone, but still report the same time:
 
-```{terminal}   
-   :user: ubuntu
-   :host: pi-b
-   :dir: ~
-
-:input: sudo phc2sys -s eth0 -c CLOCK_REALTIME -O 0 -m -q
-phc2sys[28916.598]: CLOCK_REALTIME phc offset -299834345657614183 s0 freq   +2010 delay   1037
-phc2sys[28917.598]: CLOCK_REALTIME phc offset -299834345657613951 s1 freq   +2242 delay   1037
-phc2sys[28918.598]: CLOCK_REALTIME phc offset       -47 s2 freq   +2195 delay   1000
-phc2sys[28919.598]: CLOCK_REALTIME phc offset       -94 s2 freq   +2134 delay   1037
-phc2sys[28920.598]: CLOCK_REALTIME phc offset       -30 s2 freq   +2170 delay   1055
-phc2sys[28921.598]: CLOCK_REALTIME phc offset        78 s2 freq   +2269 delay   1000
-phc2sys[28922.599]: CLOCK_REALTIME phc offset        35 s2 freq   +2249 delay   1037
-phc2sys[28923.303]: CLOCK_REALTIME phc offset         9 s2 freq   +2234 delay   1037
-```
-
-In another terminal run the `date` command to see if it is synchronized.
-It should print the current wall clock time, and not the time we set it to before:
-
-```{terminal}   
+```{terminal}
    :user: ubuntu
    :host: pi-b
    :dir: ~
 
 :input: date
-Mon Mar 31 17:25:32 SAST 2025
+Mon Apr  7 16:42:36 SAST 2025
 ```
+
+If Pi A's system clock is incorrect, you can manually adjust it:
+
+```{terminal}   
+   :user: ubuntu
+   :host: pi-a
+   :dir: ~
+
+:input: sudo date --set="2025-01-01 00:00:00"
+Wed Jan  1 00:00:00 UTC 2025
+```
+
+Large time jumps will take some time to synchronize over.
+Because we used `--step_threshold 1`, it should take only a few seconds for all the systems in the PTP time domain to be synchronized again.
+Verify the time on Pi B:
+
+```{terminal}   
+   :user: ubuntu
+   :host: pi-b
+   :dir: ~
+
+:input: date
+Wed Jan  1 02:00:30 SAST 2025
+```
+
+You can also manually synchronize the time from the internet using the `ntpdate` tool from the `chrony` package:
+
+```{terminal}
+   :input: sudo ntpdate pool.ntp.org
+   :user: ubuntu
+   :host: pi-a
+   :dir: ~
+
+2025-04-07 14:51:36.570167 (+0000) +8347851.831618 +/- 0.050685 pool.ntp.org 196.10.98.182 s1 no-leap
+CLOCK: time stepped by 8347851.831618
+CLOCK: time changed from 2025-01-01 to 2025-04-07
+```
+
+Alternatively use Chrony or `ntpd` to continuously synchronize your system clock from the internet, and then using PTP to distribute the time and synchronize via Ethernet.
+You can also follow our guide [how to use Timemaster](link-placeholder) to use a combination of PTP and NTP for redundancy.
