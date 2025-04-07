@@ -115,13 +115,15 @@ sudo ptp4l -i eth0 --verbose 1 --use_syslog 0 --hwts_filter full --neighborPropD
 
 Wait for the server to print out `assuming the grand master role` before starting the client.
 
-We use mostly the default configuration of `ptp4l`, except for these overrides:  
+We mostly use the default configuration of `ptp4l`, except for these overrides:  
 * `-i eth0` specifies the ethernet interface to use  
 * `--verbose 1` prints logs to stdout  
 * `--use_syslog 0` prevents logs from being written to the syslog  
 * `--hwts_filter full` is an override that is required for the Raspberry Pi 5, to tell the network driver to always timestamp network packets. Without this, timestamping does not occur on all network packet types, and synchronization fails.  
 * `--neighborPropDelayThresh 17000` is also an override required for the Raspberry Pi 5\. From experimentation we can see that there is a constant path delay of around 16.9 microseconds between two Raspberry Pi 5s. The Pi 5’s ethernet is connected to the RP1 chip, which is a coprocessor that handles IO. The latency between the two Pis is likely increased because this RP1 chip sits inline. This constant delay is above LinuxPTP’s default threshold of 800ns. We increase the threshold to just above the constant delay of around 16.9 microseconds.  
 * `--serverOnly 1` tells `ptp4l` to run in server only mode, and not use BMCA to become a client.
+
+Refer to the [ptp4l man page](https://manpages.ubuntu.com/manpages/latest/en/man8/ptp4l.8.html) for a detailed description of all options.
 
 On Raspberry Pi B, start the client:
 
@@ -189,6 +191,8 @@ sudo phc2sys -s CLOCK_REALTIME -c eth0 -O 0 -m -q
 * `-O 0` tells the synchronizer that it should target a 0 nanosecond offset between the two clocks. You can add an offset here, for example to account for leap seconds  
 * `-m` enables printing log messages to stdout  
 * `-q` disables printing to the syslog
+
+Refer to the [phc2sys man page](https://manpages.ubuntu.com/manpages/latest/en/man8/phc2sys.8.html) for a detailed description of all available options.
 
 ```{note}
 `phc2sys` has many more features to automatically synchronise between clocks, like selecting the best source to synchronize from, and automatically handling leap seconds and daylight savings time. The arguments we use here disable all these features, and use constant offsets. This is to show a minimal setup of what this utility does. In a real world scenario you will highly likely never synchronise from your system clock, as it is usually inaccurate. You would rather use a source clock that is synchronised by a GPS receiver.
