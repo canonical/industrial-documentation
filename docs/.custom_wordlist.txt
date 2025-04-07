@@ -1,5 +1,8 @@
 # Leave a blank line at the end of this file to support concatenation
+Chrony
+Chrony's
 cjk
+config
 cryptographically
 dvipng
 fonts
@@ -8,17 +11,24 @@ github
 GPG
 gyre
 https
+kustom
 lang
 latexmk
+LinuxPTP
+NTP
+OpenThread
 otf
 plantuml
+PTP
 tex
 texlive
+Timemaster
+Timemaster's
 TOC
+txt
+uncomment
 utils
 WCAG
+wordlist
 xetex
 xindy
-kustom
-wordlist
-txt
