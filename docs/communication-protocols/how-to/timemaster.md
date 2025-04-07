@@ -2,7 +2,7 @@
 
 Timemaster is an application from the LinuxPTP package that combines NTP and PTP to provide a synchronized system clock, with redundancy. PTP is the more accurate of the two protocols, but can only synchronize against a single server at a time. NTP is less accurate, but allows synchronization from multiple servers concurrently, providing redundancy. Timemaster combines these two to allow fallback to NTP if the PTP server goes offline.
 
-# Install dependencies
+## Install dependencies
 
 Timemaster and PTP synchronization is provided by the LinuxPTP package. Install the Debian package using APT, as the Snap’s confinement currently makes using Timemaster impossible.
 
@@ -21,7 +21,7 @@ sudo systemctl stop chronyd
 sudo systemctl disable chronyd
 ```
 
-# Configure Timemaster
+## Configure Timemaster
 
 The Timemaster config file is located at `/etc/linuxptp/timemaster.conf`. Open this file and make the following changes.
 
@@ -71,7 +71,7 @@ options --hwts_filter full --neighborPropDelayThresh 17000
 
 Refer to Timemaster’s man page for more details on configuration options.
 
-# Run Timemaster
+## Run Timemaster
 
 Start Timemaster by running this command:
 
@@ -86,7 +86,7 @@ sudo timemaster -f /etc/linuxptp/timemaster.conf -l 10 -m -q
 
 Refer to the [`timemaster` man page](https://manpages.ubuntu.com/manpages/latest/en/man8/timemaster.8.html) for a complete description of all available options.
 
-# Check the logs
+## Check the logs
 
 Timemaster only prints its own logs to `stdout`. To see the logs for its child processes, look at the system logs:
 
