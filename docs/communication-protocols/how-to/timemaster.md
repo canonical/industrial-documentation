@@ -4,7 +4,7 @@ Timemaster is an application from the LinuxPTP package that combines NTP and PTP
 
 ## Install dependencies
 
-Timemaster and PTP synchronization is provided by the LinuxPTP package. Install the Debian package using APT, as the Snap’s confinement currently makes using Timemaster impossible.
+Timemaster and PTP synchronization is provided by the LinuxPTP package. Install the Debian package using APT, as the Snap's confinement currently makes using Timemaster impossible.
 
 We assume you already have a working PTP setup. Have a look at [our how-to](to-be-replaced) to set it up.
 
@@ -69,7 +69,7 @@ path /usr/sbin/ptp4l
 options --hwts_filter full --neighborPropDelayThresh 17000
 ```
 
-Refer to Timemaster’s man page for more details on configuration options.
+Refer to the [`timemaster` man page](https://manpages.ubuntu.com/manpages/latest/en/man8/timemaster.8.html) for more details on configuration options.
 
 ## Run Timemaster
 
@@ -111,13 +111,21 @@ Chrony is ultimately responsible to make the decision of the best time source. Y
    :host: ubuntu
    :dir: /home/ubuntu/
 
-:input: chronyc sources
+:input: chronyc sources -v
+  .-- Source mode  '^' = server, '=' = peer, '#' = local clock.
+ / .- Source state '*' = current best, '+' = combined, '-' = not combined,
+| /             'x' = may be in error, '~' = too variable, '?' = unusable.
+||                                                 .- xxxx [ yyyy ] +/- zzzz
+||      Reachability register (octal) -.           |  xxxx = adjusted offset,
+||      Log2(Polling interval) --.      |          |  yyyy = measured offset,
+||                                \     |          |  zzzz = estimated error.
+||                                 |    |           \
 MS Name/IP address         Stratum Poll Reach LastRx Last sample               
 ===============================================================================
-#* PTP0                          0   2    37     6    +16ns[  +29ns] +/- 3558ns
-^? za-ctn-rs01b.dpogroup.com     2   4     3    15   -584us[ +487us] +/-   48ms
-^? tick.sanren.ac.za             1   4     3    15  -1159us[  -88us] +/-   14ms
-^- dnscache.atomic.ac            3   6    17    25  -1137us[ -730us] +/-   62ms
+#* PTP0                          0   2   377     3    -52ns[ -174ns] +/- 3555ns
+^- ntp-nts-1.ps6.canonical.>     2   4   377     5  -2780us[-2780us] +/-   39ms
+^- ntp-nts-2.ps5.canonical.>     1   4   377    10   -350us[ -350us] +/-   13ms
+^- ntp-nts-3.ps5.canonical.>     3  10   377   697  -1435us[-1547us] +/-   54ms
 ```
 
 Chrony will monitor the NTP servers and the PTP clock. If it detects that the time from one of them is further out than the rest, it will ignore that clock, and print a log message saying it detected a `falseticker`.
@@ -134,7 +142,7 @@ Apr 04 12:54:04 pi5-2504-desktop chronyd[334944]: Detected falseticker PTP0
 Apr 04 13:17:36 pi5-2504-desktop chronyd[334944]: Selected source PTP0
 ```
 
-We can query Chrony’s status again and see `PTP0` is marked with an `x`, indicating that it is not being used. The sources that are actively being used is marked by `*` and `+`. Sources marked with `-` are valid, but not being used. If Chrony is still monitoring a source for validity, it will be indicated with `?`.
+We can query Chrony's status again and see `PTP0` is marked with an `x`, indicating that it is not being used.
 
 ```{terminal}
    :user: ubuntu
@@ -145,12 +153,12 @@ We can query Chrony’s status again and see `PTP0` is marked with an `x`, indic
 MS Name/IP address         Stratum Poll Reach LastRx Last sample               
 ===============================================================================
 #x PTP0                          0   2   377     2   +37.0s[ +37.0s] +/-  219ms
-^- za-ctn-rs01b.dpogroup.com     2   4   377     3  +1059us[ +783us] +/-   48ms
-^* tick.sanren.ac.za             1   4   377     2  -1810us[-2087us] +/-   18ms
-^- dnscache.atomic.ac            3   6    77    62  +2439us[+1881us] +/-   67ms
+^- ntp-nts-1.ps6.canonical.>     2   4   377     3  +1059us[ +783us] +/-   48ms
+^* ntp-nts-2.ps5.canonical.>     1   4   377     2  -1810us[-2087us] +/-   18ms
+^- ntp-nts-3.ps5.canonical.>     3   6    77    62  +2439us[+1881us] +/-   67ms
 ```
 
-After the PTP clock is corrected, it takes some time for Chrony’s source selection algorithm to choose it again as the best source.
+After the PTP clock is corrected, it takes some time for Chrony's source selection algorithm to choose it again as the best source.
 
 ```{terminal}
    :user: ubuntu
@@ -161,7 +169,7 @@ After the PTP clock is corrected, it takes some time for Chrony’s source selec
 MS Name/IP address         Stratum Poll Reach LastRx Last sample               
 ===============================================================================
 #* PTP0                          0   2   377     3    +73us[  +73us] +/-   11ms
-^- za-ctn-rs01b.dpogroup.com     2   4   377    15   +251us[ +278us] +/-   69ms
-^+ tick.sanren.ac.za             1   4   377    14   +395us[ +421us] +/-   15ms
-^- dnscache.atomic.ac            3   7   377    88   +848us[ +435us] +/-   65ms
+^- ntp-nts-1.ps6.canonical.>     2   4   377    15   +251us[ +278us] +/-   69ms
+^+ ntp-nts-2.ps5.canonical.>     1   4   377    14   +395us[ +421us] +/-   15ms
+^- ntp-nts-3.ps5.canonical.>     3   7   377    88   +848us[ +435us] +/-   65ms
 ```
