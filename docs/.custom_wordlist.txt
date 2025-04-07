@@ -4,8 +4,10 @@ Chrony
 Chrony's
 cjk
 config
+coprocessor
 cryptographically
 dvipng
+eth
 failover
 fonts
 freefont
@@ -17,6 +19,7 @@ kustom
 lang
 latexmk
 LinuxPTP
+LinuxPTP's
 NTP
 OpenThread
 otf
@@ -25,11 +28,14 @@ PHC
 PHCs
 PTP
 stdout
+synchronizer
 syslog
 tex
 texlive
 Timemaster
 Timemaster's
+timestamping
+txt
 TOC
 txt
 uncomment
