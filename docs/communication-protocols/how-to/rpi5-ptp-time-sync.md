@@ -18,24 +18,43 @@ In addition to synchronizing PHCs, one can synchronize the system clock to the P
 
 ## Install LinuxPTP
 
-LinuxPTP is available on Ubuntu as either a snap or a deb package.
+LinuxPTP is available on Ubuntu as either a deb or a snap package.
 Either of these will work for the rest of this guide.
 
-You can install the snap using:
+`````{tabs}
+````{group-tab} deb
+
+Install the deb package:
+
+```bash
+sudo apt install linuxptp
+```
+
+````
+````{group-tab} snap
+
+Install the snap:
 
 ```bash
 sudo snap install linuxptp
 ```
 
-Alternatively you can install the Debian package:
+Add aliases for the snap's apps:
 
 ```bash
-sudo snap install linuxptp
+sudo snap alias linuxptp.hwstamp-ctl hwstamp_ctl
+sudo snap alias linuxptp.nsm nsm
+sudo snap alias linuxptp.phc-ctl phc_ctl
+sudo snap alias linuxptp.phc2sys phc2sys
+sudo snap alias linuxptp.pmc pmc
+sudo snap alias linuxptp.ptp4l ptp4l
+sudo snap alias linuxptp.timemaster timemaster
+sudo snap alias linuxptp.ts2phc ts2phc
+sudo snap alias linuxptp.tz2alt tz2alt
 ```
 
-```{note}
-This will give you an older, but stable version of LinuxPTP - currently version 4.2.
-```
+````
+`````
 
 ## Set up your network
 
