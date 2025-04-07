@@ -6,7 +6,7 @@ Timemaster is an application from the LinuxPTP package that combines NTP and PTP
 
 Timemaster and PTP synchronization is provided by the LinuxPTP package. Install the Debian package using APT, as the Snap’s confinement currently makes using Timemaster impossible.
 
-We assume you already have a working PTP setup. Have a look at our how-to to set it up.
+We assume you already have a working PTP setup. Have a look at [our how-to](to-be-replaced) to set it up.
 
 On the NTP side, Timemaster can either use `ntpd` or Chrony. The default is to use Chrony. Install it:
 
@@ -61,7 +61,7 @@ delay 10e-6
 
 The rest of the config file can be left unchanged, unless you need specific PTP or NTP configurations.
 
-If you are running on a Raspberry Pi 5, `ptp4l` will need additional options as described in \[the other how-to\]. In this case your configuration should look like this:
+If you are running on a Raspberry Pi 5, `ptp4l` will need additional options as described in [the other how-to](to-be-replaced). In this case your configuration should look like this:
 
 ```ini
 [ptp4l]
