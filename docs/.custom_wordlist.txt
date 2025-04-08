@@ -5,6 +5,7 @@ cjk
 config
 cryptographically
 dvipng
+failover
 fonts
 freefont
 github
