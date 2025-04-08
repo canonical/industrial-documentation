@@ -16,7 +16,7 @@ sudo snap connect lora-basicstation:docker-executables docker:docker-executables
 ```
 
 ## Configuration
-Configuration of the gateway is done similar to the Docker container, using the same config options as listed in the [upstream documentation](https://github.com/xoseperez/basicstation-docker?tab=readme-ov-file#configure-the-gateway). The key difference is that the snap config options are used in place of environment variables. It's possible to create an environment variable file and pass that to Docker, but using the standard snap configuration options will enable you to leverage the the snap ecosystem to maintain and update your Ubuntu Core devices.
+Configuration of the gateway is done similar to the Docker container, using the same config options as listed in the [upstream documentation](https://github.com/xoseperez/basicstation-docker?tab=readme-ov-file#configure-the-gateway). The key difference is that the snap config options are used in place of environment variables. It's possible to create an environment variable file and pass that to the Docker container, but using the standard snap configuration options will enable you to leverage the the snap ecosystem to maintain and update your Ubuntu Core devices.
 
 To translate from environment variables to snap options, you only need to change the name or key of the configuration option. The values remain the same. The variable name is changed to lower case and underscores replaced with hyphens. An `env.` prefix is also added.
 
@@ -63,7 +63,7 @@ env.gpio-chip  gpiochip0
 These configs are required to forward the correct devices to the Docker container. If you are using a Raspberry Pi 5 you must change the `env.gpio-chip` value to `gpiochip4` to allow the Docker container to reset the LoRa concentrator.
 
 ## Running the snap
-To start the snap and enable the daemon to autostart in the future, run:
+To start the snap and enable the daemon to start automatically in the future, run:
 
 ```shell
 sudo snap start --enable lora-basicstation
@@ -78,11 +78,6 @@ To view the log output:
 ```shell
 sudo snap logs -f lora-basicstation
 ```
-To remove the snap, Docker container, and image:
-
-```shell
-sudo snap remove lora-basicstation
-```
 ## Debugging
 ### Verify environment
 The snap configs are translated to an environment file when this snap is started. This environment file is passed to the Docker container when it is created.
@@ -92,7 +87,7 @@ To verify the contents of the environment file, run:
 ```shell
 cat /var/snap/lora-basicstation/common/conf.env
 ```
-### Verify the Docker container is running
+### Verify that the Docker container is running
 To make sure the Docker container is running, execute the following command:
 
 ```
@@ -119,8 +114,9 @@ Gateway EUI: 0242ACFFFE110002 (based on environment variable)
 
 ### Find attached concentrators
 
-A script to scan for connected LoRa concentrators is also included.
-To learn more about its limitations, please see the [upstream documentation](https://github.com/xoseperez/basicstation-docker?tab=readme-ov-file#find-the-concentrator). The script is executed by running:
+An application to scan for connected LoRa concentrators is also included.
+To learn more about its limitations, please see the [upstream documentation](https://github.com/xoseperez/basicstation-docker?tab=readme-ov-file#find-the-concentrator).
+Execute this application by running:
 
 ```shell
 $ lora-basicstation.find-concentrator
