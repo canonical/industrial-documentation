@@ -317,5 +317,6 @@ CLOCK: time stepped by 8347851.831618
 CLOCK: time changed from 2025-01-01 to 2025-04-07
 ```
 
+<!-- TODO replace link to timemaster how-to -->
 Alternatively use Chrony or `ntpd` to continuously synchronize your system clock from the internet, and then using PTP to distribute the time and synchronize via Ethernet.
-You can also follow our guide [how to use Timemaster](link-placeholder) to use a combination of PTP and NTP for redundancy.
+You can also follow our guide {doc}`rpi5-ptp-time-sync` to use a combination of PTP and NTP for redundancy.
