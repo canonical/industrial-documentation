@@ -17,7 +17,7 @@ sudo snap connect lora-basicstation:docker-executables docker:docker-executables
 ```
 
 ## Configuration
-Configuration of the gateway is done similar to the Docker container, using the same config options as listed in the [upstream documentation](https://github.com/xoseperez/basicstation-docker?tab=readme-ov-file#configure-the-gateway). The key difference is that the snap config options are used in place of environment variables. It's possible to create an environment variable file and pass that to the Docker container, but using the standard snap configuration options will enable you to leverage the the snap ecosystem to maintain and update your Ubuntu Core devices.
+Configuration of the gateway is done similar to the Docker container using the same config options as listed in the [upstream documentation](https://github.com/xoseperez/basicstation-docker?tab=readme-ov-file#configure-the-gateway). The key difference is that the snap config options are used in place of environment variables. It's possible to create an environment variable file and pass that to the Docker container, but using the standard snap configuration options will enable you to leverage the the snap ecosystem to maintain and update your Ubuntu Core devices.
 
 To translate from environment variables to snap options, you only need to change the name or key of the configuration option. The values remain the same. The variable name is changed to lower case and underscores replaced with hyphens. An `env.` prefix is also added.
 
@@ -79,8 +79,8 @@ To view the log output:
 ```shell
 sudo snap logs -f lora-basicstation
 ```
-## Debugging
-### Verify environment
+
+## Verifying the environment
 The snap configs are translated to an environment file when this snap is started. This environment file is passed to the Docker container when it is created.
 
 To verify the contents of the environment file, run:
@@ -88,7 +88,7 @@ To verify the contents of the environment file, run:
 ```shell
 cat /var/snap/lora-basicstation/common/conf.env
 ```
-### Verify that the Docker container is running
+## Verifying that the Docker container is running
 To make sure the Docker container is running, execute the following command:
 
 ```
@@ -96,7 +96,7 @@ sudo docker ps
 ```
 If it does not list any containers with the name `lora-basicstation`, the container is not running.
 
-### Find the Gateway EUI
+## Finding the Gateway EUI
 
 This snap provides a tool to generate an EUI from the device MAC address.
 Refer to the [upstream documentation](https://github.com/xoseperez/basicstation-docker?tab=readme-ov-file#get-the-eui-of-the-gateway) for details on its usage. Run the following command to identify the Gateway EUI:
@@ -113,7 +113,7 @@ $ lora-basicstation.gateway-eui
 Gateway EUI: 0242ACFFFE110002 (based on environment variable)
 ```
 
-### Find attached concentrators
+## Finding the attached concentrators
 
 An application to scan for connected LoRa concentrators is also included.
 To learn more about its limitations, please see the [upstream documentation](https://github.com/xoseperez/basicstation-docker?tab=readme-ov-file#find-the-concentrator).

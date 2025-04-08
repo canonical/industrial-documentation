@@ -16,7 +16,7 @@ The gadget snap defines and configures system properties that are specific to on
 
 Clone the [LoRa Basics stations Ubuntu Core image repository](https://github.com/canonical/lora-basicstation-snap/tree/main/ubuntu-core-image) and replace the original pi-gadget directory with this [version of the Raspberry Pi gadget snap](https://github.com/canonical/pi-gadget/tree/24).
 
-Inside the `pi-gadget` directory, edit the file `gadget.yaml` by adding the content of `additions-to-gadget.yaml` (shown below) at the end.
+Inside the `pi-gadget` directory, edit the file `gadget.yaml` by adding this code at the end:
 
 ```yaml
 
@@ -64,7 +64,7 @@ cd ..
 
 ## Set up the model
 
-The example `model.json` file in the `ubuntu-core-image` directory includes `landscape-client`, `lora-basicstation` and `docker`.
+To set up the custom Ubuntu Core image model, first create the model assertion. For this image, the model assertion should also include the `landscape-client`, `lora-basicstation`, and `docker` snaps:
 
 ```json
 {
@@ -129,7 +129,7 @@ The example `model.json` file in the `ubuntu-core-image` directory includes `lan
 
 ```
 
-All you need to do is to update the `authority-id` and `brand-id` fields, and then sign the model:
+Update the `authority-id` and `brand-id` fields with your [developer id](https://ubuntu.com/core/docs/create-ubuntu-one), and execute this command to sign the model:
 
 ```
 snap sign -k my-model-key model.json > model.model
