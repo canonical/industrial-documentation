@@ -142,7 +142,7 @@ After the model is signed, build an image from it by executing:
 ```shell
 $ ubuntu-image snap --snap pi-gadget/pi_24-1_arm64.snap --validation=enforce model.model
 ```
-The path to the custom gadget snap you built earlier is set because it must be side-loaded into the image during the build process.
+The path to the custom gadget snap built earlier is set because it must be side-loaded into the image during the build process.
 
 This should return:
 

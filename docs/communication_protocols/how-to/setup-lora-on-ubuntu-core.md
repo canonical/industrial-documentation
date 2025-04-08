@@ -7,8 +7,9 @@ To install the snap from the Snap Store, run:
 ```shell
 sudo snap install lora-basicstation
 ```
+This automatically installs the [Docker](https://snapcraft.io/docker) snap as well if not present on the host. 
 
-This snap needs to interact with the Docker Engine on the host. To allow that, connect the required docker interfaces by running:
+The LoRa Basics station snap needs to interact with the Docker Engine on the host. To allow that, connect the required docker interfaces by running:
 
 ```shell
 sudo snap connect lora-basicstation:docker docker:docker-daemon
