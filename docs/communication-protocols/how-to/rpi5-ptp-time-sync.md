@@ -61,7 +61,7 @@ sudo snap alias linuxptp.tz2alt tz2alt
 LinuxPTP can use either layer 2 or layer 3 networking.
 We will use layer 3, IP networking, for the two Raspberry Pis to communicate.
 If you use a switch between the two Raspberry Pis, the switch will also need to support the PTP protocol.
-As a starting point, do not use a switch, but connect the two Pis directly to each other.
+In this guide, we do not use a switch, but connect the two Pis directly to each other.
 
 From now on we will refer to the two devices as *Pi A* and *Pi B*.
 
