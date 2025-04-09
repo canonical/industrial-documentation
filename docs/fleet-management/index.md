@@ -1,7 +1,6 @@
 # Fleet Management
 
 ```{toctree}
-:maxdepth: 2
-
-how-to/index
+:maxdepth: 1
+deploy-docker-containers-uc-ansible
 ```

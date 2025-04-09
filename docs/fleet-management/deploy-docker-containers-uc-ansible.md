@@ -4,11 +4,13 @@ Ansible is an open-source automation engine used to automate processes such as p
 
 This guide shows you how to deploy docker containers on Ubuntu Core using the Ansible Snap module. For demonstration purposes, we will be deploying an instance of RabbitMQ on a Raspberry Pi. The same playbook will also deploy an instance of RabbitMQ on another Raspberry Pi running Ubuntu Server to showcase the ease with which you can shift containerized runtimes from Ubuntu Server to Ubuntu Core for added security.
 
-Note: The methods demonstrated here should also work on other distributions that support [Snapd](https://snapcraft.io/docs/installing-snapd).
+```{note}
+The methods demonstrated here should also work on other distributions that support [Snapd](https://snapcraft.io/docs/installing-snapd).
+```
 
 ## Installation
 
-To get started, you’ll need to install Ansible on the control node. This is the machine you’ll be using to run Ansible CLI tools. You can do this by executing:
+To get started, you'll need to install Ansible on the control node. This is the machine you'll be using to run Ansible CLI tools. You can do this by executing:
 
 ```shell
 $ sudo apt install ansible
@@ -18,7 +20,7 @@ For additional information and alternative installation options, check out the f
 
 ## Create the inventory file
 
-The inventory file defines the Ansible managed nodes (or hosts) that Docker containers will be deployed to. To create this file, you’ll need each host’s username and IP address. 
+The inventory file defines the Ansible managed nodes (or hosts) that Docker containers will be deployed to. To create this file, you'll need each host's username and IP address. 
 
 You must be able to SSH into any nodes in your inventory file. To confirm this, run:
 
@@ -26,7 +28,7 @@ You must be able to SSH into any nodes in your inventory file. To confirm this, 
 $ ssh {username}@{ip address}
 ```
 
-To create the inventory file, create a new file called ‘inventory.yaml’ in your preferred directory, and enter each host machine’s details as shown:
+To create the inventory file, create a new file called `inventory.yaml` in your preferred directory, and enter each host machine's details as shown:
 
 ```yaml
 machines:
@@ -52,7 +54,7 @@ Executing some tasks in the playbook will require Sudo privileges. You can enabl
 
 ## Confirm hosts are reachable
 
-It’s good practice to confirm the inventory.yaml file is properly set up and the hosts can be reached before starting on the playbook. Enter the following command to ping each host in the machines group in the inventory. 
+It's good practice to confirm the inventory.yaml file is properly set up and the hosts can be reached before starting on the playbook. Enter the following command to ping each host in the machines group in the inventory. 
 
 ```shell
 $ ansible machines -i inventory.yaml -m ping
@@ -74,7 +76,7 @@ rpi4 | SUCCESS => {
 }
 ```
 
-If the hosts are not reachable, ensure that your public SSH key is added to the .ssh/authorized\_keys file on each host.
+If the hosts are not reachable, ensure that your public SSH key is added to the .ssh/authorized_keys file on each host.
 
 ## Prepare the playbook
 
@@ -84,7 +86,7 @@ To deploy the RabbitMQ containers to the two nodes:
 
 ### Create the playbook and ping the hosts
 
-Create the playbook.yaml file in the same directory as the inventory. Inside the playbook, write the name of the playbook and specify the targeted host group. As the first task, ping the hosts using ansible’s builtin ping module. This will confirm which hosts are available:
+Create the playbook.yaml file in the same directory as the inventory. Inside the playbook, write the name of the playbook and specify the targeted host group. As the first task, ping the hosts using ansible's builtin ping module. This will confirm which hosts are available:
 
 ```yaml
 name: Deploy RabbitMQ
@@ -111,7 +113,7 @@ Installing the Docker snap in the nodes is the second task in the playbook. The 
 
 ### Pull a RabbitMQ image
 
-This task downloads the RabbitMQ image that will be deployed. You’ll need the name of the specific version of RabbitMQ you want to deploy as shown:
+This task downloads the RabbitMQ image that will be deployed. You'll need the name of the specific version of RabbitMQ you want to deploy as shown:
 
 ```yaml
 - name: Pull an image
@@ -122,7 +124,7 @@ This task downloads the RabbitMQ image that will be deployed. You’ll need the 
 
 ### Configure RabbitMQ
 
-This task sets the default username and password for the RabbitMQ instances using Ansible’s builtin shell:
+This task sets the default username and password for the RabbitMQ instances using Ansible's builtin shell:
 
 ```yaml
   - name: Setup RabbitMQ configurations
@@ -199,7 +201,7 @@ rpi5                       : ok=6    changed=1    unreachable=0    failed=0    s
 
 ```
 
-Ansible does not display an output by default. To find out the status of the containers at any time, you’ll need to run the following command:
+Ansible does not display an output by default. To find out the status of the containers at any time, run the following command:
 
 ```shell
 $ ansible machines -i inventory.yaml -m shell -a "sudo docker container ls"
@@ -223,4 +225,4 @@ In this guide, all the devices are assigned the same password. In practice, this
 
 You can also take advantage of [Patterns](https://docs.ansible.com/ansible/latest/inventory_guide/intro_patterns.html) to run your playbook or commands against specific groups or hosts. Patterns can be used to refer to a group, set of groups, an IP address, or all the hosts in your inventory.   
 
-Although values such as `env_file` and a specific RabbitMQ image are indicated in the tasks, this does not scale well when you have a large number of hosts. Ideally, these values should be replaced with variables for more efficient management.
+Although values such as `env_file` and a specific RabbitMQ image are indicated within the tasks, this does not scale well when you have a large number of hosts. Ideally, these values should be replaced with variables for more efficient management.
