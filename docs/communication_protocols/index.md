@@ -1,7 +1,6 @@
 # Communication Protocols
 
 ```{toctree}
-:maxdepth: 2
-
-how-to/index
+:maxdepth: 1
+setup-lora-on-ubuntu-core
 ```
