@@ -1,7 +1,7 @@
 # How to set up LoRa Basics™ Station on Ubuntu Core
 The LoRa Basics™ Station snap is a [companion snap](https://ubuntu.com/core/docs/docker-companion-snap) for [LoRa Basics™ Station for Docker](https://github.com/xoseperez/basicstation-docker). It allows you to run and configure a LoRa gateway on Ubuntu Core devices. This guide will take you through the steps of setting up, running, and debugging the snap.
 
-## Install the snap
+## Installing the snap
 To install the snap from the Snap Store, run:
 
 ```shell
@@ -17,20 +17,26 @@ sudo snap connect lora-basicstation:docker-executables docker:docker-executables
 ```
 
 ## Configuration
-Configuration of the gateway is done similar to the Docker container using the same config options as listed in the [upstream documentation](https://github.com/xoseperez/basicstation-docker?tab=readme-ov-file#configure-the-gateway). The key difference is that the snap config options are used in place of environment variables. It's possible to create an environment variable file and pass that to the Docker container, but using the standard snap configuration options will enable you to leverage the the snap ecosystem to maintain and update your Ubuntu Core devices.
+Configuration of the gateway is done similar to the Docker container using the same config options as listed in the [upstream documentation](https://github.com/xoseperez/basicstation-docker?tab=readme-ov-file#configure-the-gateway). The key difference is that the snap config options are used in place of environment variables. 
 
-To translate from environment variables to snap options, you only need to change the name or key of the configuration option. The values remain the same. The variable name is changed to lower case and underscores replaced with hyphens. An `env.` prefix is also added.
+```{note}
+
+It's possible to create an environment variable file and pass that to the Docker container, but using the standard snap configuration options will enable you to leverage the the snap ecosystem to maintain and update your Ubuntu Core devices.
+
+```
+
+To translate from environment variables to snap options, you only need to change the name or key of the configuration option. The values remain the same. The variable name is changed to lower case and underscores are replaced with hyphens. An `env.` prefix is also added.
 
 Example: `GATEWAY_EUI=DEADFFFEBEEF` becomes `env.gateway-eui=DEADFFFEBEEF`
 
-Once the configs are in this format, you can set them one by one using the `snap set` command, e.g.:
+Once the configs are in this format, you can set them one by one using multiple `snap set` commands, e.g.:
 
 ```shell
 sudo snap set lora-basicstation env.tc-uri="wss://eu1.cloud.thethings.network:8887"
 sudo snap set lora-basicstation env.tc-key=NNSXS...
 ```
 
-Or with a single command:
+Or all at once with a single command:
 
 ```shell
 sudo snap set lora-basicstation \
@@ -81,7 +87,7 @@ sudo snap logs -f lora-basicstation
 ```
 
 ## Verifying the environment
-The snap configs are translated to an environment file when this snap is started. This environment file is passed to the Docker container when it is created.
+The snap configs are translated to an environment file when it is started. This environment file is then passed to the Docker container when it is created.
 
 To verify the contents of the environment file, run:
 
@@ -89,7 +95,7 @@ To verify the contents of the environment file, run:
 cat /var/snap/lora-basicstation/common/conf.env
 ```
 ## Verifying that the Docker container is running
-To make sure the Docker container is running, execute the following command:
+To check if the Docker container is running, run:
 
 ```
 sudo docker ps
@@ -117,7 +123,7 @@ Gateway EUI: 0242ACFFFE110002 (based on environment variable)
 
 An application to scan for connected LoRa concentrators is also included.
 To learn more about its limitations, please see the [upstream documentation](https://github.com/xoseperez/basicstation-docker?tab=readme-ov-file#find-the-concentrator).
-Execute this application by running:
+You can execute this application by running:
 
 ```shell
 $ lora-basicstation.find-concentrator

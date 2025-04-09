@@ -1,22 +1,22 @@
 # Build a custom Ubuntu Core image for Lora Basics™ station
 
-Although you can install Lora Basics station on existing Ubuntu Core devices, you can also create a custom Ubuntu Core image that includes LoRa Basics station software and add fleet management using Canonical's Landscape tool. In this guide, we will show you how to build this image and flash it onto a device. 
+Although you can install LoRa Basics station on existing Ubuntu Core devices, you can also create a custom Ubuntu Core image that includes LoRa Basics station software and add fleet management using Canonical's Landscape tool. In this guide, we will show you how to build this image and flash it onto a device. 
 
-Before you continue, you should know how to [building an Ubuntu Core image](https://ubuntu.com/core/docs/build-an-image).
+These instructions are written for, and tested with, a Raspberry Pi 5. However, with some modification, they should also work on other platforms.
+
 
 ```{note}
-
-These instructions are written for, and tested with, a Raspberry Pi 5. With some modification they should also work on other platforms.
+Before you continue, you should know how to [build an Ubuntu Core image](https://ubuntu.com/core/docs/build-an-image).
 
 ```
 
 ## Build the gadget snap
 
-The gadget snap defines and configures system properties that are specific to one or more devices. A custom version of this snap must be included as part of the Ubuntu Core image to setup the bootloader and other components. <!-- Further clarification needed -->
+The gadget snap defines and configures system properties that are specific to one or more devices. A custom version of this snap must be included as part of the Ubuntu Core image to set up the bootloader and other components. <!-- Further clarification needed -->
 
-Clone the [LoRa Basics stations Ubuntu Core image repository](https://github.com/canonical/lora-basicstation-snap/tree/main/ubuntu-core-image) and replace the original pi-gadget directory with this [version of the Raspberry Pi gadget snap](https://github.com/canonical/pi-gadget/tree/24).
+To build the gadget snap, start by cloning the [LoRa Basics stations snap repository](https://github.com/canonical/lora-basicstation-snap). In the `ubuntu-core-image` directory, replace the pi-gadget directory with this [version of the Raspberry Pi gadget snap](https://github.com/canonical/pi-gadget/tree/24).
 
-Inside the `pi-gadget` directory, edit the file `gadget.yaml` by adding this code at the end:
+In the new `pi-gadget` directory, edit the file `gadget.yaml` by adding this code at the end:
 
 ```yaml
 
@@ -54,7 +54,7 @@ defaults:
 You will also need to update the additions with your Landscape account name, and perhaps the Landscape server URL.
 If you also want to preconfigure WiFi, update the WiFi SSID and password.
 
-Then, to build the Gadget snap, run:
+Finally, build the gadget snap by running:
 
 ```shell
 cd pi-gadget
@@ -64,7 +64,7 @@ cd ..
 
 ## Set up the model
 
-To set up the custom Ubuntu Core image model, first create the model assertion. For this image, the model assertion should also include the `landscape-client`, `lora-basicstation`, and `docker` snaps:
+To set up a custom Ubuntu Core image model, you first create the model assertion. For this image, the model assertion includes the `landscape-client`, `lora-basicstation`, and `docker` snaps:
 
 ```json
 {
@@ -162,12 +162,17 @@ WARNING: "pi" installed from local snaps disconnected from a store cannot be ref
 Build successful
 ```
 
+If the build was successful you will find a file called `pi.img` in the working directory.
+
+```{note}
 During the build process you will see two warnings.
 
 - The warning about the kernel is discussed [here](https://forum.snapcraft.io/t/ubuntu-image-warning-kernel-snap/37774/3).
-- The warning about the `pi` snap is because we side-loaded a custom locally built snap. This snap is not provided via the Snap Store and will therefore not get updates. To update custom Gadget snaps like these you will need a [dedicated Snap Store](https://ubuntu.com/core/docs/dedicated-snap-stores).
+- The warning about the `pi` snap is because we side-loaded a custom locally built snap. This snap is not provided via the Snap Store and will therefore not get updates. To update custom gadget snaps like these you will need a [dedicated Snap Store](https://ubuntu.com/core/docs/dedicated-snap-stores).
+```
 
-If the build was successful you will find a file called `pi.img` in the working directory.
+
+
 
 ## Using the image
 
