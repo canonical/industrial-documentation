@@ -238,7 +238,8 @@ This is to show a minimal setup of what this utility does.
 
 After running the `phc2sys` command, the output should show the difference between eth0's clock and the system clock, and over time it should decrease to the range 0±100.
 
-On Pi B, the client, you will see some jumps in the time offset too, as we are now synchronizing from A's system clock, to A's PHC, to B's PHC.
+You will also notice time jumps being reported by `ptp4l` on Pi B.
+This is because we are now synchronizing from A's system clock, to A's PHC, to B's PHC, and any clock adjustments made by `phc2sys` on Pi A is also propagating to Pi B.
 
 To synchronize Pi B's system clock from its PHC, run this command:
 
