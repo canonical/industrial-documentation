@@ -2,21 +2,21 @@
 
 Ansible is an open-source automation engine used to automate processes such as provisioning, continuous software deployment, and configuration management. Ansible uses YAML scripts called playbooks to automate tasks and ensures systems remain in the state declared in the playbook. It is compatible with many systems including Ubuntu Core.
 
-This guide shows you how to deploy docker containers on Ubuntu Core using the Ansible Snap module. For demonstration purposes, we will be deploying an instance of RabbitMQ on a Raspberry Pi. The same playbook will also deploy an instance of RabbitMQ on another Raspberry Pi running Ubuntu Server to showcase the ease with which you can shift containerized runtimes from Ubuntu Server to [Ubuntu Core](https://ubuntu.com/core) for added security.
+This guide shows you how to deploy docker containers on [Ubuntu Core](https://ubuntu.com/core) using the Ansible Snap module. For demonstration purposes, we will be deploying an instance of RabbitMQ on a Raspberry Pi. The same playbook will also deploy an instance of RabbitMQ on another Raspberry Pi running Ubuntu Server. This is to showcase the ease with which you can distribute containerized workload across different Linux distributions, including Ubuntu Core.
 
 ```{note}
 The methods demonstrated here should also work on other distributions that support [Snapd](https://snapcraft.io/docs/installing-snapd).
 ```
 
-## Installation
+## Install Ansible
 
-To get started, you'll need to install Ansible on the control node. This is the machine you'll be using to run Ansible CLI tools. You can do this by executing:
+To get started, you'll need to install Ansible on the control node. This is the machine you will use to run Ansible CLI tools. You can do this running:
 
 ```shell
 sudo apt install ansible
 ```
 
-For additional information and alternative installation options, check out the full [Ansible installation guide](https://docs.ansible.com/ansible/latest/installation_guide/index.html).
+For additional information and alternative installation options, check out the [official Ansible installation guide](https://docs.ansible.com/ansible/latest/installation_guide/index.html).
 
 ## Create the inventory file
 
@@ -25,7 +25,7 @@ The inventory file defines the Ansible managed nodes (or hosts) that Docker cont
 You must be able to SSH into any nodes in your inventory file. To confirm this, run:
 
 ```shell
-$ ssh {username}@{ip address}
+ssh {username}@{ip address}
 ```
 
 To create the inventory file, create a new file called `inventory.yaml` in your preferred directory, and enter each host machine's details as shown:
@@ -54,15 +54,15 @@ Executing some tasks in the playbook will require Sudo privileges. You can enabl
 
 ## Confirm hosts are reachable
 
-It's good practice to confirm the inventory.yaml file is properly set up and the hosts can be reached before starting on the playbook. Enter the following command to ping each host in the machines group in the inventory. 
+It's good practice to confirm the inventory.yaml file is properly set up and the hosts can be reached before starting on the playbook. Enter the following command to ping each host in the machines group in the inventory: 
 
 ```shell
-$ ansible machines -i inventory.yaml -m ping
+ansible machines -i inventory.yaml -m ping
 ```
 
 If successful, you should get an output similar to this:
 
-```
+```{terminal}
 rpi5 | SUCCESS => {
     "changed": false,
     "ping": "pong"
@@ -76,11 +76,11 @@ rpi4 | SUCCESS => {
 }
 ```
 
-If the hosts are not reachable, ensure that your public SSH key is added to the .ssh/authorized_keys file on each host.
+If a host is unreachable, ensure that your public SSH key is added to the .ssh/authorized_keys file on that host.
 
 ## Prepare the playbook
 
-Ansible must perform a series of actions, i.e. tasks, to deploy a docker container to a node. These tasks are written in YAML format in the order they should be executed and saved in a file called a playbook. 
+Ansible must perform a series of actions, i.e. tasks, to deploy a docker container to a node. These tasks are written in YAML format, in the order they should be executed, and saved in a file called a playbook. 
 
 To deploy the RabbitMQ containers to the two nodes:
 
@@ -161,13 +161,14 @@ This is the last task in the playbook. It launches the instances of RabbitMQ in 
 Save the playbook and execute it by running:
 
 ```shell
-$ ansible-playbook -i inventory.yaml playbook.yaml
+ansible-playbook -i inventory.yaml playbook.yaml
 ```
 
-If successfully deployed, it should return:
+If the containers are successfully deployed, it should return:
 
-```
+```{terminal}
 $ ansible-playbook -i inventory.yaml playbook.yaml
+
 
 PLAY [Deploy Docker on Ubuntu Core with Ansible] ***************************
 
@@ -204,12 +205,14 @@ rpi5                       : ok=6    changed=1    unreachable=0    failed=0    s
 Ansible does not display an output by default. To find out the status of the containers at any time, run the following command:
 
 ```shell
-$ ansible machines -i inventory.yaml -m shell -a "sudo docker container ls"
+ansible machines -i inventory.yaml -m shell -a "sudo docker container ls"
 ```
 
 The output will be:
 
-```
+```{terminal}
+$ ansible machines -i inventory.yaml -m shell -a "sudo docker container ls"
+
 rpi5 | CHANGED | rc=0 >>
 CONTAINER ID   IMAGE                       COMMAND                  CREATED       STATUS       PORTS                                                                                                          NAMES
 a427d99efd75   rabbitmq:4.0.2-management   "docker-entrypoint.s…"   3 hours ago   Up 3 hours   4369/tcp, 5671/tcp, 15671/tcp, 15691-15692/tcp, 25672/tcp, 0.0.0.0:17338->5672/tcp, 0.0.0.0:18280->15672/tcp   message_broker
