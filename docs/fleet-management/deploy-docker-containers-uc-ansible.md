@@ -56,13 +56,9 @@ Executing some tasks in the playbook will require Sudo privileges. You can enabl
 
 It's good practice to confirm the inventory.yaml file is properly set up and the hosts can be reached before starting on the playbook. Enter the following command to ping each host in the machines group in the inventory: 
 
-```shell
-ansible machines -i inventory.yaml -m ping
-```
-
-If successful, you should get an output similar to this:
-
 ```{terminal}
+$ ansible machines -i inventory.yaml -m ping
+
 rpi5 | SUCCESS => {
     "changed": false,
     "ping": "pong"
