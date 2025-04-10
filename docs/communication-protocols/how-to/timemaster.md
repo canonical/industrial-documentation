@@ -10,9 +10,9 @@ Timemaster combines these two to allow fallback to NTP if the PTP server's time 
 Timemaster and PTP synchronization is provided by the LinuxPTP package.
 Install the Debian package using APT.
 
-<!-- TODO: update doc link to PTP sync how-to -->
 We assume you already have a working PTP setup.
-Have a look at {doc}`timemaster` to set it up.
+<!-- TODO: update doc link to `rpi5-ptp-time-sync` -->
+For the Raspberry Pi 5 you can follow {doc}`timemaster`. <!-- How to synchronize two Raspberry Pi 5s using LinuxPTP -->
 
 On the NTP side, Timemaster can either use `ntpd` or Chrony.
 The default is to use Chrony.
@@ -79,8 +79,8 @@ delay 10e-6
 
 The rest of the config file can be left unchanged, unless you need specific PTP or NTP configurations.
 
-<!-- TODO: update doc link to PTP sync how-to -->
-If you are running on a Raspberry Pi 5, `ptp4l` will need additional options as described in {doc}`timemaster`.
+<!-- TODO: update doc link to `rpi5-ptp-time-sync` -->
+If you are running on a Raspberry Pi 5, `ptp4l` will need additional options as described in {doc}`timemaster`. <!-- How to synchronize two Raspberry Pi 5s using LinuxPTP -->
 In that case the additional configuration should look like this:
 
 ```ini
