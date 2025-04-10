@@ -1,8 +1,8 @@
 # Deploy Docker container on Ubuntu Core using Ansible
 
-Ansible is an open-source automation engine used to automate processes such as provisioning, continuous software deployment, and configuration management. Ansible uses YAML scripts called playbooks to automate tasks and ensures systems remain in the state declared in the playbook. It is compatible with many systems including Ubuntu Core.
+Ansible is an open-source automation engine used to automate processes such as provisioning, continuous software deployment, and configuration management. Ansible uses YAML scripts called playbooks to automate tasks and ensure systems remain in the state declared in the playbook. It is compatible with many systems including Ubuntu Core.
 
-This guide shows you how to deploy docker containers on [Ubuntu Core](https://ubuntu.com/core) using the Ansible Snap module. For demonstration purposes, we will be deploying an instance of RabbitMQ on a Raspberry Pi. The same playbook will also deploy an instance of RabbitMQ on another Raspberry Pi running Ubuntu Server. This is to showcase the ease with which you can distribute containerized workload across different Linux distributions, including Ubuntu Core.
+This guide shows you how to deploy Docker containers on [Ubuntu Core](https://ubuntu.com/core) using the Ansible Snap module. For demonstration purposes, we will be deploying an instance of RabbitMQ on a Raspberry Pi. The same playbook will also deploy an instance of RabbitMQ on another Raspberry Pi running Ubuntu Server. This is to showcase the ease with which you can distribute containerized workloads across different Linux distributions, including Ubuntu Core.
 
 ```{note}
 The methods demonstrated here should also work on other distributions that support [Snapd](https://snapcraft.io/docs/installing-snapd).
@@ -22,7 +22,7 @@ For additional information and alternative installation options, check out the [
 
 The inventory file defines the Ansible managed nodes (or hosts) that Docker containers will be deployed to. To create this file, you'll need each host's username and IP address. 
 
-You must be able to SSH into any nodes in your inventory file. To confirm this, run:
+You must be able to SSH into any nodes in your inventory file. To confirm this, run the following for each host:
 
 ```shell
 ssh {username}@{ip address}
@@ -48,13 +48,13 @@ machines:
 
 `machines` is the group name for the hosts. You can define different groups for hosts so each group executes different sets of tasks from the same playbook. 
 
-For nodes running Ubuntu Core, you must specify the `ansible_python_interpreter` to avoid getting a warning message about future python interpreters. 
+For nodes running Ubuntu Core, you must specify the `ansible_python_interpreter` to avoid getting a warning message about future Python interpreters. 
 
-Executing some tasks in the playbook will require Sudo privileges. You can enable passwordless sudo access or provide the user password for each host by setting the `ansible_password` field.
+Executing some tasks in the playbook will require `sudo` privileges. You can enable passwordless `sudo` access or provide the user password for each host by setting the `ansible_password` field.
 
 ## Confirm hosts are reachable
 
-It's good practice to confirm the inventory.yaml file is properly set up and the hosts can be reached before starting on the playbook. Enter the following command to ping each host in the machines group in the inventory: 
+It's good practice to confirm the `inventory.yaml` file is properly set up and the hosts can be reached before starting on the playbook. Enter the following command to ping each host in the `machines` group in the inventory: 
 
 ```{terminal}
 $ ansible machines -i inventory.yaml -m ping
@@ -72,17 +72,16 @@ rpi4 | SUCCESS => {
 }
 ```
 
-If a host is unreachable, ensure that your public SSH key is added to the .ssh/authorized_keys file on that host.
+If a host is unreachable, ensure that your public SSH key is added to the `.ssh/authorized_keys` file on that host.
 
 ## Prepare the playbook
 
-Ansible must perform a series of actions, i.e. tasks, to deploy a docker container to a node. These tasks are written in YAML format, in the order they should be executed, and saved in a file called a playbook. 
+Ansible must perform a series of actions, i.e. tasks, to deploy a Docker container to a node. These tasks are written in YAML format, in the order they should be executed, and saved in a file called a playbook. 
 
-To deploy the RabbitMQ containers to the two nodes:
 
 ### Create the playbook and ping the hosts
 
-Create the playbook.yaml file in the same directory as the inventory. Inside the playbook, write the name of the playbook and specify the targeted host group. As the first task, ping the hosts using ansible's builtin ping module. This will confirm which hosts are available:
+Create the `playbook.yaml` file in the same directory as the inventory. Inside the playbook, write the name of the playbook and specify the targeted host group. As the first task, ping the hosts using Ansible's built-in ping module. This will confirm which hosts are available:
 
 ```yaml
 name: Deploy RabbitMQ
@@ -95,7 +94,7 @@ name: Deploy RabbitMQ
 
 ### Install the Docker snap
 
-Installing the [Docker snap](https://snapcraft.io/docker) in the nodes is the second task in the playbook. The field `become` must be set to `true` because sudo privileges are required for this and subsequent tasks. 
+Installing the [Docker snap](https://snapcraft.io/docker) in the nodes is the second task in the playbook. The field `become` must be set to `true` because `sudo` privileges are required for this and subsequent tasks. 
 
 ```yaml
   - name: Install Docker snap
@@ -120,7 +119,7 @@ This task downloads the RabbitMQ image that will be deployed. You'll need the na
 
 ### Configure RabbitMQ
 
-This task sets the default username and password for the RabbitMQ instances using Ansible's builtin shell:
+This task sets the default username and password for the RabbitMQ instances using Ansible's built-in shell:
 
 ```yaml
   - name: Setup RabbitMQ configurations
