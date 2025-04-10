@@ -1,8 +1,8 @@
-# Deploy Docker containers on Ubuntu Core using the Ansible snap module
+# Deploy Docker container on Ubuntu Core using Ansible
 
 Ansible is an open-source automation engine used to automate processes such as provisioning, continuous software deployment, and configuration management. Ansible uses YAML scripts called playbooks to automate tasks and ensures systems remain in the state declared in the playbook. It is compatible with many systems including Ubuntu Core.
 
-This guide shows you how to deploy docker containers on Ubuntu Core using the Ansible Snap module. For demonstration purposes, we will be deploying an instance of RabbitMQ on a Raspberry Pi. The same playbook will also deploy an instance of RabbitMQ on another Raspberry Pi running Ubuntu Server to showcase the ease with which you can shift containerized runtimes from Ubuntu Server to Ubuntu Core for added security.
+This guide shows you how to deploy docker containers on Ubuntu Core using the Ansible Snap module. For demonstration purposes, we will be deploying an instance of RabbitMQ on a Raspberry Pi. The same playbook will also deploy an instance of RabbitMQ on another Raspberry Pi running Ubuntu Server to showcase the ease with which you can shift containerized runtimes from Ubuntu Server to [Ubuntu Core](https://ubuntu.com/core) for added security.
 
 ```{note}
 The methods demonstrated here should also work on other distributions that support [Snapd](https://snapcraft.io/docs/installing-snapd).
@@ -13,7 +13,7 @@ The methods demonstrated here should also work on other distributions that suppo
 To get started, you'll need to install Ansible on the control node. This is the machine you'll be using to run Ansible CLI tools. You can do this by executing:
 
 ```shell
-$ sudo apt install ansible
+sudo apt install ansible
 ```
 
 For additional information and alternative installation options, check out the full [Ansible installation guide](https://docs.ansible.com/ansible/latest/installation_guide/index.html).
@@ -34,12 +34,12 @@ To create the inventory file, create a new file called `inventory.yaml` in your 
 machines:
   hosts:
  
-    # 24.04.1 LTS (Noble Numbat) - Rpi4
+    # Ubuntu Server 24.04 LTS - RPi4
     rpi4:
       ansible_host: 192.168.0.57
       ansible_user: ubuntu
 
-    # UC24 - RPi5
+    # Ubuntu Core 24 - RPi5
     rpi5:
       ansible_host: 192.168.0.58
       ansible_user: ubuntu
@@ -50,7 +50,7 @@ machines:
 
 For nodes running Ubuntu Core, you must specify the `ansible_python_interpreter` to avoid getting a warning message about future python interpreters. 
 
-Executing some tasks in the playbook will require Sudo privileges. You can enable passwordless sudo access or  provide the user password for each host by setting the `ansible_password` field.
+Executing some tasks in the playbook will require Sudo privileges. You can enable passwordless sudo access or provide the user password for each host by setting the `ansible_password` field.
 
 ## Confirm hosts are reachable
 
@@ -99,7 +99,7 @@ name: Deploy RabbitMQ
 
 ### Install the Docker snap
 
-Installing the Docker snap in the nodes is the second task in the playbook. The field `become` must be set to `true` because sudo privileges are required for this and subsequent tasks. 
+Installing the [Docker snap](https://snapcraft.io/docker) in the nodes is the second task in the playbook. The field `become` must be set to `true` because sudo privileges are required for this and subsequent tasks. 
 
 ```yaml
   - name: Install Docker snap
@@ -149,10 +149,10 @@ This is the last task in the playbook. It launches the instances of RabbitMQ in 
       env_file: $HOME/rabbitmq_conf.env
       volumes: /var/snap/docker/current/data:/var/lib/rabbitmq
       ports:
-          # Publish container port 5672 as host port 17338
-          - 17338:5672
-          # Publish container port 15672 as host port 18280
-          - 18280:15672
+        # Publish container port 5672 as host port 17338
+        - 17338:5672
+        # Publish container port 15672 as host port 18280
+        - 18280:15672
 
 ```
 
