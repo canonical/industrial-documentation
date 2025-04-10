@@ -68,4 +68,5 @@ smart_cities/index
 Edge AI <edge_ai/index>
 manufacturing/index
 fleet-management/index
+communication_protocols/index
 contributing
