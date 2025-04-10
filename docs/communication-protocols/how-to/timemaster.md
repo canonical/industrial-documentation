@@ -61,9 +61,8 @@ maxpoll 4
 ```
 
 ```{note}
-Chrony will also use any NTP servers that are defined system wide.
-If this is unwanted, you can remove them from the system by editing the config files under `/etc/chrony`.
-Alternatively you can depend only on the system configured servers, and leave the `ntp_server` config option in `timemaster.conf` commented out.
+By default Chrony will also use any NTP servers that are defined system wide.
+This is set in Chrony's configuration via the `chrony.conf` option in `timemaster.conf`.
 ```
 
 The next part of the Timemaster config file is the definition for the PTP domain.
