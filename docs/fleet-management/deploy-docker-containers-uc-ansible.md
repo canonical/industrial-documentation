@@ -2,21 +2,19 @@
 
 Ansible is an open-source automation engine used to automate processes such as provisioning, continuous software deployment, and configuration management. Ansible uses YAML scripts called playbooks to automate tasks and ensure systems remain in the state declared in the playbook. It is compatible with many systems including Ubuntu Core.
 
-This guide shows you how to deploy Docker containers on [Ubuntu Core](https://ubuntu.com/core) using the Ansible Snap module. For demonstration purposes, we will be deploying an instance of RabbitMQ on a Raspberry Pi. The same playbook will also deploy an instance of RabbitMQ on another Raspberry Pi running Ubuntu Server. This is to showcase the ease with which you can distribute containerized workloads across different Linux distributions, including Ubuntu Core.
+This guide shows you how to deploy Docker containers on [Ubuntu Core](https://ubuntu.com/core) using the Ansible Snap module. For demonstration purposes, we will deploy an instance of RabbitMQ on a Raspberry Pi. The same playbook will also deploy an instance of RabbitMQ on another Raspberry Pi running Ubuntu Server to demonstrate the ease with which you can distribute containerized workloads across different Ubuntu distributions including Ubuntu Core.
 
-```{note}
 The methods demonstrated here should also work on other distributions that support [Snapd](https://snapcraft.io/docs/installing-snapd).
-```
 
 ## Install Ansible
 
-To get started, you'll need to install Ansible on the control node. This is the machine you will use to run Ansible CLI tools. You can do this running:
+To get started, you'll need to install Ansible on the control node. This is the machine you will use to run Ansible CLI tools. On Debian-based systems, you can do this by running:
 
 ```shell
 sudo apt install ansible
 ```
 
-For additional information and alternative installation options, check out the [official Ansible installation guide](https://docs.ansible.com/ansible/latest/installation_guide/index.html).
+For information on installing Ansible on other systems, check out the [official Ansible installation guide](https://docs.ansible.com/ansible/latest/installation_guide/index.html).
 
 ## Create the inventory file
 
