@@ -81,7 +81,7 @@ The rest of the config file can be left unchanged, unless you need specific PTP 
 
 <!-- TODO: update doc link to PTP sync how-to -->
 If you are running on a Raspberry Pi 5, `ptp4l` will need additional options as described in {doc}`timemaster`.
-In that case your configuration should look like this:
+In that case the additional configuration should look like this:
 
 ```ini
 [ptp4l]
