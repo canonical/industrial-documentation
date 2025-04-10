@@ -116,10 +116,10 @@ Installing the [Docker snap](https://snapcraft.io/docker) in the nodes is the se
 This task downloads the RabbitMQ image that will be deployed. You'll need the name of the specific version of RabbitMQ you want to deploy as shown:
 
 ```yaml
-- name: Pull an image
-  become: true
-  community.docker.docker_image_pull:
-    name: rabbitmq:4.0.2-management
+  - name: Pull an image
+    become: true
+    community.docker.docker_image_pull:
+      name: rabbitmq:4.0.2-management
 ```
 
 ### Configure RabbitMQ
