@@ -112,15 +112,15 @@ Timemaster only prints its own logs to `stdout`.
 To see the logs for its child processes, look at the system logs:
 
 ```bash
-journalctl -f -a
+journalctl -f
 ```
 
 To make the logs more readable, you can filter for a specific child application:
 
 ```bash
-journalctl -a -f | grep ptp4l # or
-journalctl -a -f | grep phc2sys # or
-journalctl -a -f | grep chrony
+journalctl -f | grep ptp4l # or
+journalctl -f | grep phc2sys # or
+journalctl -f | grep chrony
 ```
 
 During Timemaster's startup sequence, `chrony` and `phc2sys` will log their configuration and startup.
@@ -164,7 +164,7 @@ The PTP clock should be detected as false and the log will look similar to this:
    :host: ubuntu
    :dir: /home/ubuntu/
 
-:input: journalctl -a -f | grep chrony
+:input: journalctl -f | grep chrony
 chronyd[334944]: Selected source PTP0
 ... (PTP server system clock manually adjusted)
 chronyd[334944]: Detected falseticker PTP0
@@ -195,7 +195,7 @@ After the PTP clock is corrected, it takes some time for Chrony's source selecti
    :host: ubuntu
    :dir: /home/ubuntu/
 
-:input: journalctl -a -f | grep chrony
+:input: journalctl -f | grep chrony
 chronyd[334944]: Detected falseticker PTP0
 ... (PTP server system clock corrected)
 chronyd[334944]: Selected source PTP0
