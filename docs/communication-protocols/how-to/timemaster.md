@@ -5,6 +5,8 @@ PTP is the more accurate of the two protocols, but can only synchronize against 
 NTP is less accurate, but allows synchronization from multiple servers concurrently, providing redundancy.
 Timemaster combines the two protocols to allow the system to fall back to NTP if the PTP server's time drifts too far, or if it goes offline.
 
+This guide will show you how to set up Timemaster, how to monitor it, and finally show how you can verify that fallback to NTP is working.
+
 ## Install dependencies
 
 To proceed with this guide, you'll need a working PTP setup using Linux PTP.
@@ -40,7 +42,7 @@ Open this file and make the following changes.
 
 At the top of the config file, replace the commented out lines that define an `ntp_server` with configurations for two or more ntp servers.
 Choose NTP servers close to your location to reduce latency.
-You can also use the Ubuntu servers, as these will auto select appropriate servers for you.
+You can also use the Ubuntu servers as these will auto select appropriate servers for you.
 
 ```ini
 [ntp_server 0.ubuntu.pool.ntp.org]
@@ -107,8 +109,8 @@ Refer to the [`timemaster` man page](https://manpages.ubuntu.com/manpages/latest
 
 ## Check logs
 
-Timemaster only prints its own logs to `stdout`.
-To see the logs for its child processes, check the system logs:
+Timemaster prints its logs to `stdout`, but the logs for its child processes go to the system log.
+To see these system logs:
 
 ```bash
 journalctl -f
@@ -122,11 +124,11 @@ journalctl -f | grep phc2sys # or
 journalctl -f | grep chrony
 ```
 
-During Timemaster's startup sequence, `chrony` and `phc2sys` will log their configuration and startup.
-`ptp4l` will log its synchronization state every second.
+Once Timemaster is up and running you will see `chrony` and `phc2sys` logged their configuration and startup sequences.
+`ptp4l` will start logging its synchronization state.
 
 Chrony automatically selects the best time source.
-You can check which time sources are being used, using the `chronyc` utility:
+You can check which time sources are being used using the `chronyc` utility:
 
 ```{terminal}
    :user: ubuntu
@@ -155,7 +157,7 @@ MS Name/IP address         Stratum Poll Reach LastRx Last sample
 Chrony monitors the NTP servers and the PTP clock.
 If it detects that the time from one clock is not aligned with the rest, it will ignore it and print a log message saying it detected a `falseticker`. 
 
-This can be tested by adjusting the system clock of the PTP server.
+You can test this by adjusting the system clock of the PTP server.
 The PTP clock should be detected as false and the log will look similar to this:
 
 ```{terminal}
@@ -171,8 +173,7 @@ chronyd[334944]: Selected source 2620:2d:4000:1::2123 (ntp-nts-2.ps5.canonical.c
 chronyd[334944]: Detected falseticker PTP0
 ```
 
-Query Chrony's status again.
-`PTP0` should be marked with an `x`, indicating that it is not being used.
+If you query Chrony's status again, `PTP0` will be marked with an `x`, indicating that it is not being used as it may be in error.
 
 ```{terminal}
    :user: ubuntu
@@ -188,7 +189,7 @@ MS Name/IP address         Stratum Poll Reach LastRx Last sample
 ^- ntp-nts-3.ps5.canonical.>     3   6    77    62  +2439us[+1881us] +/-   67ms
 ```
 
-After a clock has been corrected, it will take some time before Chrony's source selection algorithm chooses it again.
+After a clock has been corrected, Chrony's source selection algorithm will choose it again.
 
 ```{terminal}
    :user: ubuntu
@@ -213,4 +214,8 @@ MS Name/IP address         Stratum Poll Reach LastRx Last sample
 ^- ntp-nts-1.ps6.canonical.>     2   4   377    15   +251us[ +278us] +/-   69ms
 ^+ ntp-nts-2.ps5.canonical.>     1   4   377    14   +395us[ +421us] +/-   15ms
 ^- ntp-nts-3.ps5.canonical.>     3   7   377    88   +848us[ +435us] +/-   65ms
+```
+
+```{note}
+There will be a noticeable delay between the time a clock is corrected and the time the algorithm chooses it again.
 ```
