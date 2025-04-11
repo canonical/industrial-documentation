@@ -1,30 +1,32 @@
 # How to use Timemaster
 
-Timemaster is an application from the LinuxPTP package that combines NTP and PTP to provide a synchronized system clock, with redundancy.
+Timemaster is an application from the [Linux PTP project](https://linuxptp.sourceforge.net/) that combines Network Time Protocol (NTP) and Precision Time Protocol (PTP) to provide a synchronized system clock, with redundancy.
 PTP is the more accurate of the two protocols, but can only synchronize against a single server at a time.
 NTP is less accurate, but allows synchronization from multiple servers concurrently, providing redundancy.
-Timemaster combines these two to allow fallback to NTP if the PTP server's time drifts too far, or if it goes offline.
+Timemaster combines the two protocols to allow the system to fall back to NTP if the PTP server's time drifts too far, or if it goes offline.
 
 ## Install dependencies
 
-Timemaster and PTP synchronization is provided by the LinuxPTP package.
-Install the Debian package using APT.
+To proceed with this guide, you'll need a working PTP setup using Linux PTP.
+On Ubuntu you can install it as a deb package:
+<!-- Currently this has to be the deb package, but that will likely change in the next cycle. -->
+```bash
+sudo apt install linuxptp
+```
 
-We assume you already have a working PTP setup.
 <!-- TODO: update doc link to `rpi5-ptp-time-sync` -->
-For the Raspberry Pi 5 you can follow {doc}`timemaster`. <!-- How to synchronize two Raspberry Pi 5s using LinuxPTP -->
+For more details on setting up PTP on the Raspberry Pi 5, you can follow {doc}`timemaster`. <!-- How to synchronize two Raspberry Pi 5s using LinuxPTP -->
 
 On the NTP side, Timemaster can either use `ntpd` or Chrony.
-The default is to use Chrony.
+In this guide we will be using Chrony, which is considered the [more modern and accurate](https://chrony-project.org/faq.html#_how_does_chrony_compare_to_ntpd) implementation of the two.
 Install it:
 
 ```bash
 sudo apt install chrony
 ```
 
-After installation, Chrony will automatically be started as a system service.
-In our case this is unwanted, as we want Timemaster to start and configure it.
-Stop and disable the service:
+After installation, Chrony will be automatically started as a system service.
+Stop and disable it so Chrony can be started and configured by Timemaster:
 
 ```bash
 sudo systemctl stop chronyd
@@ -36,11 +38,9 @@ sudo systemctl disable chronyd
 The Timemaster config file is located at `/etc/linuxptp/timemaster.conf`.
 Open this file and make the following changes.
 
-At the top of the config file you will see commented out lines that define an `ntp_server`.
-Replace this with configuration for multiple NTP servers.
-At least two, but four is normal.
-Try to use NTP servers that are close to you, to reduce the latency to them.
-If you are unsure, using the Ubuntu servers is fine, as it will auto select servers for you.
+At the top of the config file, replace the commented out lines that define an `ntp_server` with configurations for two or more ntp servers.
+Choose NTP servers close to your location to reduce latency.
+You can also use the Ubuntu servers, as these will auto select appropriate servers for you.
 
 ```ini
 [ntp_server 0.ubuntu.pool.ntp.org]
@@ -65,10 +65,10 @@ By default Chrony will also use any NTP servers that are defined system wide.
 This is set in Chrony's configuration via the `chrony.conf` option in `timemaster.conf`.
 ```
 
-The next part of the Timemaster config file is the definition for the PTP domain.
-The default config might work for you, so uncomment it.
-Then make sure the interface name is correct.
-In case your Ethernet interface, that supports PTP, is called `enp0s20f0u1u4`, the config should look like this:
+Next, define the PTP domain.
+The default configuration can be used by uncommenting it.
+Confirm that the Ethernet interface name is correct.
+If your interface is called `enp0s20f0u1u4`, the config should look this:
 
 ```ini
 [ptp_domain 0]
@@ -76,10 +76,10 @@ interfaces enp0s20f0u1u4
 delay 10e-6
 ```
 
-The rest of the config file can be left unchanged, unless you need specific PTP or NTP configurations.
+The rest of the config file can be left unchanged unless you need specific PTP or NTP configurations.
 
 <!-- TODO: update doc link to `rpi5-ptp-time-sync` -->
-If you are running on a Raspberry Pi 5, `ptp4l` will need additional options as described in {doc}`timemaster`. <!-- How to synchronize two Raspberry Pi 5s using LinuxPTP -->
+On a Raspberry Pi 5, `ptp4l` will need additional options as described in {doc}`timemaster`. <!-- How to synchronize two Raspberry Pi 5s using LinuxPTP -->
 In that case the additional configuration should look like this:
 
 ```ini
@@ -108,7 +108,7 @@ Refer to the [`timemaster` man page](https://manpages.ubuntu.com/manpages/latest
 ## Check logs
 
 Timemaster only prints its own logs to `stdout`.
-To see the logs for its child processes, look at the system logs:
+To see the logs for its child processes, check the system logs:
 
 ```bash
 journalctl -f
@@ -125,8 +125,8 @@ journalctl -f | grep chrony
 During Timemaster's startup sequence, `chrony` and `phc2sys` will log their configuration and startup.
 `ptp4l` will log its synchronization state every second.
 
-Chrony is ultimately responsible to make the decision of the best time source.
-You can check which time sources are being used with the `chronyc` utility:
+Chrony automatically selects the best time source.
+You can check which time sources are being used, using the `chronyc` utility:
 
 ```{terminal}
    :user: ubuntu
@@ -152,10 +152,10 @@ MS Name/IP address         Stratum Poll Reach LastRx Last sample
 
 ## Check failover
 
-Chrony will monitor the NTP servers and the PTP clock.
-If it detects that the time from one of them is not aligned with the rest, it will ignore that clock, and print a log message saying it detected a `falseticker`.
+Chrony monitors the NTP servers and the PTP clock.
+If it detects that the time from one clock is not aligned with the rest, it will ignore it and print a log message saying it detected a `falseticker`. 
 
-As an experiment you can adjust the system clock of the PTP server.
+This can be tested by adjusting the system clock of the PTP server.
 The PTP clock should be detected as false and the log will look similar to this:
 
 ```{terminal}
@@ -171,7 +171,8 @@ chronyd[334944]: Selected source 2620:2d:4000:1::2123 (ntp-nts-2.ps5.canonical.c
 chronyd[334944]: Detected falseticker PTP0
 ```
 
-We can query Chrony's status again and see `PTP0` is marked with an `x`, indicating that it is not being used.
+Query Chrony's status again.
+`PTP0` should be marked with an `x`, indicating that it is not being used.
 
 ```{terminal}
    :user: ubuntu
@@ -187,7 +188,7 @@ MS Name/IP address         Stratum Poll Reach LastRx Last sample
 ^- ntp-nts-3.ps5.canonical.>     3   6    77    62  +2439us[+1881us] +/-   67ms
 ```
 
-After the PTP clock is corrected, it takes some time for Chrony's source selection algorithm to choose it again as the best source.
+After a clock has been corrected, it will take some time before Chrony's source selection algorithm chooses it again.
 
 ```{terminal}
    :user: ubuntu
