@@ -48,7 +48,7 @@ machines:
 
 For nodes running Ubuntu Core, you must specify the `ansible_python_interpreter` to avoid getting a warning message about future Python interpreters. 
 
-Executing some tasks in the playbook will require `sudo` privileges. You can enable passwordless `sudo` access or provide the user password for each host by setting the `ansible_password` field.
+Executing some tasks in the playbook will require root privileges. You can enable passwordless root access or provide the user password for each host by setting the `ansible_password` field.
 
 ## Confirm hosts are reachable
 
@@ -92,7 +92,7 @@ name: Deploy RabbitMQ
 
 ### Install the Docker snap
 
-Installing the [Docker snap](https://snapcraft.io/docker) in the nodes is the second task in the playbook. The field `become` must be set to `true` because `sudo` privileges are required for this and subsequent tasks. 
+Installing the [Docker snap](https://snapcraft.io/docker) in the nodes is the second task in the playbook. The field `become` must be set to `true` because root privileges are required for this and subsequent tasks. 
 
 ```yaml
   - name: Install Docker snap
