@@ -21,15 +21,15 @@ Requirements:
 Used in this tutorial:
 
 - Desktop computer running Ubuntu 23.10
-- Intel NUC11TNH with 8GB RAM and 250GB NAND flash storage
-- [Nordic Semiconductor nRF52840 Dongle](https://www.nordicsemi.com/Products/Development-hardware/nrf52840-dongle), connected to Intel NUC
+- Intel {spellexception}`NUC11TNH` with 8GB RAM and 250GB NAND flash storage
+- [Nordic Semiconductor nRF52840 Dongle](https://www.nordicsemi.com/Products/Development-hardware/nrf52840-dongle), connected to Intel {spellexception}`NUC`
 
 
 We need the following tools on the development environment:
 
 - [snapcraft](https://snapcraft.io/snapcraft) to manage keys in the store and build snaps
 - [yq](https://snapcraft.io/yq) to validate YAML files and convert them to JSON
-- [ubuntu-image](https://snapcraft.io/ubuntu-image) v2 to build the Ubuntu Core image
+- [{spellexception}`ubuntu-image`](https://snapcraft.io/ubuntu-image) v2 to build the Ubuntu Core image
   
 Install them using the following commands:
 
@@ -187,7 +187,7 @@ The installation instructions are device specific.
 You may refer to Ubuntu Core section in
 [this page](https://ubuntu.com/download/iot). For example:
 
-- [Intel NUC](https://ubuntu.com/download/intel-nuc) - applicable to most computers with a secondary storage
+- [{spellexception}`Intel NUC`](https://ubuntu.com/download/intel-nuc) - applicable to most computers with a secondary storage
 
 <!--
 [Raspberry Pi](https://ubuntu.com/download/raspberry-pi)
@@ -276,7 +276,7 @@ pc-kernel                 5.15.0-91.101.1                 1540   22/stable      
 snapd                     2.60.4                          20290  latest/stable  canonical✓          snapd
 ```
 
-✅ Avahi, BlueZ, and openthread-border-router are installed.
+✅ Avahi, BlueZ, and OpenThread Border Router are installed.
 
 Check the running snap services:
 ```console

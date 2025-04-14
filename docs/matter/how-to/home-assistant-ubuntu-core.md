@@ -1,6 +1,6 @@
 # How to install Home Assistant on Ubuntu Core
 
-This guide walks you through installing Home Assistant (HASS) on Ubuntu Core.
+This guide walks you through installing Home Assistant ({spellexception}`HASS`) on Ubuntu Core.
 Home Assistant is an open source home automation solution, designed with a
 rich ecosystem of integrations for connecting smart devices.
 We use Ubuntu Core as the OS, to guarantee a secure and up to date foundation
@@ -8,8 +8,8 @@ for what runs at the center of your smart home.
 
 ```{note}
 The instructions should work on the following architectures:
-- ARM64 / AArch64
-- AMD64 / x86_64
+- arm64
+- amd64
 
 The guide has been tested on Raspberry Pi 4.
 ```
@@ -18,7 +18,7 @@ The guide has been tested on Raspberry Pi 4.
 Refer to the official documentation for [installing Ubuntu Core](https://ubuntu.com/core/docs/install-on-a-device).
 
 ## Set up the system
-SSH to the machine. If you installed a pre-built Ubuntu Core image, it comes with Console Conf which has guided you to deploy the public keys from your Ubuntu SSO account. In this case, you should use your Ubuntu username to connect: `ssh <user>@<ip>`.
+SSH to the machine. If you installed a pre-built Ubuntu Core image, it comes with [{spellexception}`Console Conf`](https://ubuntu.com/core/docs/console-conf) which has guided you to deploy the public keys from your Ubuntu SSO account. In this case, you should use your Ubuntu username to connect: `ssh <user>@<ip>`.
 
 Take a look at what is installed:
 ```console
@@ -34,7 +34,7 @@ At least this is how we start. Later on, we'll also add a Docker container, via 
 
 Let's prepare the machine for the upcoming work.
 
-Change the default hostname (ubuntu):
+Change the default hostname (`ubuntu`):
 ```console
 $ sudo hostnamectl set-hostname pi4
 ```
@@ -84,7 +84,7 @@ The essential networking interfaces have been connected, which are sufficient fo
 It is possible to remove extra access, or add additional ones. 
 
 
-Now open the following address via a web browser to start onboarding Home Assistant: http://pi4.local:8123
+Now open the following address via a web browser to start onboarding Home Assistant: <http://pi4.local:8123>
 
 ![Onboarding](./home-assistant-ubuntu-core/onboarding.png)
 
@@ -102,7 +102,7 @@ Home Assistant comes with numerous *Integrations* out of the box, enabling you t
 ## Add Matter Integration
 
 ```{important}
-This guides uses a beta version of [Python Matter Server](https://github.com/home-assistant-libs/python-matter-server) from Home Assistant Libs,
+This guides uses a beta version of [Python Matter Server](https://github.com/home-assistant-libs/python-matter-server) from Home Assistant {spellexception}`Libs`,
 which is not ready for production.
 ```
 

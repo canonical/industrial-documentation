@@ -152,7 +152,7 @@ To start and enable via a [Gadget snap], set `autostart` snap configuration to `
 
 ## Form a Thread network
 
-Use the CTL tool to initialize the Thread network:
+Use the {spellexception}`CTL` tool to initialize the Thread network:
 
 ```bash
 

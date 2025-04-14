@@ -48,7 +48,7 @@ machines:
 
 For nodes running Ubuntu Core, you must specify the `ansible_python_interpreter` to avoid getting a warning message about future Python interpreters. 
 
-Executing some tasks in the playbook will require root privileges. You can enable passwordless root access or provide the user password for each host by setting the `ansible_password` field.
+Executing some tasks in the playbook will require root privileges. You can enable password-less root access or provide the user password for each host by setting the `ansible_password` field.
 
 ## Confirm hosts are reachable
 

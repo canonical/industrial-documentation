@@ -24,10 +24,10 @@ When contributing, you must abide by the [Ubuntu Code of Conduct].
 ## License and copyright
 
 Unless explicitly stated in the license headers of source files, all
-contributions to Industrial documentation are licensed under the Creative
-Commons Attribution-Share Alike (CC-BY-SA) 3.0 Unported License.
+contributions to Industrial documentation are licensed under the {spellexception}`Creative
+Commons Attribution-Share Alike (CC-BY-SA) 3.0 Unported License`.
 To view a copy of this license, visit
-http://creativecommons.org/licenses/by-sa/3.0/ or send a letter to Creative
+{spellexception}`<http://creativecommons.org/licenses/by-sa/3.0/>` or send a letter to Creative
 Commons, 171 Second Street, Suite 300, San Francisco, California, 94105, USA.
 
 All contributors must sign the [Canonical contributor license agreement],
@@ -105,7 +105,7 @@ merged.
 To be properly considered, reviewed, and merged, your pull request must provide
 the following details:
 
-- **Title**: Summarise the change in a short, descriptive title.
+- **Title**: Summarize the change in a short, descriptive title.
 - **Description**: Explain the problem that your pull request solves. Mention
 any new features, bug fixes, or refactoring.
 - **Relevant issues**: Reference any [related issues, pull requests, and
