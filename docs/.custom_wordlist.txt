@@ -1,4 +1,5 @@
 amd
+analytics
 Ansible
 Ansible's
 avahi
@@ -17,6 +18,8 @@ cryptographically
 CSA
 Ctrl
 cURL
+dataset
+Dataset
 DBus
 DNS
 dvipng
