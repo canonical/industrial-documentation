@@ -198,7 +198,14 @@ redirects = {}
 #
 # TODO: Remove or adjust the ACME entry after you update the contributing guide
 
-linkcheck_ignore = ["http://127.0.0.1:8000", "https://github.com/canonical/ACME/*"]
+linkcheck_ignore = [
+    # Localhost URLs
+    "http://localhost:*",
+    "http://pi4.local:8123",
+    # Others
+    "https://github.com/canonical/ACME/*",
+    "https://canonical-documentation-with-sphinx-and-readthedocscom.readthedocs-hosted.com"
+]
 
 
 # A regex list of URLs where anchors are ignored by 'make linkcheck'
