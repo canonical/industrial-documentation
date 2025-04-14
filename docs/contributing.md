@@ -27,7 +27,7 @@ Unless explicitly stated in the license headers of source files, all
 contributions to Industrial documentation are licensed under the {spellexception}`Creative
 Commons Attribution-Share Alike (CC-BY-SA) 3.0 Unported License`.
 To view a copy of this license, visit
-{spellexception}`<http://creativecommons.org/licenses/by-sa/3.0/>` or send a letter to Creative
+{literalref}`http://creativecommons.org/licenses/by-sa/3.0/` or send a letter to Creative
 Commons, 171 Second Street, Suite 300, San Francisco, California, 94105, USA.
 
 All contributors must sign the [Canonical contributor license agreement],
@@ -73,7 +73,7 @@ make run
 ```
 
 This will provide a locally rendered version of the documentation at:
-<http://localhost:8000>
+{literalref}:`http://localhost:8000`
 
 The rendered preview will get updated every time a document is modified and
 saved.

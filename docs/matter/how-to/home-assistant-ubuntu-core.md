@@ -84,7 +84,7 @@ The essential networking interfaces have been connected, which are sufficient fo
 It is possible to remove extra access, or add additional ones. 
 
 
-Now open the following address via a web browser to start onboarding Home Assistant: <http://pi4.local:8123>
+Now open the following address via a web browser to start onboarding Home Assistant: {literalref}`http://pi4.local:8123`
 
 ![Onboarding](./home-assistant-ubuntu-core/onboarding.png)
 

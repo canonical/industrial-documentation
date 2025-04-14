@@ -33,15 +33,12 @@ gpio
 GPIO
 gyre
 hostname
-http
-https
 integrations
 IoT
 kustom
 lang
 latexmk
-# Leave a blank line at the end of this file to support concatenation
-localhost
+literalref
 LoRa
 mDNS
 NAND
