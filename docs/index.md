@@ -12,9 +12,9 @@ Industrial solutions powered by open-source technology for Smart Cities, Manufac
 
 ````{grid} 1 1 2 2
 
-```{grid-item-card} [Smart Cities](/smart_cities/index)
+```{grid-item-card} [Placeholder](/index)
 Explore how open-source technology is shaping the cities of the future with AI-driven infrastructure and smart governance.
-- [Tutorial](/smart_cities/tutorial/pi-gpio-commander.md)
+
 
 ```
 
@@ -64,7 +64,6 @@ This documentation is part of Canonical's industrial initiatives, supporting ope
 :titlesonly:
 self
 Home Automation <matter/index>
-smart_cities/index
 Edge AI <edge_ai/index>
 manufacturing/index
 fleet-management/index
