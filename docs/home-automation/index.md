@@ -23,7 +23,11 @@ hardware to explore and understand its basics.
 :maxdepth: 1
 
 tutorial/pi-gpio-commander
-how-to/index
+how-to/chip-tool-commission-and-control
+how-to/home-assistant-ubuntu-core
+how-to/matter-and-thread-on-ubuntu
+how-to/otbr-on-ubuntu
+how-to/otbr-ubuntu-core-image
 ```
 
 ## Project and Community

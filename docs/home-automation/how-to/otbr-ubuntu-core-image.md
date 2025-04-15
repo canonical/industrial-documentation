@@ -1,6 +1,6 @@
-# How to create an OS Image with OpenThread Border Router
+# Create an OS image with OpenThread Border Router
 
-This tutorial walks you through creating an OS image that is pre-loaded with
+This guide walks you through creating an OS image that is pre-loaded with
 OpenThread Border Router (OTBR).
 We use Ubuntu Core as the Linux distribution because it is optimized for IoT and
 is secure by design.

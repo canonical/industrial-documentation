@@ -1,4 +1,4 @@
-# How to set up OpenThread Border Router on Ubuntu
+# Set up OpenThread Border Router on Ubuntu
 
 The [OpenThread Border Router] (OTBR) is an open source Thread Border Router implementation.
 
