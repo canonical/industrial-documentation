@@ -67,5 +67,6 @@ Home Automation <matter/index>
 Edge AI <edge_ai/index>
 manufacturing/index
 fleet-management/index
-communication_protocols/index
+communication-protocols/index
+
 contributing
