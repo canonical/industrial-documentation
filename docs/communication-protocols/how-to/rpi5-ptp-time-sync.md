@@ -128,13 +128,10 @@ rtt min/avg/max/mdev = 0.216/0.225/0.235/0.007 ms
 
 ## Start PTP synchronization
 
-PTP operates in a server-client architecture.
-A server with one or more clients synchronizing against it, is called a time domain.
-One Ethernet can have multiple time domains.
-If the time domain is not specified, LinuxPTP will default to time domain number 0.
-
-By default PTP will use the best master clock algorithm (BMCA) to choose which device should be the server for the time domain.
-For this how-to we manually configure Pi A to be the server and Pi B to be the client, by respectively specifying the `--serverOnly 1` and `--clientOnly 1` command line arguments.
+PTP uses a server-client architecture. 
+When a client or multiple clients synchronize against a server, they collectively form the time domain. 
+By default, PTP uses the best master clock algorithm (BMCA) to choose which device should be the server for the time domain. 
+However, in the demonstration below, Pi A is manually configured to be the server and Pi B the client.
 
 ### Start server
 
@@ -144,23 +141,16 @@ Start the PTP server on Pi A:
 sudo ptp4l -i eth0 --verbose 1 --use_syslog 0 --step_threshold 1 --hwts_filter full --neighborPropDelayThresh 17000 --serverOnly 1
 ```
 
-Wait for the server to print out `assuming the grand master role` before starting the client.
-
-We mostly use the default configuration of `ptp4l`, except for these overrides:  
+In this case, the default configurations of ptp4l are unchanged, except for these overrides:
 * `-i eth0` specifies the Ethernet interface to use.
 * `--verbose 1` prints logs to stdout.
 * `--use_syslog 0` prevents logs from being written to the syslog.
-* `--step_threshold 1` tells `ptp4l` to step the clock when large time jumps occur.
-  This is optional, but useful during testing to see if two devices keep pace.
-* `--hwts_filter full` is an override that is required for the Raspberry Pi 5, to tell the network driver to always timestamp network packets.
-  Without this, timestamping does not occur on all network packet types, and synchronization fails.
-* `--neighborPropDelayThresh 17000` is also an override required for the Raspberry Pi 5.
-  From experimentation we can see that there is a constant path delay of around 16.9 microseconds between two Raspberry Pi 5s.
-  The Pi 5's Ethernet is connected to the RP1 chip, which is a coprocessor that handles IO.
-  The latency between the two Pis is likely increased because this RP1 chip sits inline.
-  This constant delay is above LinuxPTP's default threshold of 800 nanoseconds.
-  We increase the threshold to just above the constant delay of around 16.9 microseconds.
-* `--serverOnly 1` tells `ptp4l` to run in server mode, and not use BMCA to become a client.
+* `--step_threshold 1` tells `ptp4l` to step the clock when large time jumps occur. This is optional, but useful during testing.
+* `--hwts_filter full` tells the network driver to always timestamp network packets.
+* `--neighborPropDelayThresh 17000` increases LinuxPTPs threshold so that it's above the constant path delay between the two Raspberry Pi 5s (measured at around 16.9 microseconds).
+* `--serverOnly 1` tells `ptp4l` to only run in server mode.
+
+Wait for the server to print out `assuming the grand master role` before starting the client.
 
 For a detailed description of all configuration options, refer to the [`ptp4l` man page](https://manpages.ubuntu.com/manpages/latest/en/man8/ptp4l.8.html) .
 
