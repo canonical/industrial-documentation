@@ -144,13 +144,13 @@ Start the PTP server on Pi A:
 sudo ptp4l -i eth0 --verbose 1 --use_syslog 0 --step_threshold 1 --hwts_filter full --neighborPropDelayThresh 17000 --serverOnly 1
 ```
 
-In this case, the default configurations of ptp4l are unchanged, except for these overrides:
+In this case, the default configurations of `ptp4l` are unchanged, except for these overrides:
 * `-i eth0` specifies the Ethernet interface to use.
 * `--verbose 1` prints logs to stdout.
 * `--use_syslog 0` prevents logs from being written to the syslog.
 * `--step_threshold 1` tells `ptp4l` to step the clock when large time jumps occur. This is optional, but useful during testing.
 * `--hwts_filter full` tells the network driver to always timestamp network packets.
-* `--neighborPropDelayThresh 17000` increases LinuxPTPs threshold so that it's above the constant path delay between the two Raspberry Pi 5s (measured at around 16.9 microseconds).
+* `--neighborPropDelayThresh 17000` increases LinuxPTP's threshold so that it's above the constant path delay between the two Raspberry Pi 5s (measured at around 16.9 microseconds).
 * `--serverOnly 1` tells `ptp4l` to only run in server mode.
 
 Wait for the server to print out `assuming the grand master role` before starting the client.

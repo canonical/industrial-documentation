@@ -58,8 +58,8 @@ LoRa
 mDNS
 NAND
 nRF
-NTP
 ntp
+NTP
 onboarding
 oneshot
 OpenThread
@@ -95,6 +95,7 @@ TOC
 txt
 txt
 uncomment
+uncommenting
 utils
 VSCode
 WCAG
