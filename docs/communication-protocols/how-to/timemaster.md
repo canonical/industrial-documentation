@@ -16,8 +16,7 @@ On Ubuntu you can install it as a deb package:
 sudo apt install linuxptp
 ```
 
-<!-- TODO: update doc link to `rpi5-ptp-time-sync` -->
-For more details on setting up PTP on the Raspberry Pi 5, you can follow {doc}`timemaster`. <!-- How to synchronize two Raspberry Pi 5s using LinuxPTP -->
+For more details on setting up PTP on the Raspberry Pi 5, you can follow {doc}`rpi5-ptp-time-sync`. <!-- How to synchronize two Raspberry Pi 5s using LinuxPTP -->
 
 On the NTP side, Timemaster can either use `ntpd` or Chrony.
 In this guide we will be using Chrony, which is considered the [more modern and accurate](https://chrony-project.org/faq.html#_how_does_chrony_compare_to_ntpd) implementation of the two.
@@ -80,8 +79,7 @@ delay 10e-6
 
 The rest of the config file can be left unchanged unless you need specific PTP or NTP configurations.
 
-<!-- TODO: update doc link to `rpi5-ptp-time-sync` -->
-On a Raspberry Pi 5, `ptp4l` will need additional options as described in {doc}`timemaster`. <!-- How to synchronize two Raspberry Pi 5s using LinuxPTP -->
+On a Raspberry Pi 5, `ptp4l` will need additional options as described in {doc}`rpi5-ptp-time-sync`. <!-- How to synchronize two Raspberry Pi 5s using LinuxPTP -->
 In that case the additional configuration should look like this:
 
 ```ini
