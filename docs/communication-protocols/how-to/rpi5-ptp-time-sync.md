@@ -15,6 +15,9 @@ In addition to synchronizing PHCs, one can synchronize the system clock to the P
 
    Raspberry Pi 5 clock topology
 ```
+## Prerequisites
+- 2x Raspberry Pi 5 (with shell access)
+- 1x Ethernet Cable
 
 ## Install LinuxPTP
 
