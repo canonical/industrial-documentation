@@ -1,4 +1,4 @@
-# How to use Timemaster
+# Combine NTP and PTP for redundant time synchronization
 
 Timemaster is an application from the [Linux PTP project](https://linuxptp.sourceforge.net/) that combines Network Time Protocol (NTP) and Precision Time Protocol (PTP) to provide a synchronized system clock, with redundancy.
 PTP is the more accurate of the two protocols, but can only synchronize against a single server at a time.
