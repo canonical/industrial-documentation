@@ -1,6 +1,6 @@
 # How to install Home Assistant on Ubuntu Core
 
-This guide walks you through installing Home Assistant ({spellexception}`HASS`) on Ubuntu Core.
+This guide walks you through installing Home Assistant on Ubuntu Core.
 Home Assistant is an open source home automation solution, designed with a
 rich ecosystem of integrations for connecting smart devices.
 We use Ubuntu Core as the OS, to guarantee a secure and up to date foundation

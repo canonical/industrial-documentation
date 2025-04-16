@@ -67,6 +67,7 @@ OpenThread
 OTBR
 otf
 passcode
+passwordless
 pc
 PHC
 PHCs
