@@ -44,7 +44,7 @@ pack] and hosted on [Read the Docs].
 It is written in reStructuredText or MyST Markdown and built with [Sphinx].
 
 - For general guidance, refer to the [starter pack guide]
-- For the language and style conventions, refer to the [Canonical style guides]
+- For language and style conventions, refer to the [Canonical style guides]
 - In structuring, the documentation employs the [Diátaxis] approach
 
 ### Fork and download the documentation repository
