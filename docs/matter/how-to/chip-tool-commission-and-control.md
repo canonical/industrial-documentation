@@ -177,5 +177,5 @@ However, for a complete list of sub-commands and options, it is best to use the 
 [bluez]: https://snapcraft.io/docs/bluez-interface
 [enable experimental Bluetooth support]: https://project-chip.github.io/connectedhomeip-doc/guides/BUILDING.html#enable-experimental-bluetooth-support-and-disable-battery-plugin-in-bluez
 [dataset]: https://openthread.io/reference/cli/concepts/dataset
-[Matter documentation]: https://project-chip.github.io/connectedhomeip-doc/guides/chip_tool_guide.html#pairing
-[guide]: https://project-chip.github.io/connectedhomeip-doc/guides/chip_tool_guide.html#using-chip-tool-for-matter-device-testing
+[Matter documentation]: https://project-chip.github.io/connectedhomeip-doc/development_controllers/chip-tool/chip_tool_guide.html#pairing
+[guide]: https://project-chip.github.io/connectedhomeip-doc/development_controllers/chip-tool/chip_tool_guide.html#using-chip-tool-for-matter-device-testing
