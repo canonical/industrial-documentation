@@ -203,8 +203,7 @@ linkcheck_ignore = [
     "http://localhost:*",
     "http://pi4.local:8123",
     # Others
-    "https://github.com/canonical/ACME/*",
-    "https://canonical-documentation-with-sphinx-and-readthedocscom.readthedocs-hosted.com"
+    "https://github.com/canonical/ACME/*"
 ]
 
 

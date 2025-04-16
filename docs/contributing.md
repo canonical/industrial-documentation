@@ -44,7 +44,7 @@ pack] and hosted on [Read the Docs].
 It is written in reStructuredText or MyST Markdown and built with [Sphinx].
 
 - For general guidance, refer to the [starter pack guide]
-- For syntax help and guidelines, refer to the [Canonical style guides]
+- For the language and style conventions, refer to the [Canonical style guides]
 - In structuring, the documentation employs the [Diátaxis] approach
 
 ### Fork and download the documentation repository
@@ -157,7 +157,7 @@ git commit -m "docs(ref/kernel-boot): Add example for nohz parameter" -s
 [reStructuredText]: https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html
 [MyST Markdown]: https://myst-parser.readthedocs.io/en/latest/
 [starter pack guide]: https://canonical-starter-pack.readthedocs-hosted.com/latest/
-[Canonical style guides]: https://canonical-documentation-with-sphinx-and-readthedocscom.readthedocs-hosted.com/#style-guides
+[Canonical style guides]: https://docs.ubuntu.com/styleguide/en/
 [Diátaxis]: https://diataxis.fr/
 [woke]: https://github.com/get-woke/woke
 [related issues, pull requests, and repositories]: https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/autolinked-references-and-urls
