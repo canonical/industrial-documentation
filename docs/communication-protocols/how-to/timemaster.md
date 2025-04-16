@@ -88,7 +88,7 @@ path /usr/sbin/ptp4l
 options --hwts_filter full --neighborPropDelayThresh 17000
 ```
 
-Refer to the [`timemaster` man page](https://manpages.ubuntu.com/manpages/latest/en/man8/timemaster.8.html) for more details on configuration options.
+Refer to the [`timemaster` man page](https://manpages.ubuntu.com/manpages/noble/en/man8/timemaster.8.html) for more details on configuration options.
 
 ## Run Timemaster
 
@@ -103,7 +103,7 @@ sudo timemaster -f /etc/linuxptp/timemaster.conf -l 10 -m -q
 * `-m` enables logging to `stdout`
 * `-q` disables logging to `syslog`
 
-Refer to the [`timemaster` man page](https://manpages.ubuntu.com/manpages/latest/en/man8/timemaster.8.html) for a complete description of all available options.
+Refer to the [`timemaster` man page](https://manpages.ubuntu.com/manpages/noble/en/man8/timemaster.8.html) for a complete description of all available options.
 
 ## Check logs
 

@@ -155,7 +155,7 @@ In this case, the default configurations of `ptp4l` are unchanged, except for th
 
 Wait for the server to print out `assuming the grand master role` before starting the client.
 
-For a detailed description of all configuration options, refer to the [`ptp4l` man page](https://manpages.ubuntu.com/manpages/latest/en/man8/ptp4l.8.html) .
+For a detailed description of all configuration options, refer to the [`ptp4l` man page](https://manpages.ubuntu.com/manpages/noble/en/man8/ptp4l.8.html) .
 
 ### Start client
 
@@ -219,7 +219,7 @@ sudo phc2sys -s CLOCK_REALTIME -c eth0 -O 0 --step_threshold 1 -m -q
 * `-m` enables printing log messages to stdout.
 * `-q` disables printing to the syslog.
 
-For a detail description of all available configurations, refer to the [`phc2sys` man page](https://manpages.ubuntu.com/manpages/latest/en/man8/phc2sys.8.html).
+For a detail description of all available configurations, refer to the [`phc2sys` man page](https://manpages.ubuntu.com/manpages/noble/en/man8/phc2sys.8.html).
 
 ```{note}
 `phc2sys` has many features to automatically synchronize between clocks such as selecting the best source to synchronize from, and automatically handling leap seconds and daylight savings time.
