@@ -82,7 +82,7 @@ Setting GPIO 4 to Off
 ^C
 ```
 Take a look at the logs and the LED. If there are no errors and the LED blinks every half second, we are ready to proceed!
-Use Ctrl+C to stop the application.
+Use {kbd}`Ctrl`+{kbd}`C` to stop the application.
 
 ### CLI flags
 

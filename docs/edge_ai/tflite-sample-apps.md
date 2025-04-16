@@ -8,4 +8,4 @@ The following samples demonstrate the use of TensorFlow Lite in mobile applicati
 ## Image classification
 
 This app performs image classification on a live camera feed and displays the
-inference output in realtime on the screen.
+inference output in real-time on the screen.
