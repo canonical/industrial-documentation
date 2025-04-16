@@ -152,7 +152,7 @@ To start and enable via a [Gadget snap], set `autostart` snap configuration to `
 
 ## Form a Thread network
 
-Use the CTL tool to initialize the Thread network:
+Use the {spellexception}`CTL` tool to initialize the Thread network:
 
 ```bash
 
@@ -163,7 +163,7 @@ sudo openthread-border-router.ot-ctl thread start
 
 ```
 
-Alternatively, these steps could be performed with the GUI at http://localhost:80. Please refer to the instructions [here](https://openthread.io/guides/border-router/web-gui.md) to configure and form, join, or check the status of a Thread network using the GUI.
+Alternatively, these steps could be performed with the GUI at {literalref}`http://localhost:80`. Please refer to the instructions [here](https://openthread.io/guides/border-router/web-gui.md) to configure and form, join, or check the status of a Thread network using the GUI.
 
 ## Controlling a Thread device
 

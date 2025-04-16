@@ -1,6 +1,8 @@
 
 # AI Inference on the Edge with TensorFlow Lite
 
+placeholder
+<!--
 This blog post dives into the world of AI on the edge, and how to deploy TensorFlow Lite models on edge devices. We’ll explore the challenges of managing dependencies and updates for these models, and how containerisation with Ubuntu Core and Snapcraft can streamline the process.
 
 Let’s start by defining what TensorFlow and its Lite variant are.
@@ -169,4 +171,4 @@ Since we created a snap, our TF Lite application can be easily deployed on Ubunt
 Ubuntu Core comes with tooling that makes it possible to create your production images that bundle your stack’s building blocks, including the ML software. Refer to this documentation to get started with building your Ubuntu Core image.
 
 
-
+-->
