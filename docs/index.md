@@ -4,50 +4,32 @@ relatedlinks: '[Ubuntu&#32;Core](https://ubuntu.com/core/docs), [IoT&#32;App&#32
 
 # Industrial Documentation
 
-Industrial solutions powered by open-source technology for Smart Cities, Manufacturing, Home Automation, and Edge AI.
+Industrial solutions powered by open-source technology for fleet management, manufacturing, home automation, and communication Protocols.
 
 ---
 
 ## In this documentation
 
-````{grid} 1 1 2 2
+````{grid} 1 2 3 3
 
-```{grid-item-card} [Placeholder](/index)
-Explore how open-source technology is shaping the cities of the future with AI-driven infrastructure and smart governance.
-
-
-```
-
-```{grid-item-card} [Manufacturing](manufacturing/index)
-Automate industrial processes with AI and IoT, improving efficiency and reducing costs.
-- [How-to guides](/manufacturing/how-to/index)
+```{grid-item-card} [Communication Protocols](communication-protocols/index)
+Large scale network solutions powered by open source technology
 
 
 ```
-
-````
-
-````{grid} 1 1 2 2
-:reverse:
-
-```{grid-item-card} [Home Automation](/matter/index)
+```{grid-item-card} [Home Automation](/home-automation/index)
 Leverage open-source solutions to create secure, scalable, and intelligent home automation systems.
 
-- [Tutorial - your first Matter device with a Raspberry Pi](/matter/tutorial/pi-gpio-commander.md)
-
-- [How-to guides](/matter/how-to/index)
 
 
 ```
-
-```{grid-item-card} [Edge AI](/edge_ai/index)
-Harness the power of AI at the edge for real-time analytics and decision-making.
-- [TensorFlow Lite sample applications](/edge_ai/tflite-sample-apps.md)
-- [How-to guides](/edge_ai/how-to/index)
+```{grid-item-card} [Fleet Management](/fleet-management/index)
+Harness the power of open source to seamlessly deploy and maintain device teams and automate management
 
 ```
 
 ````
+
 
 ---
 
@@ -63,10 +45,7 @@ This documentation is part of Canonical's industrial initiatives, supporting ope
 :hidden:
 :titlesonly:
 self
-Home Automation <matter/index>
-Edge AI <edge_ai/index>
-manufacturing/index
-fleet-management/index
-communication-protocols/index
-
+Home Automation <home-automation/index>
+Fleet Management <fleet-management/index>
+Communication Protocols <communication-protocols/index>
 contributing

@@ -1,4 +1,4 @@
-# How to commission and control Matter devices with Chip Tool
+# Commission and control Matter devices with Chip Tool
 
 Chip Tool is an open source Matter Controller with a command-line
 interface (CLI). It is useful for development and testing of Matter
