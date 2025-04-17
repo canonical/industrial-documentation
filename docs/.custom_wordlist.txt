@@ -1,4 +1,5 @@
 amd
+AMQP
 analytics
 Ansible
 Ansible's
@@ -19,6 +20,7 @@ concentrators
 config
 Configurator
 connectedhomeip
+containerized
 coprocessor
 cryptographically
 CSA
@@ -34,6 +36,7 @@ EUI
 failover
 fonts
 freefont
+gapped
 github
 GND
 GPG
@@ -41,6 +44,7 @@ gpio
 GPIO
 gyre
 hostname
+http
 https
 integrations
 IoT
@@ -54,9 +58,12 @@ latexmk
 LinuxPTP
 LinuxPTP's
 literalref
+localhost
 LoRa
 mDNS
+MQTT
 NAND
+natively
 nRF
 ntp
 NTP
@@ -64,6 +71,7 @@ onboarding
 oneshot
 OpenThread
 OpenThread
+OTA
 OTBR
 otf
 passcode
@@ -75,7 +83,9 @@ pinout
 plantuml
 PTP
 RabbitMQ
+RabbitMQ's
 RCP
+reproducibility
 sandboxing
 scalable
 SDK
@@ -97,6 +107,7 @@ txt
 txt
 uncomment
 uncommenting
+untrusted
 utils
 VSCode
 WCAG
