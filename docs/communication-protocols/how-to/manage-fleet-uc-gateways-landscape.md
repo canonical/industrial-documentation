@@ -221,7 +221,7 @@ Give it a name, e.g., *Configure Basicstation*.
 
 In the code block paste the contents of the example script above.
 You can modify the configuration in the script to suite your needs.
-The configuration follows the guide [here](../companion-snap-compose/README.md#configuration).
+The configuration follows the guide [here]`(../companion-snap-compose/README.md#configuration).`
 
 Enter `root` as the user the script should run as.
 Save the script and click **Run**.
