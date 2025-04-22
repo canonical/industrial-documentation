@@ -3,13 +3,13 @@
 
 Although you can install LoRa Basics station on existing Ubuntu Core devices, you can also create a custom Ubuntu Core image that includes LoRa Basics station software, deploy the image to multiple devices and use Landscape to manage your new fleet. 
 
-In this guide, we will show you how to build the Ubuntu Core image containing a LoRa gateway, flash it onto a device(s), and configure it using Landscape. These instructions are written for, and tested with, a Raspberry Pi 5. However, with some modification, they should also work on other platforms.
+In this guide, we will show you how to build an Ubuntu Core image containing a LoRa gateway, flash it onto a device(s), and configure it using Landscape. These instructions are written for, and tested with, a Raspberry Pi 5. However, with some modification, they should also work on other platforms.
 
 ```{note}
 Before you continue, you should know how to [build an Ubuntu Core image](https://ubuntu.com/core/docs/build-an-image).
-You also require a Landscape account on a self-hosted or SAAS Landscape server.
+You'll also need a Landscape account on a self-hosted or SAAS Landscape server.
 ```
-
+## Create working directory
 Create a working directory for the configuration of the image.
 
 ```bash
@@ -28,7 +28,7 @@ git clone https://github.com/canonical/pi-gadget --branch 24
 ```
 
 The repository will be cloned into a new `pi-gadget` subdirectory.
-Inside this directory, edit the file `gadget.yaml`, and append this code:
+Inside this subdirectory, edit the `gadget.yaml` file by appending this code:
 
 ```yaml
 
@@ -63,7 +63,7 @@ defaults:
                     password: "my-wifi-password"
 ```
 
-You will also need to update the Landscape account name and the Landscape server URL to match your server and account.
+You will also need to update the Landscape account name and the Landscape server URL to match your account and server.
 If you also want to preconfigure WiFi, update the WiFi SSID and password.
 
 Finally, build the gadget snap by running:
@@ -76,7 +76,7 @@ cd ..
 
 ## Set up the model
 
-Create a new model assertion by creating an empty file in the working directory called `model.json`, and then adding the code below.
+Create a new model assertion by creating an empty file called `model.json` in the working directory and inserting the code below.
 
 ```json
 {
@@ -144,8 +144,8 @@ Create a new model assertion by creating an empty file in the working directory 
 This model assertion includes the `landscape-client`, `lora-basicstation`, and `docker` snaps.
 
 Update the `authority-id` and `brand-id` fields with your [developer id](https://ubuntu.com/core/docs/create-ubuntu-one).
-Next update the `timestamp` field to the current time, making sure it falls withing in the validity period of your snap signing key.
-Finally execute this command to sign the model:
+Next, update the `timestamp` field to the current time, making sure it falls within the validity period of your snap signing key.
+Finally, execute this command to sign the model:
 
 ```
 snap sign -k my-model-key model.json > model.model
@@ -159,7 +159,7 @@ To build an image you require the `ubuntu-image` application. Install it:
 sudo snap install ubuntu-image --classic
 ```
 
-You can now build a disk image from the signed model:
+Then, build a disk image from the signed model:
 
 ```shell
 ubuntu-image snap --snap pi-gadget/pi_24-1_arm64.snap --validation=enforce model.model
@@ -194,15 +194,16 @@ During the build process you will see two warnings.
 ```
 ## Flash the image to a device
 
-You can flash this image file to an SD card using Raspberry Pi Imager.
+Flash the `pi.img` file to an SD card using Raspberry Pi Imager.
 After flashing, insert the SD card into a Raspberry Pi and power it on.
 If you have a monitor connected, you will see a login prompt after a couple of minutes.
 It is not possible to log in here as there is no user configured.
 
 ## Locate the device on Landscape dashboard
-After your Raspberry Pi has started up, it should automatically register with Landscape. 
-It will then appear on your Landscape dashboard as a pending device.
-In the gadget snap, `landscape-client` is configured to use the device mac address as name, so that is what you should see listed here.
+Your Raspberry Pi should automatically register with Landscape after starting up.
+In the gadget snap, `landscape-client` is configured to use the device mac address as name.
+Therefore, your Raspberyy Pi will appear on your Landscape dashboard as a pending device with its mac address as the name.
+
 
 ![pending device](manage-fleet-uc-gateways-landscape/dashboard-pending-device.png)
 
@@ -214,7 +215,8 @@ Click accept to add the device to your Landscape instance.
 
 After accepting you will see the info page for the device.
 
-You'll need to wait for several minutes for the device to check in. Once this is done, the info page will show some basic parameters of the device, like total memory, model and MAC addresses.
+You'll need to wait several minutes for the device to check in. 
+Once this is done, the info page will show some basic parameters of the device such as total memory, model, and MAC addresses.
 
 ![computer info](manage-fleet-uc-gateways-landscape/computer-info.png)
 
@@ -228,7 +230,7 @@ You will see the list of installed snaps.
 You can update or remove a Snap from here.
 Verify that `lora-basicstation` is in the list.
 
-To install more software on your device, you can click on **Install snaps** under the Snaps tab.
+To install more software on your device, click on **Install snaps** under the Snaps tab.
 
 ## Configure the gateway
 
@@ -238,12 +240,12 @@ An example script is provided [here](manage-fleet-uc-gateways-landscape/configur
 
 On Landscape, after selecting your device from the list of computers, go to the scripts tab.
 If presented with a choice, select **Run a new script** and then click **Next**.
-You will now see a form to create a new script.
+You will see a form to create a new script.
 Give it a name, e.g., *Configure Basicstation*.
 
 In the code block paste the contents of the example script above.
 You can modify the configuration in the script to suite your needs.
-The configuration follows the guide [here]`(../companion-snap-compose/README.md#configuration).`
+The configuration follows the guide [here](setup-lora-on-ubuntu-core.md#configuration).
 
 Enter `root` as the user the script should run as.
 Save the script and click **Run**.
@@ -268,7 +270,7 @@ Log into your LoRa network server and check if your gateway is connected.
 Debugging can be done by running scripts on the device.
 Checkout this page for [example scripts for Ubuntu Core devices on Landscape](https://github.com/canonical/landscape-scripts/tree/main/core).
 
-Another debugging option is to create a user account on the device, then log into the device over SSH or locally with a keyboard and mouse.
+Another debugging option is to create a user account on the device and logging into it over SSH or locally with a keyboard and mouse.
 The user management interface of Landscape does not currently work for Ubuntu Core.
 Follow this link to see [example scripts to add users](https://github.com/canonical/landscape-scripts/tree/main/core/users).
 
