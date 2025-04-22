@@ -7,16 +7,28 @@ In this guide, we will show you how to build the Ubuntu Core image containing a 
 
 ```{note}
 Before you continue, you should know how to [build an Ubuntu Core image](https://ubuntu.com/core/docs/build-an-image).
+You also require a Landscape account on a self-hosted or SAAS Landscape server.
+```
 
+Create a working directory for the configuration of the image.
+
+```bash
+mkdir lora-ubuntu-core-image
+cd lora-ubuntu-core-image
 ```
 
 ## Build the gadget snap
 
 The gadget snap defines and configures system properties that are specific to one or more devices. A custom version of this snap must be included as part of the Ubuntu Core image to set up the bootloader and other components. <!-- Further clarification needed -->
 
-To build the gadget snap, start by cloning the [LoRa Basics stations snap repository](https://github.com/canonical/lora-basicstation-snap). In the `ubuntu-core-image` directory, replace the pi-gadget directory with this [version of the Raspberry Pi gadget snap](https://github.com/canonical/pi-gadget/tree/24).
+To build the gadget snap, start by cloning the [Raspberry Pi gadget snap](https://github.com/canonical/pi-gadget/tree/24) repository into the working directory.
 
-In the new `pi-gadget` directory, edit the file `gadget.yaml` by adding this code at the end:
+```bash
+git clone https://github.com/canonical/pi-gadget --branch 24
+```
+
+The repository will be cloned into a new `pi-gadget` subdirectory.
+Inside this directory, edit the file `gadget.yaml`, and append this code:
 
 ```yaml
 
@@ -24,7 +36,7 @@ defaults:
   # Preconfigure Landscape Client
   ffnH0sJpX3NFAclH777M8BdXIWpo93af:
     landscape-url: https://landscape.canonical.com
-    account-name: "<REDACTED>"
+    account-name: "REPLACE-ME"
     registration-key: ""
     auto-register:
       enabled: true
@@ -51,7 +63,7 @@ defaults:
                     password: "my-wifi-password"
 ```
 
-You will also need to update the additions with your Landscape account name, and perhaps the Landscape server URL.
+You will also need to update the Landscape account name and the Landscape server URL to match your server and account.
 If you also want to preconfigure WiFi, update the WiFi SSID and password.
 
 Finally, build the gadget snap by running:
@@ -64,7 +76,7 @@ cd ..
 
 ## Set up the model
 
-To set up a custom Ubuntu Core image model, you first create the model assertion. For this image, the model assertion includes the `landscape-client`, `lora-basicstation`, and `docker` snaps:
+Create a new model assertion by creating an empty file in the working directory called `model.json`, and then adding the code below.
 
 ```json
 {
@@ -72,8 +84,8 @@ To set up a custom Ubuntu Core image model, you first create the model assertion
     "series": "16",
     "model": "uc24-pi-arm64-lora",
     "architecture": "arm64",
-    "authority-id": "<REDACTED>",
-    "brand-id": "<REDACTED>",
+    "authority-id": "REPLACE-ME",
+    "brand-id": "REPLACE-ME",
     "timestamp": "2024-08-20T12:20:00+00:00",
     "base": "core24",
     "grade": "dangerous",
@@ -129,7 +141,11 @@ To set up a custom Ubuntu Core image model, you first create the model assertion
 
 ```
 
-Update the `authority-id` and `brand-id` fields with your [developer id](https://ubuntu.com/core/docs/create-ubuntu-one), and execute this command to sign the model:
+This model assertion includes the `landscape-client`, `lora-basicstation`, and `docker` snaps.
+
+Update the `authority-id` and `brand-id` fields with your [developer id](https://ubuntu.com/core/docs/create-ubuntu-one).
+Next update the `timestamp` field to the current time, making sure it falls withing in the validity period of your snap signing key.
+Finally execute this command to sign the model:
 
 ```
 snap sign -k my-model-key model.json > model.model
@@ -137,10 +153,16 @@ snap sign -k my-model-key model.json > model.model
 
 ## Build the image
 
-After the model is signed, build an image from it by executing:
+To build an image you require the `ubuntu-image` application. Install it:
+
+```bash
+sudo snap install ubuntu-image --classic
+```
+
+You can now build a disk image from the signed model:
 
 ```shell
-$ ubuntu-image snap --snap pi-gadget/pi_24-1_arm64.snap --validation=enforce model.model
+ubuntu-image snap --snap pi-gadget/pi_24-1_arm64.snap --validation=enforce model.model
 ```
 The path to the custom gadget snap built earlier is set because it must be side-loaded into the image during the build process.
 
@@ -180,10 +202,10 @@ It is not possible to log in here as there is no user configured.
 ## Locate the device on Landscape dashboard
 After your Raspberry Pi has started up, it should automatically register with Landscape. 
 It will then appear on your Landscape dashboard as a pending device.
+In the gadget snap, `landscape-client` is configured to use the device mac address as name, so that is what you should see listed here.
 
 ![pending device](manage-fleet-uc-gateways-landscape/dashboard-pending-device.png)
 
-In the gadget snap, `landscape-client` is configured to use the device mac address as name.
 Click on this name to configure the device.
 You can also customize the device title here.
 Click accept to add the device to your Landscape instance.
