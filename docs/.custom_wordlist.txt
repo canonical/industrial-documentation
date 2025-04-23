@@ -98,6 +98,7 @@ SSO
 stdout
 synchronizer
 syslog
+TCP
 tex
 texlive
 Timemaster
