@@ -10,6 +10,7 @@ BlueZ
 BlueZ's
 BMCA
 bootable
+bootloader
 Chromecast
 Chrony
 Chrony's
@@ -81,12 +82,14 @@ PHC
 PHCs
 pinout
 plantuml
+preconfigure
 PTP
 RabbitMQ
 RabbitMQ's
 RCP
 reproducibility
 runtime
+SAAS
 sandboxing
 scalable
 SDK
@@ -94,8 +97,10 @@ snapcraft
 Snapcraft
 Snapd
 SnapD
+SSID
 SSO
 stdout
+subdirectory
 synchronizer
 syslog
 TCP
