@@ -1,4 +1,4 @@
-(how-to-guides-container-deployment-build-an-image-for-docker-deployment)=
+(containers-how-to-build-uc-image-containing docker)=
 # Build an Ubuntu Core image for Docker deployments
 
 Ubuntu Core runs applications as snaps.
