@@ -404,7 +404,7 @@ This will create: `rabbitmq_3.13-management_amd64.snap`, using the Docker image 
 In this guide, we created a RabbitMQ companion snap that made it possible to deploy, configure, and maintain the RabbitMQ Docker image on Ubuntu Core. 
 
 The companion snap can be extended to take care of many other requirements including:
-- Shipping the Docker image inside the snap for better reproducibility and deployment in air-gapped environments; see [Package Docker images in a snap](package-docker-images-in-a-snap).
+- Shipping the Docker image inside the snap for better reproducibility and deployment in air-gapped environments; see {ref}`Package Docker images in a snap <how-to-guides-container-package-docker-images-in-a-snap>`.
 - Pruning dangling images to save disk space after upgrades
 - Using Docker compose; although this isn't recommended because it will encapsulate several containers into a single service
 

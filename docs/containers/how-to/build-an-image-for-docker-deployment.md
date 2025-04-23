@@ -6,7 +6,7 @@ Therefore, the Docker Engine must also be run as a snap.
 
 To run Docker containers on a running Ubuntu Core instance, install the Docker snap and [run your docker commands](https://ubuntu.com/core/docs/docker-run).
 
-You can even create a {ref}`companion snap <explanation-docker-companion-snap>` that [runs the container](deploy-docker-from-a-snap) and takes care of updates to the [bundled container image](package-docker-images-in-a-snap).
+You can even create a {ref}`companion snap <explanation-docker-companion-snap>` that {ref}`runs the container <how-to-guides-container-deployment-deploy-docker-from-a-snap>` and takes care of updates to the {ref}`bundled container image <how-to-guides-container-package-docker-images-in-a-snap>`.
 
 To ship containerized applications with Ubuntu Core, you need to create a custom image. The custom image can then be used to create bootable media and can automate deployment of a production system.
 
