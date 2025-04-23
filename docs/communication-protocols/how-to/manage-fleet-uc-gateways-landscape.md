@@ -206,7 +206,7 @@ During the build process you will see two warnings.
 ```
 ## Flash the image to a device
 
-Flash the `pi.img` file to an SD card using Raspberry Pi Imager.
+Flash the `pi.img` file to an SD card using Raspberry Pi {spellexception}`Imager`.
 After flashing, insert the SD card into a Raspberry Pi and power it on.
 If you have a monitor connected, you will see a login prompt after a couple of minutes.
 It is not possible to log in here as there is no user configured.
@@ -253,7 +253,7 @@ Download this [example script](manage-fleet-uc-gateways-landscape/configure-lora
 On Landscape, after selecting your device from the list of computers, go to the scripts tab.
 If presented with a choice, select **Run a new script** and click **Next**.
 You will see a form to create a new script.
-Give it a name, e.g., *Configure Basicstation*.
+Give it a name, e.g., *Configure {spellexception}`Basicstation`*.
 
 In the code block paste the contents of the example script above.
 You can modify the configuration in the script to suite your needs.
