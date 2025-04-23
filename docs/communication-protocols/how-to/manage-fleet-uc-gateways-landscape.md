@@ -1,16 +1,18 @@
-# Manage a fleet of LoRa  gateways on Ubuntu Core with Landscape
-[Landscape](https://ubuntu.com/landscape) is a Canonical service for fleet management of devices running ubuntu. 
+# Manage a fleet of LoRa  gateways using Ubuntu Core with Landscape
+[Landscape](https://ubuntu.com/landscape) is a Canonical service for fleet management of devices running Ubuntu. 
 
-Although you can install LoRa Basics station on existing Ubuntu Core devices, you can also create a custom Ubuntu Core image that includes LoRa Basics station software, deploy the image to multiple devices and use Landscape to manage your new fleet. 
+It is possible to manually install LoRa Basics Station one by one on multiple Ubuntu Core devices. This is however not scalable. To make deployments of large fleets easier, it would be useful to create a single disk image that can be flashed to multiple devices, and personalize them after the first boot. Ubuntu Core enables the creation of images that includes a custom set of software packages, which can then be deployed to multiple machines, and personalized and managed by Landscape.
 
 In this guide, we will show you how to build an Ubuntu Core image containing a LoRa gateway, flash it onto a device(s), and configure it using Landscape. These instructions are written for, and tested with, a Raspberry Pi 5. However, with some modification, they should also work on other platforms.
 
 ```{note}
 Before you continue, you should know how to [build an Ubuntu Core image](https://ubuntu.com/core/docs/build-an-image).
-You'll also need a Landscape account on a self-hosted or SAAS Landscape server.
+You'll also need a Landscape account on a Landscape server.
+You can use [Landscape SAAS](https://landscape.canonical.com/) included with your Ubuntu Pro account.
 ```
 ## Create working directory
 Create a working directory for the configuration of the image.
+This is where you will create the definition of the image and where the resulting image will be built and stored.
 
 ```bash
 mkdir lora-ubuntu-core-image
@@ -19,9 +21,11 @@ cd lora-ubuntu-core-image
 
 ## Build the gadget snap
 
-The gadget snap defines and configures system properties that are specific to one or more devices. A custom version of this snap must be included as part of the Ubuntu Core image to set up the bootloader and other components. <!-- Further clarification needed -->
+The [gadget snap](https://snapcraft.io/docs/the-gadget-snap) defines and configures system properties that are specific to one or more devices.
+A custom version of this snap must be included as part of the Ubuntu Core image to set up the bootloader and other components.
+We specifically use it to load default configurations onto the image, like Landscape and WiFi credentials.
 
-To build the gadget snap, start by cloning the [Raspberry Pi gadget snap](https://github.com/canonical/pi-gadget/tree/24) repository into the working directory.
+To create the custom gadget snap, start by cloning the [Raspberry Pi gadget snap](https://github.com/canonical/pi-gadget/tree/24) repository into the working directory.
 
 ```bash
 git clone https://github.com/canonical/pi-gadget --branch 24
@@ -33,7 +37,7 @@ Inside this subdirectory, edit the `gadget.yaml` file by appending this code:
 ```yaml
 
 defaults:
-  # Preconfigure Landscape Client
+  # Add default configurations for landscape-client snap using the snap-id
   ffnH0sJpX3NFAclH777M8BdXIWpo93af:
     landscape-url: https://landscape.canonical.com
     account-name: "REPLACE-ME"
@@ -142,7 +146,10 @@ Create a new model assertion by creating an empty file called `model.json` in th
 ```
 
 This model assertion includes the `landscape-client`, `lora-basicstation`, and `docker` snaps.
-
+```{note}
+If you followed the prerequisite guide on [how to build an Ubuntu Core image](https://ubuntu.com/core/docs/build-an-image), you should already have generated and registered a snap signing key.
+We'll use the same key here.
+```
 Update the `authority-id` and `brand-id` fields with your [developer id](https://ubuntu.com/core/docs/create-ubuntu-one).
 Next, update the `timestamp` field to the current time, making sure it falls within the validity period of your snap signing key.
 Finally, execute this command to sign the model:
@@ -202,7 +209,7 @@ It is not possible to log in here as there is no user configured.
 ## Locate the device on Landscape dashboard
 Your Raspberry Pi should automatically register with Landscape after starting up.
 In the gadget snap, `landscape-client` is configured to use the device mac address as name.
-Therefore, your Raspberyy Pi will appear on your Landscape dashboard as a pending device with its mac address as the name.
+Therefore, your Raspberry Pi will appear on your Landscape dashboard as a pending device with its mac address as the name.
 
 
 ![pending device](manage-fleet-uc-gateways-landscape/dashboard-pending-device.png)
@@ -247,7 +254,7 @@ In the code block paste the contents of the example script above.
 You can modify the configuration in the script to suite your needs.
 This example configuration roughly follows the steps in {doc}`setup-lora-on-ubuntu-core`.
 
-Enter `root` as the user the script should run as.
+For *run as user* use `root`.
 Save the script and click **Run**.
 
 ![create scripts](manage-fleet-uc-gateways-landscape/create-script.png)
@@ -257,7 +264,7 @@ After a couple of minutes you should see a success.
 
 ![activity](manage-fleet-uc-gateways-landscape/activity-succeeded.png)
 
-The text in the status column is clickable and will show the output of the script. `stdout` on success and `stderr` on failure. 
+The text in the status column (`Succeeded` in this case) is clickable. Clicking on it will open a window to show the output of the script. If the script succeeded, the output will include `stdout`. If it failed, it will show `stderr`.
 
 ![stdout](manage-fleet-uc-gateways-landscape/activity-stdout.png)
 
