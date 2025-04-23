@@ -1,5 +1,5 @@
 (how-to-guides-container-deployment-deploy-docker-from-a-snap)=
-# Deploy Docker from a snap
+# Deploy a Docker container from a snap
 
 As with any other snap-enabled environment, Ubuntu Core can install and deploy _Docker containers_ from the command line, first by installing the [Docker container runtime](https://snapcraft.io/docker) snap, and then running either `docker run` or `docker compose`. This approach is useful for testing, but it's difficult to scale.
 

@@ -1,5 +1,5 @@
 (how-to-guides-container-deployment-build-an-image-for-docker-deployment)=
-# Build an image for Docker deployment
+# Build an Ubuntu Core image for Docker deployments
 
 Ubuntu Core runs applications as snaps, and running the Docker Engine as a snap is no exception.
 
