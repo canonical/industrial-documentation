@@ -245,7 +245,7 @@ Give it a name, e.g., *Configure Basicstation*.
 
 In the code block paste the contents of the example script above.
 You can modify the configuration in the script to suite your needs.
-The configuration follows the guide [here](setup-lora-on-ubuntu-core.md#configuration).
+This configuration follows the process discussed in the {ref}`configuration step <gateway-configuration>` of setting up a LoRa Basics station on Ubuntu Core.
 
 Enter `root` as the user the script should run as.
 Save the script and click **Run**.
@@ -275,3 +275,6 @@ The user management interface of Landscape does not currently work for Ubuntu Co
 Follow this link to see [example scripts to add users](https://github.com/canonical/landscape-scripts/tree/main/core/users).
 
 For instance, the `add-sso-user.py` script will add a user with an SSH key obtained from a Launchpad account.
+
+<!-- Links -->
+
