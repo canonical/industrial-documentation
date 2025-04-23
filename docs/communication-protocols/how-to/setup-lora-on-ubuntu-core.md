@@ -15,7 +15,7 @@ The LoRa Basics station snap needs to interact with the Docker Engine on the hos
 sudo snap connect lora-basicstation:docker docker:docker-daemon
 sudo snap connect lora-basicstation:docker-executables docker:docker-executables
 ```
-
+(gateway-configuration)=
 ## Configuration
 Configuration of the gateway is done similar to the Docker container using the same configuration options as listed in the [upstream documentation](https://github.com/xoseperez/basicstation-docker?tab=readme-ov-file#configure-the-gateway). The key difference is that the snap configuration options are used in place of environment variables. 
 
