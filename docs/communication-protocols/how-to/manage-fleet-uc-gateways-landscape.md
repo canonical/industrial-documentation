@@ -1,14 +1,19 @@
 # Manage a fleet of LoRa  gateways using Ubuntu Core with Landscape
 [Landscape](https://ubuntu.com/landscape) is a Canonical service for fleet management of devices running Ubuntu. 
 
-It is possible to manually install LoRa Basics Station one by one on multiple Ubuntu Core devices. This is however not scalable. To make deployments of large fleets easier, it would be useful to create a single disk image that can be flashed to multiple devices, and personalize them after the first boot. Ubuntu Core enables the creation of images that includes a custom set of software packages, which can then be deployed to multiple machines, and personalized and managed by Landscape.
+It's possible to manually install LoRa Basics Station one by one on multiple Ubuntu Core devices. 
+This, however, is not scalable. 
+A single disk image that can be flashed to multiple devices and personalized after the first boot would make deployment of large fleets easier.
+Ubuntu Core enables the creation of images, with a custom set of software packages, that can then be deployed to multiple machines, and personalized and managed using Landscape.
 
-In this guide, we will show you how to build an Ubuntu Core image containing a LoRa gateway, flash it onto a device(s), and configure it using Landscape. These instructions are written for, and tested with, a Raspberry Pi 5. However, with some modification, they should also work on other platforms.
+This guide shows you how to build an Ubuntu Core image containing a LoRa gateway, flash it onto a device(s), and configure it using Landscape. 
+These instructions are written for, and tested with, a Raspberry Pi 5. 
+However, with some modification, they should also work on other platforms.
 
 ```{note}
 Before you continue, you should know how to [build an Ubuntu Core image](https://ubuntu.com/core/docs/build-an-image).
 You'll also need a Landscape account on a Landscape server.
-You can use [Landscape SAAS](https://landscape.canonical.com/) included with your Ubuntu Pro account.
+You can use the [Landscape SAAS](https://landscape.canonical.com/) included with your Ubuntu Pro account.
 ```
 ## Create working directory
 Create a working directory for the configuration of the image.
@@ -23,7 +28,7 @@ cd lora-ubuntu-core-image
 
 The [gadget snap](https://snapcraft.io/docs/the-gadget-snap) defines and configures system properties that are specific to one or more devices.
 A custom version of this snap must be included as part of the Ubuntu Core image to set up the bootloader and other components.
-We specifically use it to load default configurations onto the image, like Landscape and WiFi credentials.
+In this case, it is used to load default configurations onto the image such as Landscape and WiFi credentials.
 
 To create the custom gadget snap, start by cloning the [Raspberry Pi gadget snap](https://github.com/canonical/pi-gadget/tree/24) repository into the working directory.
 
@@ -148,7 +153,7 @@ Create a new model assertion by creating an empty file called `model.json` in th
 This model assertion includes the `landscape-client`, `lora-basicstation`, and `docker` snaps.
 ```{note}
 If you followed the prerequisite guide on [how to build an Ubuntu Core image](https://ubuntu.com/core/docs/build-an-image), you should already have generated and registered a snap signing key.
-We'll use the same key here.
+The same key should be used here.
 ```
 Update the `authority-id` and `brand-id` fields with your [developer id](https://ubuntu.com/core/docs/create-ubuntu-one).
 Next, update the `timestamp` field to the current time, making sure it falls within the validity period of your snap signing key.
@@ -160,7 +165,7 @@ snap sign -k my-model-key model.json > model.model
 
 ## Build the image
 
-To build an image you require the `ubuntu-image` application. Install it:
+Install the `ubuntu-image` application:
 
 ```bash
 sudo snap install ubuntu-image --classic
@@ -196,8 +201,8 @@ If the build was successful you will find a file called `pi.img` in the working 
 ```{note}
 During the build process you will see two warnings.
 
-- The warning about the kernel is discussed [here](https://forum.snapcraft.io/t/ubuntu-image-warning-kernel-snap/37774/3).
-- The warning about the `pi` snap is because we side-loaded a custom locally built snap. This snap is not provided via the Snap Store and will therefore not get updates. To update custom gadget snaps like these you will need a [dedicated Snap Store](https://ubuntu.com/core/docs/dedicated-snap-stores).
+- The warning about the kernel is explained in this [forum discussion](https://forum.snapcraft.io/t/ubuntu-image-warning-kernel-snap/37774/3).
+- The warning about the `pi` snap is caused by the side-loading of a custom locally built snap. The snap is not provided via the Snap Store and will, therefore, not get updates. To update custom gadget snaps like these, you will need a [dedicated Snap Store](https://ubuntu.com/core/docs/dedicated-snap-stores).
 ```
 ## Flash the image to a device
 
@@ -243,16 +248,16 @@ To install more software on your device, click on **Install snaps** under the Sn
 
 Configuration of an Ubuntu Core device with Landscape is done using scripts.
 To configure your gateway, you'll need to set snap options for `lora-basicstation` via a script.
-An example script is provided [here](manage-fleet-uc-gateways-landscape/configure-lora-basicstation.sh).
+Download this [example script](manage-fleet-uc-gateways-landscape/configure-lora-basicstation.sh) to continue.
 
 On Landscape, after selecting your device from the list of computers, go to the scripts tab.
-If presented with a choice, select **Run a new script** and then click **Next**.
+If presented with a choice, select **Run a new script** and click **Next**.
 You will see a form to create a new script.
 Give it a name, e.g., *Configure Basicstation*.
 
 In the code block paste the contents of the example script above.
 You can modify the configuration in the script to suite your needs.
-This configuration follows the process discussed in the {ref}`configuration step <gateway-configuration>` of setting up a LoRa Basics station on Ubuntu Core.
+This configuration roughly follows the process discussed in the {ref}`configuration step <gateway-configuration>` of setting up a LoRa Basics station on Ubuntu Core.
 
 For *run as user* use `root`.
 Save the script and click **Run**.
@@ -268,7 +273,7 @@ The text in the status column (`Succeeded` in this case) is clickable. Clicking 
 
 ![stdout](manage-fleet-uc-gateways-landscape/activity-stdout.png)
 
-Log into your LoRa network server and check if your gateway is connected.
+Log into your LoRa network server and confirm that the gateway is connected.
 
 ![LNS](manage-fleet-uc-gateways-landscape/lns-gateway-status.png)
 
@@ -277,11 +282,10 @@ Log into your LoRa network server and check if your gateway is connected.
 Debugging can be done by running scripts on the device.
 Checkout this page for [example scripts for Ubuntu Core devices on Landscape](https://github.com/canonical/landscape-scripts/tree/main/core).
 
-Another debugging option is to create a user account on the device and logging into it over SSH or locally with a keyboard and mouse.
+Another debugging option is creating a user account on the device and logging into it over SSH or locally with a keyboard and mouse.
 The user management interface of Landscape does not currently work for Ubuntu Core.
 Follow this link to see [example scripts to add users](https://github.com/canonical/landscape-scripts/tree/main/core/users).
 
 For instance, the `add-sso-user.py` script will add a user with an SSH key obtained from a Launchpad account.
 
-<!-- Links -->
 
