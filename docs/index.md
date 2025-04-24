@@ -17,14 +17,18 @@ Large scale network solutions powered by open source technology
 
 
 ```
+
 ```{grid-item-card} [Home Automation](/home-automation/index)
 Leverage open-source solutions to create secure, scalable, and intelligent home automation systems.
 
 
 
 ```
-```{grid-item-card} [Fleet Management](/fleet-management/index)
-Harness the power of open source to seamlessly deploy and maintain device teams and automate management
+
+```{grid-item-card} [Containers](/containers/index)
+Deploy and manage containerized applications on Ubuntu Core
+
+
 
 ```
 
@@ -46,6 +50,6 @@ This documentation is part of Canonical's industrial initiatives, supporting ope
 :titlesonly:
 self
 Home Automation <home-automation/index>
-Fleet Management <fleet-management/index>
 Communication Protocols <communication-protocols/index>
+Containers <containers/index>
 contributing
