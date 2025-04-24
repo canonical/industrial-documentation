@@ -59,7 +59,6 @@ latexmk
 LinuxPTP
 LinuxPTP's
 literalref
-localhost
 LoRa
 mDNS
 MQTT
