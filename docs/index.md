@@ -10,16 +10,11 @@ Industrial solutions powered by open-source technology for fleet management, man
 
 ## In this documentation
 
-````{grid} 1 1 2 2
+````{grid} 1 2 3 3
 
 ```{grid-item-card} [Communication Protocols](communication-protocols/index)
 Large scale network solutions powered by open source technology
 
-
-```
-
-```{grid-item-card} [Fleet Management](/fleet-management/index)
-Harness the power of open source to seamlessly deploy and maintain device teams and automate management
 
 ```
 
@@ -55,7 +50,6 @@ This documentation is part of Canonical's industrial initiatives, supporting ope
 :titlesonly:
 self
 Home Automation <home-automation/index>
-Fleet Management <fleet-management/index>
 Communication Protocols <communication-protocols/index>
 Containers <containers/index>
 contributing

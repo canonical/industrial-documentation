@@ -5,7 +5,7 @@ As with any other snap-enabled environment, Ubuntu Core can install and deploy _
 
 Ubuntu Core has been designed to boot into a production state without manual interaction. This is accomplished by building a [custom Ubuntu Core image](https://ubuntu.com/core/docs/build-an-image) for your specific application and device deployment.
 
-To build such an image to deploy Docker with your own configuration requires the creation a [companion snap](https://ubuntu.com/core/docs/docker-companion-snap), the creation of which is described in this _How-to_. Our example will deploy [RabbitMQ](https://www.rabbitmq.com/), an industry-grade message broker implementing protocols such as AMQP and MQTT, but it can easily be adapted to deploy any other Docker application.
+To build such an image to deploy Docker with your own configuration requires the creation a {doc}`companion snap <../explanation/docker-companion-snap>`, the creation of which is described in this _How-to_. Our example will deploy [RabbitMQ](https://www.rabbitmq.com/), an industry-grade message broker implementing protocols such as AMQP and MQTT, but it can easily be adapted to deploy any other Docker application.
 
 Basic familiarity with snaps isn't required but paves the way for a smooth experience. We suggest going though the [tutorial on creating a snap](https://snapcraft.io/docs/create-a-new-snap) or another similar guide.
 

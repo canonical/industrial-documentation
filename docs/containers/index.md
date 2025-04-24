@@ -1,34 +1,39 @@
 # Containers
 
-Ubuntu Core has been developed specifically to leverage the power of snap packages, with their autonomous upgrades and confined sandbox.
+<!--
+Containers intro
+-->
 
-However, Ubuntu Core can also be used to run and deploy Docker container images, either from the command line or embedded within an Ubuntu Core image.
+Ubuntu Core has been developed specifically to leverage the power of snap packages, with their autonomous upgrades and confined sandbox. However, Ubuntu Core can also be used to run Docker containers.
 
-## Deploying Docker
+There many ways to deploy Docker containers on Ubuntu Core. 
+For basic use cases, a container can be started from the [command line](https://documentation.ubuntu.com/core/how-to-guides/container-deployment/run-a-docker-container/).
 
-Build a snap which embeds the Docker container images you wish to deploy from a device. Understand how the Docker companion snap enables deployment of Docker containers in Ubuntu Core.
+## Deploying Docker via Snaps
 
-- {ref}`Deploy Docker containers from a snap <how-to-guides-container-deployment-deploy-docker-from-a-snap>`
-- {ref}`The Docker companion snap <explanation-docker-companion-snap>`
+<!-- intro -->
+
+- {doc}`Deploy Docker Containers from a snap <how-to/deploy-docker-container-from-a-snap>`
+- {doc}`Package Docker images in a snap <how-to/package-docker-images-in-a-snap>`
+- {doc}`Build an Ubuntu Core image containing Docker <how-to/build-ubuntu-core-image-containing-docker>`
+- {doc}`Docker companion snap <explanation/docker-companion-snap>`
 
 
-## Packaging Docker
+## Deploying Docker via Ansible
 
-How Docker images can be bundled inside snaps to be deployed together with other resources within the package.
+<!-- intro -->
 
-Ship containerized applications with Ubuntu Core by building a custom image that can then be used to create bootable media and can automate deployment of a production system.
-
-- {ref}`Package Docker images in a snap <how-to-guides-container-package-docker-images-in-a-snap>`
-- {ref}`Build an Ubuntu Core image for Docker deployments <containers-how-to-build-uc-image-containing docker>`
+- {doc}`Deploy Docker containers on Ubuntu Core using Ansible <how-to/deploy-docker-containers-uc-ansible>`
 
 
 ```{toctree}
 :hidden:
 :titlesonly:
 :maxdepth: 2
-:glob:
 
-Deploy Docker Container from a snap <how-to/deploy-docker-container-from-a-snap>
-Package Docker images in a snap <how-to/package-docker-images-in-a-snap>
-Build an Ubuntu Core image containing Docker <how-to/build-ubuntu-core-image-containing-docker>
-Docker companion snap <explanation/docker-companion-snap>
+how-to/deploy-docker-container-from-a-snap
+how-to/package-docker-images-in-a-snap
+how-to/build-ubuntu-core-image-containing-docker
+explanation/docker-companion-snap
+how-to/deploy-docker-containers-uc-ansible
+```
