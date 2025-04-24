@@ -1,4 +1,3 @@
-(explanation-docker-companion-snap)=
 # Docker companion snap
 
 A Docker companion snap is a package with instructions and artifacts for deploying a Docker Container.
@@ -21,4 +20,4 @@ The companion snap can bundle the container image and handle the container's dat
 
 The snap ecosystem enhances Docker deployments with features like transactional updates, rollback, over-the-air (OTA) management, in both internet-connected and air-gapped environments.
 
-For more information on creating Docker companion snaps, refer to this guide on {ref}`deploying Docker containers from a snap <how-to-guides-container-deployment-deploy-docker-from-a-snap>`.
+For more information on creating Docker companion snaps, refer to this guide on {doc}`deploying Docker containers from a snap <../how-to/deploy-docker-container-from-a-snap>`.
