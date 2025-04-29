@@ -2,7 +2,7 @@
 relatedlinks: '[Ubuntu&#32;Core](https://ubuntu.com/core/docs), [IoT&#32;App&#32;Store](https://ubuntu.com/internet-of-things/appstore), [IoT&#32;Device&#32Management](https://ubuntu.com/internet-of-things/management)'
 ---
 
-# Industrial Documentation
+# Industrial documentation
 
 Industrial solutions powered by open-source technology for fleet management, manufacturing, home automation, and communication Protocols.
 
@@ -48,7 +48,7 @@ This documentation is part of Canonical's industrial initiatives, supporting ope
 ```{toctree}
 :hidden:
 :titlesonly:
-self
+
 Home Automation <home-automation/index>
 Communication Protocols <communication-protocols/index>
 Containers <containers/index>

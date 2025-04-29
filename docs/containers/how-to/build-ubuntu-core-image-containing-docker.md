@@ -60,4 +60,4 @@ Finally, replace the default gadget snap listed in the model assertion with the 
 }
 ```
 
-Omit `default-channel` and `id` if you want to [build the image using a custom gadget snap](https://ubuntu.com/core/docs/custom-images) that hasn't been uploaded to a store.
+Omit `default-channel` and `id` if you want to [build the image using a custom gadget snap](https://documentation.ubuntu.com/core/how-to-guides/image-creation/build-a-gadget-snap/) that hasn't been uploaded to a store.
