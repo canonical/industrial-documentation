@@ -40,7 +40,7 @@ Deploy and manage containerized applications on Ubuntu Core
 ```{rubric} Related Docs
 ```
 
-- [Real-time Ubuntu](https://documentation.ubuntu.com/real-time/en/latest/): Ubuntu with real-time kernel for increased predictability in manufacturing, telecommunications, and other low-latency systems
+- [Real-time Ubuntu](https://documentation.ubuntu.com/real-time/en/latest/): Ubuntu with real-time kernel for increased predictability in manufacturing, telecommunications, and other low-latency applications
 
 - [Robotics](https://canonical-robotics.readthedocs-hosted.com/en/latest/): Deploy and maintain your robots on an Ubuntu-based infrastructure
 
