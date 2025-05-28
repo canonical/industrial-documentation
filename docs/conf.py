@@ -23,7 +23,7 @@ import datetime
 #
 # TODO: Update with the official name of your project or product
 
-project = "Industrial"
+project = "IoT Applications"
 author = "Canonical Ltd."
 
 
@@ -105,7 +105,7 @@ html_context = {
     # TODO: If there's no such website,
     #       remove the {{ product_page }} link from the page header template
     #       (usually .sphinx/_templates/header.html; also, see README.rst).
-    "product_page": "ubuntu.com/industrial",
+    "product_page": "ubuntu.com/internet-of-things",
     # Product tag image; the orange part of your logo, shown in the page header
     #
     # TODO: To add a tag image, uncomment and update as needed.
