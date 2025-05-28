@@ -8,7 +8,7 @@ Building your smart home or factory on Ubuntu sets you up for long-term stabilit
 
 Developing an open source IoT infrastructure may require creating new tools or customizing existing ones. You'll also need to know how to properly set up different elements on different platforms.
 
-Our solutions show you how to build the backbone of your IoT infrastructre with open source software. Find out how to set up IoT applications to run on different Ubuntu platforms, manage your devices with Landscape, deploy AI solutions as snaps, configure IoT devices and applications, and more.
+Our documentation show you how to build the backbone of your IoT infrastructre with open source software. Find out how to set up IoT applications to run on different Ubuntu platforms, manage your devices with Landscape, deploy AI solutions as snaps, configure IoT devices and applications, and more.
 
 ---
 
@@ -17,7 +17,7 @@ Our solutions show you how to build the backbone of your IoT infrastructre with 
 ````{grid} 1 2 3 3
 
 ```{grid-item-card} [IoT At Home](/iot-at-home/index)
-Open-source solutions for intelligent, secure, and scalable home automation
+Open-source solutions for secure and scalable home automation using the Matter standard
 
 ```
 
