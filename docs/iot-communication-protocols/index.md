@@ -6,7 +6,7 @@ Beyond the choice of protocol, when setting up IoT infrastructure, there are add
 With Ubuntu Core devices you can set up your IoT network to use industry-leading protocols, ensuring peak performance, long-term network reliability, and device compatibility.
 
 ## LoRa on Ubuntu Core
-LoRaWAN(Long range wide area network) is a networking protocol. It has characteristics that are well suited to IoT applications such as low power consumption, an open standard, and large area coverage. With an Ubuntu Core device, you can set up and manage your own LoRa gateway. 
+{spellexception}`LoRaWAN`(Long range wide area network) is a networking protocol. It has characteristics that are well suited to IoT applications such as low power consumption, an open standard, and large area coverage. With an Ubuntu Core device, you can set up and manage your own LoRa gateway. 
 
 - {doc}`Set up LoRa Basics™ Station on Ubuntu Core<how-to/setup-lora-on-ubuntu-core>`
 - {doc}`Manage a fleet of LoRa gateways using Ubuntu Core with Landscape<how-to/manage-fleet-uc-gateways-landscape>`
