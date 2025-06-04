@@ -12,7 +12,7 @@ With Ubuntu Core devices you can set up your IoT network to use industry-leading
 - {doc}`Manage a fleet of LoRa gateways using Ubuntu Core with Landscape<how-to/manage-fleet-uc-gateways-landscape>`
 
 ## Time Synchronization
-In IoT applications such as industrial automation, financial trading, and telecommunications, the system clocks in all connected devices must be synchronized to ensure they operate in tandem. Clocks in devices running Ubuntu Core can be synchronized in different ways including using a single time protocol or combining two different protocols. 
+In IoT applications such as industrial automation, financial trading, and telecommunications, the system clocks in all connected devices must be synchronized to ensure they operate in tandem. Clocks in devices running Ubuntu can be synchronized in different ways including using a single time protocol or combining two different protocols. 
 
 - {doc}`How to synchronize two Raspberry Pi 5s using LinuxPTP <how-to/rpi5-ptp-time-sync>`
 - {doc}`Combine NTP and PTP for redundant time synchronization<how-to/timemaster>`
