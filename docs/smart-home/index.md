@@ -1,4 +1,4 @@
-# Smart home
+# Smart Home
 
 Smart home applications are an important driver of IoT.
 Many smart assistants, security systems, and  smart appliances are targeted at this market, and many use the [Matter standard](https://csa-iot.org/all-solutions/matter/).

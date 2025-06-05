@@ -16,8 +16,8 @@ Our documentation show you how to build the backbone of your IoT infrastructure 
 
 ````{grid} 1 2 3 3
 
-```{grid-item-card} [IoT At Home](/iot-at-home/index)
-Open-source solutions for secure and scalable home automation using the Matter standard
+```{grid-item-card} [Smart Home](/smart-home/index)
+Open-source solutions for secure and scalable smart home applications using the Matter standard
 
 ```
 
@@ -61,7 +61,7 @@ This documentation is part of Canonical's IoT initiatives, supporting open-sourc
 :hidden:
 :titlesonly:
 
-IoT At Home <iot-at-home/index>
+Smart Home <smart-home/index>
 Container Deployment <container-deployment/index>
 IoT Communication Protocols <iot-communication-protocols/index>
 contributing
