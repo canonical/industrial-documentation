@@ -18,7 +18,7 @@ Explore the basics of Smart home and Matter using easily-available hardware.
 - {doc}`Install Home Assistant on Ubuntu Core<how-to/otbr-ubuntu-core-image>`
 
 ### Thread Networking
-Set up your Matter applications to use Thread for networking and build gateways between Thread and other networks. 
+Set up a Thread network and gateway for your Matter devices. 
 - {doc}`Run Matter applications with Thread networking on Ubuntu<how-to/matter-and-thread-on-ubuntu>`
 - {doc}`Set up OpenThread Border Router on Ubuntu<how-to/otbr-on-ubuntu>`
 - {doc}`Create an OS image with OpenThread Border Router<how-to/otbr-ubuntu-core-image>`
