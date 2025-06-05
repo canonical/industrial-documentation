@@ -1,18 +1,18 @@
 # Home automation
 
 Home automation applications are an important driver of IoT.
-Many smart assistants, security systems, and  smart appliances are targeted at this market, and many use the Matter standard.
+Many smart assistants, security systems, and  smart appliances are targeted at this market, and many use the [Matter standard](https://csa-iot.org/all-solutions/matter/).
 
 The Matter open source connectivity standard allows IoT devices to be connected securely and reliably.
 Its wide adoption limits compatibility issues.
-Matter on Ubuntu offers a rich suite of established developer tools, simplifying the work of building Linux-based Matter applications.
 
-With a Raspberry Pi or similar device running an Ubuntu system, you can build a Matter lighting device, deploy your own home assistant, set up an OpenThread Border Router for your IoT devices, and more. 
+Ubuntu offers a rich suite of established developer tools, simplifying the work of building Matter applications.
 
-## In this documentation
+With a device running Ubuntu, you can build a Matter device, deploy Home Assistant, set up an OpenThread Border Router for your IoT devices, and more. 
+
 
 ### Get started
-Explore the basics of Matter on Ubuntu using easily-available hardware.
+Explore the basics of Smart home and Matter using easily-available hardware.
 - {doc}`Build your first Matter device with a Raspberry Pi<tutorial/pi-gpio-commander>`
 - {doc}`Commission and control Matter devices with Chip Tool<how-to/chip-tool-commission-and-control>`
 - {doc}`Install Home Assistant on Ubuntu Core<how-to/otbr-ubuntu-core-image>`
